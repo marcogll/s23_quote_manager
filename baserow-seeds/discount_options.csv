@@ -1,0 +1,6 @@
+option_id,label,rate,stackable
+none,Sin descuento,0,False
+onboarding,Onboarding · Mes 1,0.3,False
+early,Early adopter,0.2,False
+annual,Pago anual,0.15,False
+referral,Referral,0.1,True

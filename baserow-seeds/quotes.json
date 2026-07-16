@@ -1,0 +1,15 @@
+[
+  {
+    "quote_number": "S23-2026-0716-001",
+    "client_id": 1,
+    "agent_id": 1,
+    "currency": "MXN",
+    "exchange_rate": 17.4500,
+    "discount_id": "onboarding",
+    "referral": true,
+    "notes": "Vigencia de 15 días. El proyecto inicia con 50% de anticipo.",
+    "status": "draft",
+    "created_at": "2026-07-16",
+    "total_usd": 1250.00
+  }
+]

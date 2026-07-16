@@ -1,0 +1,31 @@
+nombre,categoria,costo_mxn,tiempo_estimado,unidad_tiempo,descripcion,condiciones,notas_adicionales,proveedor_responsable,disponibilidad,costo_variable
+Desarrollo Web Full Stack,Tecnología,25000,2,semanas,"Desarrollo de aplicación web completa con frontend y backend","50% anticipo, 50% contra entrega","Incluye hasta 3 revisiones. Hosting no incluido.","Desarrollador Senior","Bajo demanda",Si
+Landing Page Profesional,Tecnología,8500,5,días,"Página de aterrizaje optimizada para conversión","100% anticipo","Incluye diseño responsive y formulario de contacto","Diseñador UX/UI","Inmediata",No
+App Móvil iOS/Android,Tecnología,45000,6,semanas,"Aplicación móvil nativa o híbrida","30% anticipo, 40% desarrollo, 30% entrega","Publicación en stores incluida. Mantenimiento primer mes gratis.","Desarrollador Mobile","Bajo demanda",Si
+Consultoría IT,Consultoría,2000,1,hora,"Asesoría técnica especializada en infraestructura","Pago por adelantado","Mínimo 2 horas. Reporte escrito incluido.","Consultor IT","Inmediata",No
+Auditoría de Seguridad,Consultoría,15000,1,semana,"Revisión completa de vulnerabilidades","50% anticipo","Incluye reporte ejecutivo y plan de remediación","Especialista Seguridad","Bajo demanda",No
+Branding Corporativo,Diseño,18000,10,días,"Creación de identidad visual completa","40% anticipo, 60% entrega","Incluye logo, paleta de colores, tipografía y manual básico","Diseñador Gráfico","Bajo demanda",No
+Diseño UX/UI App,Diseño,22000,2,semanas,"Diseño de interfaz y experiencia de usuario","50% anticipo, 50% entrega","Incluye prototipo interactivo y entrega en Figma","Diseñador UX/UI","Bajo demanda",Si
+Redes Sociales - Gestión Mensual,Marketing,12000,1,mes,"Administración de 3 redes sociales","Pago mensual por adelantado","Incluye 12 posts, reporte mensual y respuesta a comentarios","Community Manager","Inmediata",No
+SEO Técnico On-Page,Marketing,8000,1,semana,"Optimización técnica para motores de búsqueda","100% anticipo","Incluye análisis de keywords y optimización de 10 páginas","Especialista SEO","Inmediata",No
+Video Corporativo 2min,Multimedia,16000,5,días,"Video institucional con edición profesional","50% anticipo, 50% entrega","Incluye locución, música de stock y 2 revisiones","Productor de Video","Bajo demanda",Si
+Fotografía de Producto,Multimedia,5000,1,día,"Sesión fotográfica profesional de productos","100% anticipo","Incluye 20 fotos retocadas. Estudio incluido.","Fotógrafo","Inmediata",No
+Soporte Técnico Remoto,Soporte,800,1,hora,"Resolución de incidencias técnicas remotas","Pago por uso","Mínimo 1 hora. No incluye hardware.","Técnico de Soporte","Inmediata",No
+Mantenimiento Web Mensual,Soporte,3500,1,mes,"Actualizaciones, backups y monitoreo mensual","Pago mensual por adelantado","Incluye hasta 2 horas de cambios menores.","Desarrollador Web","Inmediata",No
+Capacitación Excel Avanzado,Capacitación,4000,1,día,"Curso presencial o virtual de 6 horas","100% anticipo","Material digital incluido. Máximo 10 participantes.","Instructor Certificado","Bajo demanda",No
+Capacitación Python Básico,Capacitación,6000,2,días,"Curso introductorio de Python para principiantes","100% anticipo","Incluye ejercicios prácticos. Máximo 8 participantes.","Instructor Programación","Bajo demanda",No
+Migración a Cloud,Servicios Cloud,20000,1,semana,"Migración de infraestructura a AWS/Azure/GCP","30% anticipo, 70% entrega","Incluye configuración básica y documentación.","Cloud Architect","Bajo demanda",No
+Backup Automatizado Cloud,Servicios Cloud,3000,2,días,"Configuración de backups automáticos en la nube","100% anticipo","Incluye primer mes de monitoreo. Storage no incluido.","Administrador Cloud","Inmediata",No
+Análisis de Datos Básico,Análisis de Datos,7000,3,días,"Dashboard y análisis exploratorio de datos","50% anticipo, 50% entrega","Hasta 3 fuentes de datos. Tool: Power BI o Looker.","Analista de Datos","Bajo demanda",No
+Machine Learning Básico,Análisis de Datos,35000,3,semanas,"Modelo predictivo con datos proporcionados","30% anticipo, 40% desarrollo, 30% entrega","Incluye documentación y deployment básico.","Científico de Datos","Bajo demanda",Si
+Integración API Terceros,Integración,12000,1,semana,"Conexión con APIs externas (Stripe, Twilio, etc.)","50% anticipo, 50% entrega","Incluye manejo de errores básico y logs.","Desarrollador Backend","Bajo demanda",No
+Chatbot WhatsApp Business,Automatización,18000,2,semanas,"Bot automatizado para WhatsApp Business API","50% anticipo, 50% entrega","No incluye costos de Meta/Facebook. Flujo básico.","Desarrollador Backend","Bajo demanda",Si
+E-commerce Shopify/WooCommerce,Tecnología,20000,2,semanas,"Tienda en línea funcional con pasarela de pago","40% anticipo, 60% entrega","Incluye hasta 20 productos. Pasarela: Stripe/MercadoPago.","Desarrollador Web","Bajo demanda",Si
+Newsletter Mensual Diseñada,Marketing,2500,1,semana,"Diseño y maquetación de newsletter","Pago por envío","Incluye diseño responsive y 2 revisiones.","Diseñador/Digital","Inmediata",No
+Optimización de Velocidad Web,Optimización,6000,3,días,"Mejora de Core Web Vitals y velocidad","100% anticipo","Objetivo: score 90+ en PageSpeed. No garantizado.","Desarrollador Web","Bajo demanda",No
+Base de Datos - Diseño,Base de Datos,10000,1,semana,"Modelado relacional y normalización","50% anticipo, 50% entrega","Incluye diagrama ER y scripts DDL.","DBA / Backend","Bajo demanda",No
+Base de Datos - Migración,Base de Datos,15000,2,semanas,"Migración de datos entre plataformas","30% anticipo, 70% entrega","Incluye validación y rollback plan.","DBA / Backend","Bajo demanda",No
+Testing QA Manual,QA,8000,1,semana,"Pruebas funcionales de aplicación web/móvil","100% anticipo","Incluye reporte de bugs hasta 50 casos de prueba.","QA Engineer","Bajo demanda",No
+Testing QA Automatizado,QA,25000,3,semanas,"Suite de pruebas automatizadas (Selenium/Cypress)","30% anticipo, 70% entrega","Incluye framework base. Mantenimiento no incluido.","QA Automation","Bajo demanda",Si
+Servidor VPS Configuración,Infraestructura,5000,1,día,"Configuración inicial de VPS (Ubuntu/CentOS)","100% anticipo","Incluye hardening básico, firewall y SSL.","SysAdmin","Inmediata",No
+Dominio + Certificado SSL,Dominios,1500,1,día,"Registro de dominio .com + SSL LetsEncrypt","100% anticipo","Renovación anual por cuenta del cliente.","Administrador de Proyectos","Inmediata",No

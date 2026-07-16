@@ -1,0 +1,72 @@
+service_id,name,category,price,billing,description,features,content,recommended,is_custom
+plan-starter,Starter,Planes mensuales,240.95,monthly,Presencia digital y automatización esencial.,"[""Landing page inicial"",""1–2 workflows"",""1 red social"",""Soporte y reporte mensual""]",,False,False
+plan-grow,Grow,Planes mensuales,486.95,monthly,Operación multicanal con IA y métricas.,"[""2 redes sociales"",""SEO + contenido"",""Integración IA"",""Dashboard"",""Soporte prioritario""]",,True,False
+plan-scale,Scale,Planes mensuales,907.95,monthly,"Ejecución avanzada con PMO, BI e IA.","[""PMO parcial"",""Automatización avanzada"",""Paid media"",""BI en tiempo real"",""Seguimiento semanal""]",,False,False
+plan-enterprise,Enterprise,Planes mensuales,1717.95,monthly,Equipo dedicado con SLA y supervisión senior.,"[""PMO dedicado"",""1 perfil técnico"",""Automatización integral"",""Standup diario"",""SLA garantizado""]",,False,False
+plan-marketing,Marketing 360°,Planes mensuales,711.95,monthly,Marketing integral en tres canales.,"[""3 redes sociales"",""SEO"",""Meta + Google Ads"",""Dashboard unificado""]",,False,False
+ret-social,Redes sociales,Servicios especializados,269.95,monthly,"2 redes, copy, publicaciones y métricas.",,,False,False
+ret-seo,SEO técnico,Servicios especializados,318.95,monthly,"Posicionamiento, blog y link building.",,,False,False
+ret-paid,Paid media,Servicios especializados,284.95,monthly,Gestión de Meta y Google Ads.,,,False,False
+ret-staff,Staffing,Servicios especializados,1079.95,monthly,"Dev, diseñador o copy supervisado.",,,False,False
+project-diagnostic,Diagnóstico / Consultoría,Proyectos,417.95,one-time,Mapeo de procesos y roadmap priorizado.,"[""Sesión de 2–3 horas"",""Documento PDF"",""Seguimiento 30 días""]",,False,False
+project-landing,Landing Page,Proyectos,436.95,one-time,Página de alta conversión conectada a tu funnel.,"[""UI/UX custom"",""Copy"",""CRM"",""SEO on-page"",""Analytics"",""10 días""]",## Alcance\n\n1. Diseño UI/UX custom\n2. Copywriting persuasivo\n3. Integración con CRM\n4. SEO on-page\n5. Analytics configurado\n\n**Tiempo de entrega:** 10 días hábiles.,False,False
+project-auto-basic,Automatización Básica,Proyectos,589.95,one-time,1–2 workflows con CRM y mensajería.,"[""Email/WhatsApp"",""14 días""]",,False,False
+project-site,Sitio Corporativo,Proyectos,1079.95,one-time,Sitio administrable de hasta 8 secciones.,"[""CMS"",""SEO técnico"",""Hosting y dominio 1 año"",""21 días""]",,False,False
+project-audit,Auditoría TI,Proyectos,686.95,one-time,Revisión técnica y de experiencia de usuario.,"[""Código"",""UI/UX"",""Reporte ejecutivo"",""7 días""]",,False,False
+project-auto-advanced,Automatización Avanzada,Proyectos,1374.95,one-time,Automatización n8n multi-sistema con IA.,"[""WhatsApp Business"",""APIs"",""Monitoreo"",""3 meses soporte"",""30 días""]",,False,False
+project-commerce,E-commerce,Proyectos,1865.95,one-time,"Tienda con pagos, CFDI y WhatsApp.","[""Catálogo ilimitado"",""Pasarelas MX"",""45 días""]",,False,False
+project-bi,Sistema BI + IA,Proyectos,2700.95,one-time,Inteligencia de negocio y agentes autónomos.,"[""Scoring predictivo"",""Reportes automáticos"",""6 meses soporte"",""60 días""]",,False,False
+hw-basic,Reloj básico,Asistencia · Hardware,202,one-time,Huella/PIN para hasta 50 empleados.,,,False,False
+hw-pro,Reloj Pro,Asistencia · Hardware,398,one-time,Facial + huella para hasta 200 empleados.,,,False,False
+hw-enterprise,Reloj Enterprise,Asistencia · Hardware,722,one-time,"Facial + huella + NFC, empleados ilimitados.",,,False,False
+lic-month,Licencia mensual,Asistencia · Licencias,49.99,monthly,Software de control de asistencia.,,,False,False
+lic-quarter,Licencia trimestral,Asistencia · Licencias,129.99,one-time,"Tres meses de licencia, ahorro aproximado 13%.",,,False,False
+lic-half,Licencia semestral,Asistencia · Licencias,219.99,one-time,"Seis meses de licencia, ahorro aproximado 26%.",,,False,False
+lic-year,Licencia anual,Asistencia · Licencias,349.99,annual,"Doce meses de licencia, ahorro aproximado 41%.",,,True,False
+bundle-starter,Bundle Starter,Asistencia · Bundles,497,one-time,Reloj básico + licencia anual.,,,False,False
+bundle-pro,Bundle Pro,Asistencia · Bundles,674,one-time,Reloj Pro + licencia anual.,,,False,False
+bundle-enterprise,Bundle Enterprise,Asistencia · Bundles,943,one-time,Reloj Enterprise + licencia anual.,,,False,False
+self-hosted,Asistencia self-hosted,Asistencia · Self-hosted,260,one-time,Licencia perpetua; infraestructura estimada $400/año.,,,False,False
+dashboard-base,Dashboard base,Dashboards,462,one-time,"Hasta 6 widgets, filtros y exportación.","[""UI/UX"",""PDF/Excel"",""1 revisión""]",,False,False
+dash-data-medium,Datos medianos,Dashboards · Variables,231,one-time,Ajuste por volumen de datos mediano.,,,False,False
+dash-data-large,Datos grandes,Dashboards · Variables,693,one-time,Ajuste por gran volumen de datos.,,,False,False
+dash-api,Conexión API estándar,Dashboards · Variables,144,one-time,Conectividad mediante API estándar.,,,False,False
+dash-db,Conexión BD directa,Dashboards · Variables,202,one-time,Conexión directa a base de datos.,,,False,False
+dash-erp,Conexión custom / ERP,Dashboards · Variables,462,one-time,Integración personalizada o ERP.,,,False,False
+dash-dedicated,Cloud dedicado,Dashboards · Variables,115,one-time,Configuración dedicada; hosting $69/mes.,,,False,False
+dash-self,Servidor self-hosted,Dashboards · Variables,202,one-time,Configuración en servidor propio.,,,False,False
+addon-widget,Widget adicional,Dashboards · Add-ons,46,one-time,Widget adicional al alcance base.,,,False,False
+addon-alerts,Alertas automáticas,Dashboards · Add-ons,144,one-time,Alertas basadas en reglas.,,,False,False
+addon-roles,Multiusuario con roles,Dashboards · Add-ons,173,one-time,Accesos y permisos por rol.,,,False,False
+addon-realtime,Tiempo real,Dashboards · Add-ons,231,one-time,Actualización de datos en tiempo real.,,,False,False
+addon-whitelabel,White-label,Dashboards · Add-ons,289,one-time,Personalización completa de marca.,,,False,False
+mxn-dev-fullstack,Desarrollo Web Full Stack,Tecnología,25000,one-time,Desarrollo de aplicación web completa con frontend y backend.,"[""Hasta 3 revisiones"",""No incluye hosting"",""2 semanas de entrega""]",,False,False
+mxn-landing,Landing Page Profesional,Tecnología,6500,one-time,Página de aterrizaje optimizada para conversión.,"[""Diseño responsive"",""Formulario de contacto"",""5 días de entrega""]",,False,False
+mxn-app-mobile,App Móvil iOS/Android,Tecnología,45000,one-time,Aplicación móvil nativa o híbrida.,"[""Publicación en stores"",""Mantenimiento primer mes gratis"",""6 semanas de entrega""]",,False,False
+mxn-consultoria,Consultoría IT,Consultoría,2000,one-time,Asesoría técnica especializada en infraestructura.,"[""Mínimo 2 horas"",""Reporte escrito incluido"",""1 hora por sesión""]",,False,False
+mxn-audit-seg,Auditoría de Seguridad,Consultoría,11000,one-time,Revisión completa de vulnerabilidades.,"[""Reporte ejecutivo"",""Plan de remediación"",""1 semana de entrega""]",,False,False
+mxn-branding,Branding Corporativo,Diseño,12500,one-time,Creación de identidad visual completa.,"[""Logo, paleta y tipografía"",""Manual básico incluido"",""10 días de entrega""]",,False,False
+mxn-uxui,Diseño UX/UI App,Diseño,22000,one-time,Diseño de interfaz y experiencia de usuario.,"[""Prototipo interactivo"",""Entrega en Figma"",""2 semanas de entrega""]",,False,False
+mxn-social,Redes Sociales - Gestión Mensual,Marketing,5500,monthly,Administración de 3 redes sociales.,"[""12 posts mensuales"",""Reporte mensual"",""Respuesta a comentarios""]",,False,False
+mxn-seo,SEO Técnico On-Page,Marketing,6000,one-time,Optimización técnica para motores de búsqueda.,"[""Análisis de keywords"",""10 páginas optimizadas"",""1 semana de entrega""]",,False,False
+mxn-newsletter,Newsletter Mensual Diseñada,Marketing,2500,one-time,Diseño y maquetación de newsletter.,"[""Diseño responsive"",""2 revisiones"",""1 semana de entrega""]",,False,False
+mxn-video,Video Corporativo 2min,Multimedia,2500,one-time,Video institucional con edición profesional.,"[""Locución incluida"",""Música de stock"",""2 revisiones"",""5 días de entrega""]",,False,False
+mxn-foto,Fotografía de Producto,Multimedia,4000,one-time,Sesión fotográfica profesional de productos.,"[""20 fotos retocadas"",""Estudio incluido"",""1 día de entrega""]",,False,False
+mxn-mantenimiento,Mantenimiento Web Mensual,Soporte,2500,monthly,Actualizaciones, backups y monitoreo mensual.,"[""Hasta 2 horas de cambios menores"",""Backups automáticos"",""Monitoreo 24/7""]",,False,False
+mxn-excel,Capacitación Excel Avanzado,Capacitación,8000,one-time,Curso presencial o virtual de 6 horas.,"[""Material digital incluido"",""Máximo 10 participantes"",""3 días de entrega""]",,False,False
+mxn-python,Capacitación Python Básico,Capacitación,12000,one-time,Curso introductorio de Python para principiantes.,"[""Ejercicios prácticos"",""Máximo 8 participantes"",""5 días de entrega""]",,False,False
+mxn-cloud-mig,Migración a Cloud,Servicios Cloud,20000,one-time,Migración de infraestructura a AWS/Azure/GCP.,"[""Configuración básica"",""Documentación incluida"",""1 semana de entrega""]",,False,False
+mxn-backup,Backup Automatizado Cloud,Servicios Cloud,3000,one-time,Configuración de backups automáticos en la nube.,"[""Primer mes de monitoreo"",""Storage no incluido"",""2 días de entrega""]",,False,False
+mxn-analytics,Análisis de Datos Básico,Análisis de Datos,7000,one-time,Dashboard y análisis exploratorio de datos.,"[""Hasta 3 fuentes de datos"",""Power BI o Looker"",""3 días de entrega""]",,False,False
+mxn-ml,Machine Learning Básico,Análisis de Datos,35000,one-time,Modelo predictivo con datos proporcionados.,"[""Documentación incluida"",""Deployment básico"",""3 semanas de entrega""]",,False,False
+mxn-api-int,Integración API Terceros,Integración,12000,one-time,Conexión con APIs externas (Stripe, Twilio, etc.).,"[""Manejo de errores básico"",""Logs configurados"",""1 semana de entrega""]",,False,False
+mxn-chatbot,Chatbot WhatsApp Business,Automatización,18000,one-time,Bot automatizado para WhatsApp Business API.,"[""No incluye costos Meta/Facebook"",""Flujo básico"",""2 semanas de entrega""]",,False,False
+mxn-ecommerce,E-commerce Shopify/WooCommerce,Tecnología,20000,one-time,Tienda en línea funcional con pasarela de pago.,"[""Hasta 20 productos"",""Stripe/MercadoPago"",""2 semanas de entrega""]",,False,False
+mxn-optimizacion,Optimización de Velocidad Web,Optimización,6000,one-time,Mejora de Core Web Vitals y velocidad.,"[""Objetivo: score 90+ PageSpeed"",""No garantizado"",""3 días de entrega""]",,False,False
+mxn-db-design,Base de Datos - Diseño,Base de Datos,10000,one-time,Modelado relacional y normalización.,"[""Diagrama ER"",""Scripts DDL"",""1 semana de entrega""]",,False,False
+mxn-db-mig,Base de Datos - Migración,Base de Datos,15000,one-time,Migración de datos entre plataformas.,"[""Validación incluida"",""Rollback plan"",""2 semanas de entrega""]",,False,False
+mxn-qa-manual,Testing QA Manual,QA,8000,one-time,Pruebas funcionales de aplicación web/móvil.,"[""Reporte de bugs"",""Hasta 50 casos de prueba"",""1 semana de entrega""]",,False,False
+mxn-qa-auto,Testing QA Automatizado,QA,25000,one-time,Suite de pruebas automatizadas (Selenium/Cypress).,"[""Framework base"",""Mantenimiento no incluido"",""3 semanas de entrega""]",,False,False
+mxn-vps,Servidor VPS Configuración,Infraestructura,5000,one-time,Configuración inicial de VPS (Ubuntu/CentOS).,"[""Hardening básico"",""Firewall y SSL"",""1 día de entrega""]",,False,False
+mxn-server-local,Configuración de Server Local,Infraestructura,8900,one-time,"Setup completo de servidor local con servicios empresariales: impresión remota, monitoreo de sitio web, NAS, aplicaciones internas y utilidades críticas para el negocio.","[""Impresión remota configurada"",""Monitoreo de sitio web 24/7"",""NAS con backups automáticos"",""Aplicaciones internas deployadas"",""2 días de entrega""]",,False,False
+mxn-dominio,Dominio + Certificado SSL,Dominios,1500,one-time,Registro de dominio .com + SSL LetsEncrypt.,"[""Renovación anual por cuenta del cliente"",""1 día de entrega""]",,False,False

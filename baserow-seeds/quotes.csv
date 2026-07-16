@@ -1,0 +1,2 @@
+quote_number,client_id,agent_id,currency,exchange_rate,discount_id,referral,notes,status,created_at,total_usd
+S23-2026-0716-001,1,1,MXN,17.45,onboarding,True,Vigencia de 15 días. El proyecto inicia con 50% de anticipo.,draft,2026-07-16,1250.0

@@ -1,0 +1,7 @@
+[
+  { "option_id": "none", "label": "Sin descuento", "rate": 0, "stackable": false },
+  { "option_id": "onboarding", "label": "Onboarding · Mes 1", "rate": 0.3, "stackable": false },
+  { "option_id": "early", "label": "Early adopter", "rate": 0.2, "stackable": false },
+  { "option_id": "annual", "label": "Pago anual", "rate": 0.15, "stackable": false },
+  { "option_id": "referral", "label": "Referral", "rate": 0.1, "stackable": true }
+]

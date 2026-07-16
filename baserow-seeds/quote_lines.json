@@ -1,0 +1,14 @@
+[
+  {
+    "quote_id": 1,
+    "service_id": 1,
+    "quantity": 2,
+    "unit_price_usd": 240.95
+  },
+  {
+    "quote_id": 1,
+    "service_id": 3,
+    "quantity": 1,
+    "unit_price_usd": 436.95
+  }
+]

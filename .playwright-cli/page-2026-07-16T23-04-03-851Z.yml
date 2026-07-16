@@ -1,0 +1,644 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img "Soul:23" [ref=e5]
+      - generic [ref=e6]:
+        - generic [ref=e7]: Cotizaciones
+        - generic [ref=e8]: Marketing & Systems
+    - generic [ref=e9]:
+      - button "MG Marco Gallegos Lead Engineer" [ref=e10] [cursor=pointer]:
+        - generic [ref=e11]: MG
+        - generic [ref=e12]:
+          - generic [ref=e13]: Marco Gallegos
+          - generic [ref=e14]: Lead Engineer
+      - generic [ref=e17]:
+        - generic [ref=e18]: Borrador guardado
+        - generic [ref=e19]: S23-2026-0716
+  - generic [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - paragraph [ref=e23]: Punto de venta
+        - heading "Arma una cotización" [level=1] [ref=e24]
+        - paragraph [ref=e25]: Selecciona servicios y personaliza el alcance.
+      - generic [ref=e26]:
+        - button "Modo guiado" [ref=e27] [cursor=pointer]
+        - button "Nueva" [ref=e30] [cursor=pointer]
+        - button "Crear servicio" [ref=e34] [cursor=pointer]
+    - textbox [ref=e40]:
+      - /placeholder: Buscar servicio, plan o solución...
+    - generic "Categorías" [ref=e41]:
+      - button "Todos" [ref=e42] [cursor=pointer]
+      - button "Soporte" [ref=e43] [cursor=pointer]
+      - button "Planes mensuales" [ref=e44] [cursor=pointer]
+      - button "Servicios especializados" [ref=e45] [cursor=pointer]
+      - button "Proyectos" [ref=e46] [cursor=pointer]
+      - button "Asistencia · Hardware" [ref=e47] [cursor=pointer]
+      - button "Asistencia · Licencias" [ref=e48] [cursor=pointer]
+      - button "Asistencia · Bundles" [ref=e49] [cursor=pointer]
+      - button "Asistencia · Self-hosted" [ref=e50] [cursor=pointer]
+      - button "Dashboards" [ref=e51] [cursor=pointer]
+      - button "Dashboards · Variables" [ref=e52] [cursor=pointer]
+      - button "Dashboards · Add-ons" [ref=e53] [cursor=pointer]
+    - generic [ref=e54]:
+      - article [ref=e55]:
+        - generic [ref=e56]: Único
+        - generic [ref=e58]:
+          - paragraph [ref=e59]: Soporte
+          - heading "Soporte remoto" [level=2] [ref=e60]
+          - paragraph [ref=e61]: Sesión de soporte remoto de 1 hora.
+        - list [ref=e62]:
+          - listitem [ref=e63]: Atención remota
+          - listitem [ref=e64]: Diagnóstico y resolución
+          - listitem [ref=e65]: 15% de descuento desde 4 horas
+        - generic [ref=e66]:
+          - paragraph [ref=e67]:
+            - strong [ref=e68]: $950.00
+            - text: / hora
+          - button "Agregar Soporte remoto" [ref=e69] [cursor=pointer]: Agregar
+      - article [ref=e71]:
+        - generic [ref=e72]: Mensual
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: Planes mensuales
+          - heading "Starter" [level=2] [ref=e76]
+          - paragraph [ref=e77]: Presencia digital y automatización esencial.
+        - list [ref=e78]:
+          - listitem [ref=e79]: Landing page inicial
+          - listitem [ref=e80]: 1–2 workflows
+          - listitem [ref=e81]: 1 red social
+        - generic [ref=e82]:
+          - paragraph [ref=e83]:
+            - strong [ref=e84]: $240.95
+            - text: / mes
+          - button "Agregar Starter" [ref=e85] [cursor=pointer]: Agregar
+      - article [ref=e87]:
+        - generic [ref=e88]:
+          - generic [ref=e89]: Mensual
+          - generic [ref=e90]: Recomendado
+        - generic [ref=e93]:
+          - paragraph [ref=e94]: Planes mensuales
+          - heading "Grow" [level=2] [ref=e95]
+          - paragraph [ref=e96]: Operación multicanal con IA y métricas.
+        - list [ref=e97]:
+          - listitem [ref=e98]: 2 redes sociales
+          - listitem [ref=e99]: SEO + contenido
+          - listitem [ref=e100]: Integración IA
+        - generic [ref=e101]:
+          - paragraph [ref=e102]:
+            - strong [ref=e103]: $486.95
+            - text: / mes
+          - button "Agregar Grow" [ref=e104] [cursor=pointer]: Agregar
+      - article [ref=e106]:
+        - generic [ref=e107]: Mensual
+        - generic [ref=e109]:
+          - paragraph [ref=e110]: Planes mensuales
+          - heading "Scale" [level=2] [ref=e111]
+          - paragraph [ref=e112]: Ejecución avanzada con PMO, BI e IA.
+        - list [ref=e113]:
+          - listitem [ref=e114]: PMO parcial
+          - listitem [ref=e115]: Automatización avanzada
+          - listitem [ref=e116]: Paid media
+        - generic [ref=e117]:
+          - paragraph [ref=e118]:
+            - strong [ref=e119]: $907.95
+            - text: / mes
+          - button "Agregar Scale" [ref=e120] [cursor=pointer]: Agregar
+      - article [ref=e122]:
+        - generic [ref=e123]: Mensual
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: Planes mensuales
+          - heading "Enterprise" [level=2] [ref=e127]
+          - paragraph [ref=e128]: Equipo dedicado con SLA y supervisión senior.
+        - list [ref=e129]:
+          - listitem [ref=e130]: PMO dedicado
+          - listitem [ref=e131]: 1 perfil técnico
+          - listitem [ref=e132]: Automatización integral
+        - generic [ref=e133]:
+          - paragraph [ref=e134]:
+            - strong [ref=e135]: $1,717.95
+            - text: / mes
+          - button "Agregar Enterprise" [ref=e136] [cursor=pointer]: Agregar
+      - article [ref=e138]:
+        - generic [ref=e139]: Mensual
+        - generic [ref=e141]:
+          - paragraph [ref=e142]: Planes mensuales
+          - heading "Marketing 360°" [level=2] [ref=e143]
+          - paragraph [ref=e144]: Marketing integral en tres canales.
+        - list [ref=e145]:
+          - listitem [ref=e146]: 3 redes sociales
+          - listitem [ref=e147]: SEO
+          - listitem [ref=e148]: Meta + Google Ads
+        - generic [ref=e149]:
+          - paragraph [ref=e150]:
+            - strong [ref=e151]: $711.95
+            - text: / mes
+          - button "Agregar Marketing 360°" [ref=e152] [cursor=pointer]: Agregar
+      - article [ref=e154]:
+        - generic [ref=e155]: Mensual
+        - generic [ref=e157]:
+          - paragraph [ref=e158]: Servicios especializados
+          - heading "Redes sociales" [level=2] [ref=e159]
+          - paragraph [ref=e160]: 2 redes, copy, publicaciones y métricas.
+        - generic [ref=e161]:
+          - paragraph [ref=e162]:
+            - strong [ref=e163]: $269.95
+            - text: / mes
+          - button "Agregar Redes sociales" [ref=e164] [cursor=pointer]: Agregar
+      - article [ref=e166]:
+        - generic [ref=e167]: Mensual
+        - generic [ref=e169]:
+          - paragraph [ref=e170]: Servicios especializados
+          - heading "SEO técnico" [level=2] [ref=e171]
+          - paragraph [ref=e172]: Posicionamiento, blog y link building.
+        - generic [ref=e173]:
+          - paragraph [ref=e174]:
+            - strong [ref=e175]: $318.95
+            - text: / mes
+          - button "Agregar SEO técnico" [ref=e176] [cursor=pointer]: Agregar
+      - article [ref=e178]:
+        - generic [ref=e179]: Mensual
+        - generic [ref=e181]:
+          - paragraph [ref=e182]: Servicios especializados
+          - heading "Paid media" [level=2] [ref=e183]
+          - paragraph [ref=e184]: Gestión de Meta y Google Ads.
+        - generic [ref=e185]:
+          - paragraph [ref=e186]:
+            - strong [ref=e187]: $284.95
+            - text: / mes
+          - button "Agregar Paid media" [ref=e188] [cursor=pointer]: Agregar
+      - article [ref=e190]:
+        - generic [ref=e191]: Mensual
+        - generic [ref=e193]:
+          - paragraph [ref=e194]: Servicios especializados
+          - heading "Staffing" [level=2] [ref=e195]
+          - paragraph [ref=e196]: Dev, diseñador o copy supervisado.
+        - generic [ref=e197]:
+          - paragraph [ref=e198]:
+            - strong [ref=e199]: $1,079.95
+            - text: / mes
+          - button "Agregar Staffing" [ref=e200] [cursor=pointer]: Agregar
+      - article [ref=e202]:
+        - generic [ref=e203]: Único
+        - generic [ref=e205]:
+          - paragraph [ref=e206]: Proyectos
+          - heading "Diagnóstico / Consultoría" [level=2] [ref=e207]
+          - paragraph [ref=e208]: Mapeo de procesos y roadmap priorizado.
+        - list [ref=e209]:
+          - listitem [ref=e210]: Sesión de 2–3 horas
+          - listitem [ref=e211]: Documento PDF
+          - listitem [ref=e212]: Seguimiento 30 días
+        - generic [ref=e213]:
+          - paragraph [ref=e214]:
+            - strong [ref=e215]: $417.95
+            - text: MXN
+          - button "Agregar Diagnóstico / Consultoría" [ref=e216] [cursor=pointer]: Agregar
+      - article [ref=e218]:
+        - generic [ref=e219]: Único
+        - generic [ref=e221]:
+          - paragraph [ref=e222]: Proyectos
+          - heading "Landing Page" [level=2] [ref=e223]
+          - paragraph [ref=e224]: Página de alta conversión conectada a tu funnel.
+        - list [ref=e225]:
+          - listitem [ref=e226]: UI/UX custom
+          - listitem [ref=e227]: Copy
+          - listitem [ref=e228]: CRM
+        - generic [ref=e229]:
+          - paragraph [ref=e230]:
+            - strong [ref=e231]: $436.95
+            - text: MXN
+          - button "Agregar Landing Page" [ref=e232] [cursor=pointer]: Agregar
+      - article [ref=e234]:
+        - generic [ref=e235]: Único
+        - generic [ref=e237]:
+          - paragraph [ref=e238]: Proyectos
+          - heading "Automatización Básica" [level=2] [ref=e239]
+          - paragraph [ref=e240]: 1–2 workflows con CRM y mensajería.
+        - list [ref=e241]:
+          - listitem [ref=e242]: Email/WhatsApp
+          - listitem [ref=e243]: 14 días
+        - generic [ref=e244]:
+          - paragraph [ref=e245]:
+            - strong [ref=e246]: $589.95
+            - text: MXN
+          - button "Agregar Automatización Básica" [ref=e247] [cursor=pointer]: Agregar
+      - article [ref=e249]:
+        - generic [ref=e250]: Único
+        - generic [ref=e252]:
+          - paragraph [ref=e253]: Proyectos
+          - heading "Sitio Corporativo" [level=2] [ref=e254]
+          - paragraph [ref=e255]: Sitio administrable de hasta 8 secciones.
+        - list [ref=e256]:
+          - listitem [ref=e257]: CMS
+          - listitem [ref=e258]: SEO técnico
+          - listitem [ref=e259]: Hosting y dominio 1 año
+        - generic [ref=e260]:
+          - paragraph [ref=e261]:
+            - strong [ref=e262]: $1,079.95
+            - text: MXN
+          - button "Agregar Sitio Corporativo" [ref=e263] [cursor=pointer]: Agregar
+      - article [ref=e265]:
+        - generic [ref=e266]: Único
+        - generic [ref=e268]:
+          - paragraph [ref=e269]: Proyectos
+          - heading "Auditoría TI" [level=2] [ref=e270]
+          - paragraph [ref=e271]: Revisión técnica y de experiencia de usuario.
+        - list [ref=e272]:
+          - listitem [ref=e273]: Código
+          - listitem [ref=e274]: UI/UX
+          - listitem [ref=e275]: Reporte ejecutivo
+        - generic [ref=e276]:
+          - paragraph [ref=e277]:
+            - strong [ref=e278]: $686.95
+            - text: MXN
+          - button "Agregar Auditoría TI" [ref=e279] [cursor=pointer]: Agregar
+      - article [ref=e281]:
+        - generic [ref=e282]: Único
+        - generic [ref=e284]:
+          - paragraph [ref=e285]: Proyectos
+          - heading "Automatización Avanzada" [level=2] [ref=e286]
+          - paragraph [ref=e287]: Automatización n8n multi-sistema con IA.
+        - list [ref=e288]:
+          - listitem [ref=e289]: WhatsApp Business
+          - listitem [ref=e290]: APIs
+          - listitem [ref=e291]: Monitoreo
+        - generic [ref=e292]:
+          - paragraph [ref=e293]:
+            - strong [ref=e294]: $1,374.95
+            - text: MXN
+          - button "Agregar Automatización Avanzada" [ref=e295] [cursor=pointer]: Agregar
+      - article [ref=e297]:
+        - generic [ref=e298]: Único
+        - generic [ref=e300]:
+          - paragraph [ref=e301]: Proyectos
+          - heading "E-commerce" [level=2] [ref=e302]
+          - paragraph [ref=e303]: Tienda con pagos, CFDI y WhatsApp.
+        - list [ref=e304]:
+          - listitem [ref=e305]: Catálogo ilimitado
+          - listitem [ref=e306]: Pasarelas MX
+          - listitem [ref=e307]: 45 días
+        - generic [ref=e308]:
+          - paragraph [ref=e309]:
+            - strong [ref=e310]: $1,865.95
+            - text: MXN
+          - button "Agregar E-commerce" [ref=e311] [cursor=pointer]: Agregar
+      - article [ref=e313]:
+        - generic [ref=e314]: Único
+        - generic [ref=e316]:
+          - paragraph [ref=e317]: Proyectos
+          - heading "Sistema BI + IA" [level=2] [ref=e318]
+          - paragraph [ref=e319]: Inteligencia de negocio y agentes autónomos.
+        - list [ref=e320]:
+          - listitem [ref=e321]: Scoring predictivo
+          - listitem [ref=e322]: Reportes automáticos
+          - listitem [ref=e323]: 6 meses soporte
+        - generic [ref=e324]:
+          - paragraph [ref=e325]:
+            - strong [ref=e326]: $2,700.95
+            - text: MXN
+          - button "Agregar Sistema BI + IA" [ref=e327] [cursor=pointer]: Agregar
+      - article [ref=e329]:
+        - generic [ref=e330]: Único
+        - generic [ref=e332]:
+          - paragraph [ref=e333]: Asistencia · Hardware
+          - heading "Reloj básico" [level=2] [ref=e334]
+          - paragraph [ref=e335]: Huella/PIN para hasta 50 empleados.
+        - generic [ref=e336]:
+          - paragraph [ref=e337]:
+            - strong [ref=e338]: $202.00
+            - text: MXN
+          - button "Agregar Reloj básico" [ref=e339] [cursor=pointer]: Agregar
+      - article [ref=e341]:
+        - generic [ref=e342]: Único
+        - generic [ref=e344]:
+          - paragraph [ref=e345]: Asistencia · Hardware
+          - heading "Reloj Pro" [level=2] [ref=e346]
+          - paragraph [ref=e347]: Facial + huella para hasta 200 empleados.
+        - generic [ref=e348]:
+          - paragraph [ref=e349]:
+            - strong [ref=e350]: $398.00
+            - text: MXN
+          - button "Agregar Reloj Pro" [ref=e351] [cursor=pointer]: Agregar
+      - article [ref=e353]:
+        - generic [ref=e354]: Único
+        - generic [ref=e356]:
+          - paragraph [ref=e357]: Asistencia · Hardware
+          - heading "Reloj Enterprise" [level=2] [ref=e358]
+          - paragraph [ref=e359]: Facial + huella + NFC, empleados ilimitados.
+        - generic [ref=e360]:
+          - paragraph [ref=e361]:
+            - strong [ref=e362]: $722.00
+            - text: MXN
+          - button "Agregar Reloj Enterprise" [ref=e363] [cursor=pointer]: Agregar
+      - article [ref=e365]:
+        - generic [ref=e366]: Mensual
+        - generic [ref=e368]:
+          - paragraph [ref=e369]: Asistencia · Licencias
+          - heading "Licencia mensual" [level=2] [ref=e370]
+          - paragraph [ref=e371]: Software de control de asistencia.
+        - generic [ref=e372]:
+          - paragraph [ref=e373]:
+            - strong [ref=e374]: $49.99
+            - text: / mes
+          - button "Agregar Licencia mensual" [ref=e375] [cursor=pointer]: Agregar
+      - article [ref=e377]:
+        - generic [ref=e378]: Único
+        - generic [ref=e380]:
+          - paragraph [ref=e381]: Asistencia · Licencias
+          - heading "Licencia trimestral" [level=2] [ref=e382]
+          - paragraph [ref=e383]: Tres meses de licencia, ahorro aproximado 13%.
+        - generic [ref=e384]:
+          - paragraph [ref=e385]:
+            - strong [ref=e386]: $129.99
+            - text: MXN
+          - button "Agregar Licencia trimestral" [ref=e387] [cursor=pointer]: Agregar
+      - article [ref=e389]:
+        - generic [ref=e390]: Único
+        - generic [ref=e392]:
+          - paragraph [ref=e393]: Asistencia · Licencias
+          - heading "Licencia semestral" [level=2] [ref=e394]
+          - paragraph [ref=e395]: Seis meses de licencia, ahorro aproximado 26%.
+        - generic [ref=e396]:
+          - paragraph [ref=e397]:
+            - strong [ref=e398]: $219.99
+            - text: MXN
+          - button "Agregar Licencia semestral" [ref=e399] [cursor=pointer]: Agregar
+      - article [ref=e401]:
+        - generic [ref=e402]:
+          - generic [ref=e403]: Anual
+          - generic [ref=e404]: Recomendado
+        - generic [ref=e407]:
+          - paragraph [ref=e408]: Asistencia · Licencias
+          - heading "Licencia anual" [level=2] [ref=e409]
+          - paragraph [ref=e410]: Doce meses de licencia, ahorro aproximado 41%.
+        - generic [ref=e411]:
+          - paragraph [ref=e412]:
+            - strong [ref=e413]: $349.99
+            - text: / año
+          - button "Agregar Licencia anual" [ref=e414] [cursor=pointer]: Agregar
+      - article [ref=e416]:
+        - generic [ref=e417]: Único
+        - generic [ref=e419]:
+          - paragraph [ref=e420]: Asistencia · Bundles
+          - heading "Bundle Starter" [level=2] [ref=e421]
+          - paragraph [ref=e422]: Reloj básico + licencia anual.
+        - generic [ref=e423]:
+          - paragraph [ref=e424]:
+            - strong [ref=e425]: $497.00
+            - text: MXN
+          - button "Agregar Bundle Starter" [ref=e426] [cursor=pointer]: Agregar
+      - article [ref=e428]:
+        - generic [ref=e429]: Único
+        - generic [ref=e431]:
+          - paragraph [ref=e432]: Asistencia · Bundles
+          - heading "Bundle Pro" [level=2] [ref=e433]
+          - paragraph [ref=e434]: Reloj Pro + licencia anual.
+        - generic [ref=e435]:
+          - paragraph [ref=e436]:
+            - strong [ref=e437]: $674.00
+            - text: MXN
+          - button "Agregar Bundle Pro" [ref=e438] [cursor=pointer]: Agregar
+      - article [ref=e440]:
+        - generic [ref=e441]: Único
+        - generic [ref=e443]:
+          - paragraph [ref=e444]: Asistencia · Bundles
+          - heading "Bundle Enterprise" [level=2] [ref=e445]
+          - paragraph [ref=e446]: Reloj Enterprise + licencia anual.
+        - generic [ref=e447]:
+          - paragraph [ref=e448]:
+            - strong [ref=e449]: $943.00
+            - text: MXN
+          - button "Agregar Bundle Enterprise" [ref=e450] [cursor=pointer]: Agregar
+      - article [ref=e452]:
+        - generic [ref=e453]: Único
+        - generic [ref=e455]:
+          - paragraph [ref=e456]: Asistencia · Self-hosted
+          - heading "Asistencia self-hosted" [level=2] [ref=e457]
+          - paragraph [ref=e458]: Licencia perpetua; infraestructura estimada $400/año.
+        - generic [ref=e459]:
+          - paragraph [ref=e460]:
+            - strong [ref=e461]: $260.00
+            - text: MXN
+          - button "Agregar Asistencia self-hosted" [ref=e462] [cursor=pointer]: Agregar
+      - article [ref=e464]:
+        - generic [ref=e465]: Único
+        - generic [ref=e467]:
+          - paragraph [ref=e468]: Dashboards
+          - heading "Dashboard base" [level=2] [ref=e469]
+          - paragraph [ref=e470]: Hasta 6 widgets, filtros y exportación.
+        - list [ref=e471]:
+          - listitem [ref=e472]: UI/UX
+          - listitem [ref=e473]: PDF/Excel
+          - listitem [ref=e474]: 1 revisión
+        - generic [ref=e475]:
+          - paragraph [ref=e476]:
+            - strong [ref=e477]: $462.00
+            - text: MXN
+          - button "Agregar Dashboard base" [ref=e478] [cursor=pointer]: Agregar
+      - article [ref=e480]:
+        - generic [ref=e481]: Único
+        - generic [ref=e483]:
+          - paragraph [ref=e484]: Dashboards · Variables
+          - heading "Datos medianos" [level=2] [ref=e485]
+          - paragraph [ref=e486]: Ajuste por volumen de datos mediano.
+        - generic [ref=e487]:
+          - paragraph [ref=e488]:
+            - strong [ref=e489]: $231.00
+            - text: MXN
+          - button "Agregar Datos medianos" [ref=e490] [cursor=pointer]: Agregar
+      - article [ref=e492]:
+        - generic [ref=e493]: Único
+        - generic [ref=e495]:
+          - paragraph [ref=e496]: Dashboards · Variables
+          - heading "Datos grandes" [level=2] [ref=e497]
+          - paragraph [ref=e498]: Ajuste por gran volumen de datos.
+        - generic [ref=e499]:
+          - paragraph [ref=e500]:
+            - strong [ref=e501]: $693.00
+            - text: MXN
+          - button "Agregar Datos grandes" [ref=e502] [cursor=pointer]: Agregar
+      - article [ref=e504]:
+        - generic [ref=e505]: Único
+        - generic [ref=e507]:
+          - paragraph [ref=e508]: Dashboards · Variables
+          - heading "Conexión API estándar" [level=2] [ref=e509]
+          - paragraph [ref=e510]: Conectividad mediante API estándar.
+        - generic [ref=e511]:
+          - paragraph [ref=e512]:
+            - strong [ref=e513]: $144.00
+            - text: MXN
+          - button "Agregar Conexión API estándar" [ref=e514] [cursor=pointer]: Agregar
+      - article [ref=e516]:
+        - generic [ref=e517]: Único
+        - generic [ref=e519]:
+          - paragraph [ref=e520]: Dashboards · Variables
+          - heading "Conexión BD directa" [level=2] [ref=e521]
+          - paragraph [ref=e522]: Conexión directa a base de datos.
+        - generic [ref=e523]:
+          - paragraph [ref=e524]:
+            - strong [ref=e525]: $202.00
+            - text: MXN
+          - button "Agregar Conexión BD directa" [ref=e526] [cursor=pointer]: Agregar
+      - article [ref=e528]:
+        - generic [ref=e529]: Único
+        - generic [ref=e531]:
+          - paragraph [ref=e532]: Dashboards · Variables
+          - heading "Conexión custom / ERP" [level=2] [ref=e533]
+          - paragraph [ref=e534]: Integración personalizada o ERP.
+        - generic [ref=e535]:
+          - paragraph [ref=e536]:
+            - strong [ref=e537]: $462.00
+            - text: MXN
+          - button "Agregar Conexión custom / ERP" [ref=e538] [cursor=pointer]: Agregar
+      - article [ref=e540]:
+        - generic [ref=e541]: Único
+        - generic [ref=e543]:
+          - paragraph [ref=e544]: Dashboards · Variables
+          - heading "Cloud dedicado" [level=2] [ref=e545]
+          - paragraph [ref=e546]: Configuración dedicada; hosting $69/mes.
+        - generic [ref=e547]:
+          - paragraph [ref=e548]:
+            - strong [ref=e549]: $115.00
+            - text: MXN
+          - button "Agregar Cloud dedicado" [ref=e550] [cursor=pointer]: Agregar
+      - article [ref=e552]:
+        - generic [ref=e553]: Único
+        - generic [ref=e555]:
+          - paragraph [ref=e556]: Dashboards · Variables
+          - heading "Servidor self-hosted" [level=2] [ref=e557]
+          - paragraph [ref=e558]: Configuración en servidor propio.
+        - generic [ref=e559]:
+          - paragraph [ref=e560]:
+            - strong [ref=e561]: $202.00
+            - text: MXN
+          - button "Agregar Servidor self-hosted" [ref=e562] [cursor=pointer]: Agregar
+      - article [ref=e564]:
+        - generic [ref=e565]: Único
+        - generic [ref=e567]:
+          - paragraph [ref=e568]: Dashboards · Add-ons
+          - heading "Widget adicional" [level=2] [ref=e569]
+          - paragraph [ref=e570]: Widget adicional al alcance base.
+        - generic [ref=e571]:
+          - paragraph [ref=e572]:
+            - strong [ref=e573]: $46.00
+            - text: MXN
+          - button "Agregar Widget adicional" [ref=e574] [cursor=pointer]: Agregar
+      - article [ref=e576]:
+        - generic [ref=e577]: Único
+        - generic [ref=e579]:
+          - paragraph [ref=e580]: Dashboards · Add-ons
+          - heading "Alertas automáticas" [level=2] [ref=e581]
+          - paragraph [ref=e582]: Alertas basadas en reglas.
+        - generic [ref=e583]:
+          - paragraph [ref=e584]:
+            - strong [ref=e585]: $144.00
+            - text: MXN
+          - button "Agregar Alertas automáticas" [ref=e586] [cursor=pointer]: Agregar
+      - article [ref=e588]:
+        - generic [ref=e589]: Único
+        - generic [ref=e591]:
+          - paragraph [ref=e592]: Dashboards · Add-ons
+          - heading "Multiusuario con roles" [level=2] [ref=e593]
+          - paragraph [ref=e594]: Accesos y permisos por rol.
+        - generic [ref=e595]:
+          - paragraph [ref=e596]:
+            - strong [ref=e597]: $173.00
+            - text: MXN
+          - button "Agregar Multiusuario con roles" [ref=e598] [cursor=pointer]: Agregar
+      - article [ref=e600]:
+        - generic [ref=e601]: Único
+        - generic [ref=e603]:
+          - paragraph [ref=e604]: Dashboards · Add-ons
+          - heading "Tiempo real" [level=2] [ref=e605]
+          - paragraph [ref=e606]: Actualización de datos en tiempo real.
+        - generic [ref=e607]:
+          - paragraph [ref=e608]:
+            - strong [ref=e609]: $231.00
+            - text: MXN
+          - button "Agregar Tiempo real" [ref=e610] [cursor=pointer]: Agregar
+      - article [ref=e612]:
+        - generic [ref=e613]: Único
+        - generic [ref=e615]:
+          - paragraph [ref=e616]: Dashboards · Add-ons
+          - heading "White-label" [level=2] [ref=e617]
+          - paragraph [ref=e618]: Personalización completa de marca.
+        - generic [ref=e619]:
+          - paragraph [ref=e620]:
+            - strong [ref=e621]: $289.00
+            - text: MXN
+          - button "Agregar White-label" [ref=e622] [cursor=pointer]: Agregar
+  - complementary [ref=e624]:
+    - generic [ref=e626]:
+      - paragraph [ref=e627]: Cotización actual
+      - heading "0 conceptos" [level=2] [ref=e628]
+    - generic [ref=e629]:
+      - generic [ref=e630]:
+        - generic [ref=e634]: Tu cotización está vacía
+        - paragraph [ref=e635]: Agrega servicios del catálogo para comenzar.
+      - generic [ref=e636]:
+        - heading "Cliente" [level=3] [ref=e637]
+        - generic [ref=e638]:
+          - generic [ref=e639]:
+            - generic [ref=e640]: Nombre
+            - textbox "Nombre" [ref=e641]:
+              - /placeholder: Nombre del contacto
+          - generic [ref=e642]:
+            - generic [ref=e643]: Empresa
+            - textbox "Empresa" [ref=e644]
+          - generic [ref=e645]:
+            - generic [ref=e646]: Correo
+            - textbox "Correo" [ref=e647]:
+              - /placeholder: correo@empresa.com
+          - generic [ref=e648]:
+            - generic [ref=e649]: Teléfono
+            - textbox "Teléfono" [ref=e650]:
+              - /placeholder: +52 844 000 0000
+      - generic [ref=e651]:
+        - heading "Descuento" [level=3] [ref=e652]
+        - generic [ref=e653]:
+          - generic [ref=e654]: Promoción principal
+          - combobox "Promoción principal" [ref=e655]:
+            - option "Sin descuento" [selected]
+            - option "Onboarding · Mes 1 · 30%"
+            - option "Early adopter · 20%"
+            - option "Pago anual · 15%"
+            - option "Referral · 10%"
+        - generic [ref=e656]:
+          - checkbox "Agregar referral 10% Único descuento acumulable" [ref=e657]
+          - generic [ref=e658]:
+            - text: Agregar referral 10%
+            - generic [ref=e659]: Único descuento acumulable
+      - generic [ref=e660]:
+        - heading "Moneda" [level=3] [ref=e661]
+        - generic [ref=e662]:
+          - generic [ref=e663]: Mostrar cotización en
+          - combobox "Mostrar cotización en" [ref=e664]:
+            - option "MXN · Peso mexicano" [selected]
+            - option "USD · Dólar estadounidense"
+            - option "CAD · Dólar canadiense"
+            - option "EUR · Euro"
+        - generic [ref=e665]: 1 USD = Consultando…
+        - generic [ref=e667]:
+          - checkbox "Mostrar tipo de cambio Incluye tasa y fecha en el PDF" [checked] [ref=e668]
+          - generic [ref=e669]:
+            - text: Mostrar tipo de cambio
+            - generic [ref=e670]: Incluye tasa y fecha en el PDF
+      - generic [ref=e672]:
+        - generic [ref=e673]: Notas y condiciones
+        - generic [ref=e674]:
+          - generic "Formato Markdown" [ref=e675]:
+            - button "Título" [ref=e676] [cursor=pointer]
+            - button "Negritas" [ref=e679] [cursor=pointer]
+            - button "Cursivas" [ref=e682] [cursor=pointer]
+            - button "Lista" [ref=e686] [cursor=pointer]
+            - button "Lista numerada" [ref=e688] [cursor=pointer]
+            - button "Checklist" [ref=e692] [cursor=pointer]
+            - button [ref=e696] [cursor=pointer]
+          - textbox "Escribe condiciones en Markdown..." [ref=e700]: Vigencia de 15 días. El proyecto inicia con 50% de anticipo.
+    - generic [ref=e701]:
+      - generic [ref=e702]:
+        - generic [ref=e703]: Honorarios Soul:23
+        - generic [ref=e704]: $0.00
+      - generic [ref=e705]:
+        - generic [ref=e706]: Total a pagar a Soul:23
+        - generic [ref=e707]: $0.00
+      - button "Generar cotización" [disabled] [ref=e708]
+      - paragraph [ref=e715]: Se abrirá la vista lista para guardar como PDF.

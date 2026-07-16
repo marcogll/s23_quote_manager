@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Especificación del Proyecto · Sitio Web · Soul:23</title>
+<style>
+  @page { size: 8.5in 14in; margin: 1.2cm 1.5cm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  .sheet {
+    width: 100%;
+    background: #ffffff;
+    padding: 0;
+  }
+
+  .logo-wrap { margin-bottom: 20px; }
+  .logo-wrap svg { height: 36px; width: auto; }
+  .logo-wrap .tagline {
+    font-size: 8.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    margin-top: 4px;
+  }
+
+  .parties { display: flex; justify-content: space-between; gap: 30px; margin-bottom: 18px; }
+  .party { flex: 1; }
+  .party h4 { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a8a8a; margin: 0 0 6px 0; font-weight: 600; }
+  .party p { margin: 0 0 2px 0; font-size: 11.5px; line-height: 1.4; }
+  .party p.name { font-weight: 700; font-size: 12.5px; margin-bottom: 4px; }
+  .contact-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 11.5px; }
+  .contact-row .icon { width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; }
+
+  .meta-box { text-align: right; font-size: 11.5px; color: #555; margin-bottom: 4px; }
+  .meta-box .quote-title { font-size: 19px; font-weight: 800; color: #000; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .meta-box div { margin-top: 1px; }
+  .meta-box span.editable { border-bottom: 1px dashed #bbb; padding: 0 2px; }
+
+  .page-label {
+    font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; color: #aaa;
+    margin-bottom: 4px; font-weight: 700;
+  }
+
+  .intro { background: #000; color: #fff; padding: 12px 18px; border-radius: 5px; font-size: 11.5px; line-height: 1.5; margin: 12px 0 18px 0; }
+  .intro b { color: #fff; }
+
+  table.plan { width: 100%; border-collapse: collapse; margin-top: 2px; }
+  table.plan thead th {
+    background: #000; color: #fff; text-align: left; padding: 8px 12px;
+    font-size: 9.5px; letter-spacing: 0.8px; text-transform: uppercase;
+  }
+  table.plan thead th:last-child { text-align: right; }
+  table.plan tbody td { padding: 8px 12px; font-size: 11.5px; border-bottom: 1px solid #eee; vertical-align: top; }
+  table.plan tbody tr:nth-child(odd) { background: #fafafa; }
+  table.plan td.name { font-weight: 700; width: 42%; }
+  table.plan td.name span.sub { display:block; font-weight:400; color:#8a8a8a; font-size:10px; margin-top:1px; }
+  table.plan td.amount { text-align: right; font-weight: 700; white-space: nowrap; }
+  table.plan td .type-badge {
+    font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 7px; border-radius: 3px; display:inline-block;
+  }
+  .badge-unico { background: #eee; color: #333; }
+  .badge-anual { background: #2b6cb0; color: #fff; }
+  .badge-mensual { background: #b7791f; color: #fff; }
+  .badge-opcional { background: #666; color: #fff; }
+
+  table.totals-mini { width: 100%; border-collapse: collapse; margin-top: 0; }
+  table.totals-mini td { padding: 8px 12px; font-size: 11.5px; border-bottom: 1px solid #e8e8e8; }
+  table.totals-mini td.label { color: #555; }
+  table.totals-mini td.label small { display: block; color: #999; font-size: 10px; font-weight: 400; margin-top: 1px; }
+  table.totals-mini td.amount { text-align: right; font-weight: 700; white-space: nowrap; }
+  table.totals-mini tr.total-row td { background: #000; color: #fff; font-size: 14px; font-weight: 800; border-bottom: none; }
+  table.totals-mini tr.total-row td.label small { color: #cfcfcf; }
+
+  .cta-note { margin-top: 14px; font-size: 11px; line-height: 1.5; color: #333; }
+  .cta-note .kicker { font-weight: 700; text-transform: uppercase; font-size: 9.5px; letter-spacing: 0.8px; color: #8a8a8a; margin-top: 10px; }
+  .cta-note p { margin: 2px 0 0 0; }
+
+  .section { border: 1px solid #e5e5e5; border-radius: 5px; margin-bottom: 6px; overflow: hidden; }
+  .section-head { display: flex; align-items: center; justify-content: space-between; background: #000; color: #fff; padding: 6px 12px; }
+  .section-head .left { display: flex; align-items: center; gap: 6px; }
+  .section-head .num {
+    width: 16px; height: 16px; border: 1.5px solid #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0;
+  }
+  .section-head .title { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+  .section-head .type-badge { font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 3px; margin-left: 6px; }
+  .badge-unico-dark { background: #fff; color: #000; }
+  .section-head .price { font-size: 12px; font-weight: 800; white-space: nowrap; }
+  .section-body { padding: 8px 12px 10px 12px; background: #fff; }
+  .section-body ul { margin: 0; padding: 0 0 0 14px; }
+  .section-body li { font-size: 9.5px; line-height: 1.3; margin-bottom: 0; color: #333; }
+  .section-body .scope-note { margin-top: 4px; font-size: 9px; color: #8a8a8a; font-style: italic; line-height: 1.3; }
+  .section-body .qty-row { margin-top: 6px; display: flex; gap: 12px; font-size: 10px; flex-wrap: wrap; }
+  .section-body .qty-row .pill { background: #f5f5f5; border-radius: 4px; padding: 3px 8px; }
+  .section-body .qty-row .pill b { color: #000; }
+  .checkbox-row { display: flex; align-items: center; gap: 5px; font-size: 9px; color: #8a8a8a; margin-top: 6px; }
+  .checkbox-row input { width: 11px; height: 11px; }
+
+  .sheet-detail .logo-wrap { margin-bottom: 14px; }
+  .sheet-detail .section { margin-bottom: 3px; }
+  .sheet-detail .section-head { padding: 5px 10px; }
+  .sheet-detail .section-body { padding: 5px 10px 6px 10px; }
+  .sheet-detail .section-body ul { padding-left: 12px; }
+  .sheet-detail .section-body li { font-size: 8.5px; line-height: 1.25; }
+  .sheet-detail .section-body .scope-note { font-size: 8px; margin-top: 2px; }
+  .sheet-detail .section-body .checkbox-row { margin-top: 3px; }
+  .sheet-detail .section-body .qty-row { margin-top: 3px; }
+  .sheet-detail .section-head .title { font-size: 10px; }
+  .sheet-detail .section-head .price { font-size: 11px; }
+  .sheet-detail .section-head .num { width: 15px; height: 15px; font-size: 8px; }
+  .sheet-detail .notes { margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .sheet-detail .notes .kicker { font-size: 7.5px; margin-top: 4px; letter-spacing: 0.5px; }
+  .sheet-detail .notes p { margin-bottom: 2px; }
+  .sheet-detail .page-num { margin-top: 2px; font-size: 8px; }
+
+  .notes { margin-top: 14px; font-size: 10.5px; line-height: 1.5; color: #333; }
+  .notes p { margin: 0 0 6px 0; }
+  .notes b { color: #000; }
+  .notes .kicker { font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.8px; color: #8a8a8a; margin-top: 8px; }
+
+  .page-num { text-align: right; font-size: 10px; color: #aaa; margin-top: 14px; }
+  [contenteditable="true"] { outline: none; }
+  [contenteditable="true"]:hover { background: #fff8e1; }
+
+  .condiciones { margin-top: 4px; padding: 5px 8px; background: #f9f9f9; border: 1px solid #e5e5e5; border-radius: 4px; font-size: 7.5px; line-height: 1.35; color: #555; }
+  .condiciones .kicker { font-weight: 700; text-transform: uppercase; font-size: 7px; letter-spacing: 0.5px; color: #8a8a8a; margin-bottom: 2px; }
+  .condiciones p { margin: 1px 0; }
+  .cols-2 { columns: 2; column-gap: 14px; }
+  .cols-2 > span { display: block; break-inside: avoid; margin-bottom: 2px; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { box-shadow: none; page-break-after: always; }
+    .sheet:last-child { page-break-after: auto; }
+    [contenteditable="true"]:hover { background: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================= PÁGINA 1 — PLAN / PROPUESTA ============================= -->
+<div class="sheet sheet-detail">
+  <div class="logo-wrap">
+    <a href="https://soul23.mx" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+    <svg viewBox="0 0 858.47046 253.70135" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#000000" d="m 11.7353,214.35074 v -29 h 15 15 v 14.5 14.5 h 34.3334 c 18.8833,0 34.5208,-0.18687 34.75,-0.41527 0.2291,-0.22839 0.2896,-12.15339 0.1343,-26.5 l -0.2824,-26.08473 h -10.9676 -10.9677 v -13.5 -13.5 h -23.5 -23.5 v -14 -14 h -15 -15 v -48 -48 h 65 65 v 24 24 h -15.5 -15.5 v -12.75 -12.75 h -33.967 -33.967 l -0.283,24.16752 c -0.1556,13.29214 -0.058,24.15135 0.217,24.13158 0.275,-0.0198 4.8875,0.0173 10.25,0.0825 l 9.75,0.1184 v 13 13 h 25 25 v 12.5 12.5 h 14.5 14.5 v 55.5 55.5 h -65 -65 z m 152,-87.5 v -116.5 h 60.5 60.5 v 116.5 116.5 h -60.5 -60.5 z m 92.0031,14.75 c 0,-40.0125 0.2975,-80.5125 0.6574,-90 l 0.6543,-17.25 h -33.6574 -33.6574 v 11.5 c 0,7 0.3913,11.5 1,11.5 0.6582,0 1,26.83333 1,78.5 v 78.5 h 32 32 z m 51.9969,-14.75 v -116.5 h 20.5 20.5 l -10e-4,102.25 -10e-4,102.25 23.0212,-0.5 23.0211,-0.5 -0.029,-101.75 -0.029,-101.75 56.7592,-6e-5 56.7592,-7e-5 -0.2593,102.00007 -0.2597,102.00006 h 28.509 28.5093 v 14.5 14.5 h -49 -49 v -105 -105 h -15.5 -15.5 v 105 105 h -64 -64 z m 279,48.5 v -68 h 32 32 v -13 -13 h 11 11 v -24 -24 h -30.5 -30.5 v 12.5 12.5 h -12.5 -12.5 v -24 -24 h 55 55 v 61.5 61.5 h -42.5 -42.5 v 40.5 40.5 h 19.5 c 14.9055,0 19.5124,-0.29453 19.5524,-1.25 0.029,-0.6875 0.01,-6.9875 -0.049,-14 l -0.1016,-12.75 h 23.049 23.0492 v 28.5 28.5 h -55 -55 z m 131,39.5 v -28.5 h 19 19 v 14 14 h 27 27 v -40.5 -40.5 h -13.5 -13.5 v -12.5 -12.5 h 13.5 13.5 v -37.5 -37.5 h -27 -27 v 12.5 12.5 h -19 -19 v -24 -24 h 64.5 64.5 v 49 49 h -11 -11 v 12 12 h 11 11 v 55.5 55.5 h -64.5 -64.5 z m -180,-49 v -19.5 h 13.5 13.5 v 19.5 19.5 h -13.5 -13.5 z m 180,-71.5 v -13 h 19 19 v 13 13 h -19 -19 z"/>
+    </svg>
+    </a>
+    <div class="tagline">Marketing &amp; Systems</div>
+  </div>
+  <div class="page-label">Página 3 de 3 · Especificación del Proyecto</div>
+  <h2 style="margin:0 0 3px 0; font-size:17px;">Sitio Web — Notaría Pública 39</h2>
+  <p style="margin:0 0 14px 0; font-size:11px; color:#8a8a8a;">Proyecto futuro · $5,000 MXN · No incluido en el total para iniciar.</p>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">1</div><div class="title">Objetivo</div></div>
+    </div>
+    <div class="section-body">
+      <p style="margin:0;font-size:10px;line-height:1.5;">Landing page profesional y eficiente que funcione como portal digital de la Notaría. Optimizada para buscadores, con tiempos de carga rápidos y diseñada para ofrecer la mejor experiencia de usuario. Permite a los clientes enviar solicitudes y trámites en línea, y al personal interno gestionarlos mediante automatizaciones inteligentes con capacidades de IA.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">2</div><div class="title">Landing Page</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li>Diseño responsive adaptable a cualquier dispositivo (escritorio, tablet, móvil).</li>
+        <li>Basado en el repositorio <a href="https://github.com/marcogll/notary39_slw" target="_blank">github.com/marcogll/notary39_slw</a> como punto de partida.</li>
+        <li>Estructura propuesta (navegación única, secciones modulares):
+          <br>Hero → Servicios notariales → CTA → Recursos/FAQs → Por qué nosotros → Testimonios → Equipo → Contacto → Footer.</li>
+        <li>Páginas legales: aviso de privacidad y términos de uso.</li>
+        <li>Imagen profesional acorde a una notaría (colores, tipografía, escudo/heráldica).</li>
+        <li>Optimizado para buscadores (SEO): estructura semántica, meta tags, etiquetas OG, sitemap.</li>
+        <li>Tiempo de carga estimado: &lt; 2 segundos (optimización de assets, lazy loading, CDN).</li>
+        <li>Construido con tecnologías modernas pensando en rendimiento, accesibilidad y mantenibilidad.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">3</div><div class="title">Tech Stack &amp; Compatibilidad</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><b>Frontend:</b> React 19 + TypeScript — framework moderno y escalable.</li>
+        <li><b>Build:</b> Vite 7 — rapidez en desarrollo y builds optimizados.</li>
+        <li><b>Estilizado:</b> Tailwind CSS + shadcn/ui — diseño limpio, consistente y mantenible.</li>
+        <li><b>Animaciones:</b> GSAP — transiciones suaves y scroll reveal.</li>
+        <li><b>Formularios:</b> envío vía webhook (n8n) — conecta con email, Google Sheets o CRM.</li>
+        <li><b>100% compatible con Hostinger:</b> el build genera archivos estáticos (HTML/CSS/JS) que se despliegan en cualquier hosting compartido sin configuración especial. Hostinger soporta el despliegue vía cPanel, FTP o gestor de archivos.</li>
+        <li><b>Sin dependencias avanzadas en producción:</b> el sitio compilado no requiere Node, contenedores ni configuraciones de servidor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">4</div><div class="title">Formularios &amp; Automatización</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><b>Formulario de contacto:</b> nombre, teléfono, email, mensaje — para consultas generales.</li>
+        <li><b>Formulario multitrámite:</b> selector de tipo de trámite, datos del solicitante, documentos adjuntos, descripción.</li>
+        <li>Las automatizaciones corren en los servidores de Soul:23 e incluyen:
+          <br>— Respuesta automática de confirmación al cliente (acuse de recibo con folio).
+          <br>— Notificación inmediata al equipo responsable (dueño, manager, encargado, clerk) vía email.
+          <br>— Registro automático de cada solicitud en Google Sheets / base de datos para trazabilidad.</li>
+        <li>Validación de campos en tiempo real y protección contra spam.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">5</div><div class="title">Notificaciones &amp; Registro</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><b>Email automático:</b> cada formulario enviado notifica al instante al personal encargado con los datos completos de la solicitud.</li>
+        <li><b>Google Sheets / DB:</b> registro automático de todas las solicitudes para trazabilidad, control y consulta posterior.</li>
+        <li><b>CRM:</b> integración opcional para administración de clientes, historial, seguimiento y estatus.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">6</div><div class="title">Flujos de Automatización</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><b>Sistema integral:</b> los flujos conectan los formularios del sitio con el sistema de gestión (CRM/Sheets) para automatizar todo el ciclo de la solicitud.</li>
+        <li><b>Asignación automática:</b> las solicitudes se asignan al personal correspondiente según el tipo de trámite.</li>
+        <li><b>Respuestas automáticas:</b> el solicitante recibe un acuse de recibo con número de folio.</li>
+        <li><b>Alertas internas:</b> notificaciones al personal cuando una solicitud requiere atención urgente o está próxima a vencer.</li>
+        <li><b>Dashboard/panel:</b> vista general de solicitudes recibidas, en proceso y resueltas.</li>
+        <li><b>Capacidades de IA:</b> clasificación inteligente de solicitudes, detección de trámites urgentes, respuestas sugeridas basadas en el tipo de solicitud.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="left"><div class="num">7</div><div class="title">Entrega &amp; Timeline</div></div>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><b>Semana 1 (días 1–7):</b> primer boceto funcional del sitio. Se despliega en servidor temporal para revisión.</li>
+        <li><b>Semana 2 (días 8–14):</b> feedback del cliente. Si el boceto está listo, se puede migrar de forma anticipada al dominio definitivo.</li>
+        <li><b>Semana 3 (días 15–21):</b> versión final con toques finales. Se carga definitivamente en el hosting del cliente.</li>
+        <li>Después de la entrega de la versión final, el sitio se puede actualizar para renovar información, fotografías y otros cambios hasta 3 veces dentro de los primeros 6 meses posteriores a la entrega.</li>
+        <li>Código fuente respaldado en repositorio GitHub privado.</li>
+        <li>Capacitación básica al personal para administrar formularios y ver solicitudes.</li>
+      </ul>
+      <div class="qty-row">
+        <div class="pill">Primer boceto: <b>5–7 días</b></div>
+        <div class="pill">Feedback: <b>1 semana</b></div>
+        <div class="pill">Versión final: <b>semana 3</b></div>
+        <div class="pill">Ajustes incluidos: <b>3</b></div>
+      </div>
+      <div class="scope-note">El hosting corre por cuenta del cliente. El proyecto se puede contratar en cualquier momento, no está incluido en el total para iniciar. El contenido editorial (textos, semblanzas, perfiles, fotografías, logos) es proporcionado por el cliente. Soul:23 se encarga del diseño, maquetación, desarrollo e implementación técnica.</div>
+      <div class="checkbox-row"><input type="checkbox"> Contratar por separado</div>
+    </div>
+  </div>
+
+  <div class="condiciones" style="margin-top:10px;">
+    <div class="kicker">Nota — Uso del código</div>
+    <p>El código fuente se desarrolla para la Notaría 39. Soul:23 se reserva el derecho de mostrar el sitio terminado como caso de estudio o showcase en su sitio web y portafolio, a menos que el cliente solicite expresamente lo contrario por escrito.</p>
+  </div>
+
+  <div class="condiciones" style="margin-top:30px;">
+    <div class="kicker">Glosario de Términos</div>
+    <div class="cols-2" style="font-size:7px;line-height:1.45;">
+      <span><b>React 19:</b> Librería de JavaScript para interfaces de usuario modernas y rápidas.</span>
+      <span><b>TypeScript:</b> Superconjunto de JavaScript que añade tipos para mayor robustez.</span>
+      <span><b>Vite:</b> Herramienta de desarrollo rápida para proyectos web modernos.</span>
+      <span><b>Tailwind CSS:</b> Framework de estilos que acelera el diseño visual.</span>
+      <span><b>shadcn/ui:</b> Colección de componentes reutilizables para interfaces limpias.</span>
+      <span><b>GSAP:</b> Librería de animaciones para transiciones suaves y modernas.</span>
+      <span><b>n8n:</b> Plataforma de automatización de flujos de trabajo.</span>
+      <span><b>Webhook:</b> Conexión automática entre servicios (formulario → email/Sheets).</span>
+      <span><b>SEO:</b> Optimización para motores de búsqueda como Google.</span>
+      <span><b>CDN:</b> Red de servidores que entrega el sitio más rápido al usuario.</span>
+      <span><b>CRM:</b> Sistema para administrar clientes y su historial.</span>
+      <span><b>IA:</b> Inteligencia Artificial para automatizar tareas y clasificar solicitudes.</span>
+      <span><b>Hero:</b> Sección principal de bienvenida al entrar al sitio (imagen grande + titular).</span>
+      <span><b>CTA:</b> Botón o llamado a la acción que invita al usuario a realizar una acción (ej. "Contáctanos").</span>
+      <span><b>FAQ:</b> Preguntas frecuentes (Frequently Asked Questions).</span>
+      <span><b>Responsive:</b> Diseño que se adapta automáticamente a celulares, tablets y computadoras.</span>
+      <span><b>Landing Page:</b> Página web de una sola vista diseñada para presentar un servicio.</span>
+      <span><b>Footer:</b> Pie de página, sección inferior del sitio con datos de contacto y links legales.</span>
+    </div>
+  </div>
+
+  <div class="page-num">3</div>
+</div>
+
+</body>
+</html>
