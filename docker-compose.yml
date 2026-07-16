@@ -1,38 +1,72 @@
-version: '3.8'
+# ============================================================
+# Soul:23 Product Editor - Docker Compose
+# Uso local completo con PostgreSQL + Next.js
+# ============================================================
 
 services:
+  # ----------------------------------------------------------
+  # PostgreSQL 15
+  # ----------------------------------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: s23_db
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-soul23_products}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-soul23_products}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - s23_network
+
+  # ----------------------------------------------------------
+  # Aplicacion Next.js
+  # ----------------------------------------------------------
   app:
     build:
       context: .
       dockerfile: Dockerfile
+      target: runner
+    container_name: s23_app
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${APP_PORT:-3000}:3000"
     environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/soul23_products?schema=public
-      - NEXTAUTH_URL=http://localhost:3000
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-your-secret-key-change-this-in-production}
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-soul23_products}?schema=public
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
     depends_on:
       db:
         condition: service_healthy
-    restart: unless-stopped
-
-  db:
-    image: postgres:15-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=soul23_products
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/products"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - s23_network
 
+# ----------------------------------------------------------
+# Volumenes
+# ----------------------------------------------------------
 volumes:
   postgres_data:
+    driver: local
+
+# ----------------------------------------------------------
+# Redes
+# ----------------------------------------------------------
+networks:
+  s23_network:
+    driver: bridge
