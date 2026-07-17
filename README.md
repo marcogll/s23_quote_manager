@@ -28,6 +28,8 @@
 
 - CRUD completo de productos (nombre, descripcion, precio, SKU, categoria, stock, imagen)
 - Autenticacion con credenciales via NextAuth.js
+- Panel de usuarios exclusivo para administradores (`/admin/usuarios`)
+- Registro publico deshabilitado; el administrador crea las cuentas y contraseñas
 - Middleware de proteccion de rutas
 - Base de datos PostgreSQL con Prisma ORM
 - Generacion de cliente Prisma autonoma
@@ -88,6 +90,10 @@ Servicios expuestos:
    - `DATABASE_URL` (Railway genera esto automaticamente al agregar PostgreSQL)
    - `NEXTAUTH_SECRET` (generar con `openssl rand -base64 32`)
    - `NEXTAUTH_URL` (dominio asignado por Railway)
+   - `ADMIN_NAME` (por ejemplo, `Marco`)
+   - `ADMIN_USERNAME` (por ejemplo, `marcogll`)
+   - `ADMIN_EMAIL` (correo con el que iniciara sesion el administrador)
+   - `ADMIN_PASSWORD` (minimo 8 caracteres; se almacena cifrada)
 3. Railway detectara automaticamente el `Dockerfile` y `docker-compose.yml`
 
 ## Estructura del proyecto
@@ -101,10 +107,10 @@ src/
     api/
       auth/[...nextauth]/  # Endpoint de NextAuth
       products/            # API CRUD de productos
-      register/            # Endpoint de registro de usuarios
+      register/            # Creacion de usuarios (solo administrador)
     login/                 # Pagina de inicio de sesion
     productos/             # Editor de productos (protegido)
-    register/              # Registro de usuario inicial
+    admin/usuarios/        # Panel de administracion de usuarios
   lib/
     auth.ts                # Configuracion de NextAuth
     prisma.ts              # Cliente Prisma con adaptador PostgreSQL
@@ -119,6 +125,10 @@ docker-compose.yml         # Servicios app + PostgreSQL
 | DATABASE_URL     | URL de conexion a PostgreSQL                     |
 | NEXTAUTH_URL     | URL base de la aplicacion                        |
 | NEXTAUTH_SECRET  | Clave secreta para firmar tokens de sesion       |
+| ADMIN_NAME       | Nombre del administrador inicial                  |
+| ADMIN_USERNAME   | Usuario de acceso del administrador               |
+| ADMIN_EMAIL      | Correo del administrador inicial                  |
+| ADMIN_PASSWORD   | Password del administrador; minimo 8 caracteres   |
 
 ## Comandos utiles
 
@@ -147,4 +157,3 @@ npx prisma studio
 - bcryptjs (hashing de passwords)
 - Docker / Docker Compose
 - PWA (next-pwa)
-

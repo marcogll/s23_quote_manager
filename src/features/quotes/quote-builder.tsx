@@ -22,6 +22,8 @@ import { MarkdownEditor } from "./markdown-editor";
 import { ProfileDialog, type AgentProfile } from "./profile-dialog";
 import { QuoteDocument } from "./quote-document";
 import { QuoteHistoryDialog, type StoredQuote } from "./quote-history-dialog";
+import { SessionControls } from "@/features/auth/session-controls";
+import { JsonImportPanel, QuoteWorkspaceNav, type WorkspaceSection } from "./quote-workspace-nav";
 
 type Client = { name: string; company: string; email: string; phone: string };
 type CurrencyCode = "MXN" | "USD" | "CAD" | "EUR";
@@ -92,6 +94,8 @@ export const QuoteBuilder = () => {
   const [savedQuotes, setSavedQuotes] = useState<StoredQuote[]>([]);
   const [currentQuoteId, setCurrentQuoteId] = useState(() => `quote-${Date.now()}`);
   const [quoteNumber, setQuoteNumber] = useState(createQuoteNumber);
+  const [activeSection, setActiveSection] = useState<WorkspaceSection>("create");
+  const [importFeedback, setImportFeedback] = useState({ message: "", isError: false });
 
   useEffect(() => {
     const savedCustom = readStoredArray<Service>("s23-custom-services");
@@ -259,14 +263,70 @@ export const QuoteBuilder = () => {
     setLines((current) => current.filter((line) => line.service.id !== id));
   };
 
+  const isStoredQuote = (value: unknown): value is StoredQuote => {
+    if (!value || typeof value !== "object") return false;
+    const quote = value as Partial<StoredQuote>;
+    return typeof quote.id === "string"
+      && typeof quote.number === "string"
+      && typeof quote.updatedAt === "string"
+      && typeof quote.client === "object"
+      && Array.isArray(quote.lines)
+      && quote.lines.every((line) => line && typeof line.quantity === "number" && typeof line.service?.id === "string");
+  };
+
+  const importQuotes = async (file: File) => {
+    try {
+      const parsed = JSON.parse(await file.text()) as unknown;
+      const candidates = Array.isArray(parsed) ? parsed : [parsed];
+      if (!candidates.length || !candidates.every(isStoredQuote)) throw new Error("invalid-format");
+      setSavedQuotes((current) => [
+        ...candidates,
+        ...current.filter((quote) => !candidates.some((candidate) => candidate.id === quote.id)),
+      ]);
+      setImportFeedback({ message: `${candidates.length} cotización${candidates.length === 1 ? "" : "es"} importada${candidates.length === 1 ? "" : "s"}.`, isError: false });
+    } catch {
+      setImportFeedback({ message: "El archivo no tiene el formato esperado. Descarga la plantilla y verifica sus campos.", isError: true });
+    }
+  };
+
+  const downloadJsonTemplate = () => {
+    const template: StoredQuote = {
+      id: "quote-ejemplo-001",
+      number: `S23-${new Date().getFullYear()}-000001`,
+      updatedAt: new Date().toISOString(),
+      client: { name: "Nombre del contacto", company: "Empresa", email: "contacto@empresa.com", phone: "+52 000 000 0000" },
+      lines: [{ service: services[0], quantity: 1 }],
+      notes: "Vigencia de 15 días.",
+      discountId: "none",
+      customDiscountRate: 0,
+      referral: false,
+      currency: "MXN",
+      showExchangeRate: true,
+      includeVat: false,
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify([template], null, 2)], { type: "application/json" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "plantilla-cotizaciones-s23.json";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const changeSection = (section: WorkspaceSection) => {
+    setActiveSection(section);
+    if (section === "current" && window.matchMedia("(max-width: 820px)").matches) setMobileCart(true);
+  };
+
   return (
     <main className="workspace">
       <header className="app-header">
         <div className="brand"><img src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg" alt="Soul:23" /><span><b>Cotizaciones</b><small>Marketing & Systems</small></span></div>
-        <div className="header-tools"><button className="history-trigger" onClick={() => setHistoryOpen(true)}><Archive size={16} /> Cotizaciones</button><button className="agent-trigger" onClick={() => setProfileDialog(true)}><span className="profile-avatar">{selectedAgent.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span><span><b>{selectedAgent.name}</b><small>{selectedAgent.role}</small></span><ChevronRight size={14} /></button><div className="header-meta"><span>Borrador guardado</span><b>{quoteNumber}</b></div></div>
+        <div className="header-tools"><button className="history-trigger" onClick={() => setHistoryOpen(true)}><Archive size={16} /> Cotizaciones</button><button className="agent-trigger" onClick={() => setProfileDialog(true)}><span className="profile-avatar">{selectedAgent.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span><span><b>{selectedAgent.name}</b><small>{selectedAgent.role}</small></span><ChevronRight size={14} /></button><div className="header-meta"><span>Borrador guardado</span><b>{quoteNumber}</b></div><SessionControls /></div>
       </header>
 
-      <section className="catalog-panel">
+      <QuoteWorkspaceNav active={activeSection} quoteCount={savedQuotes.length} currentLineCount={lines.length} onChange={changeSection} />
+
+      {activeSection === "create" && <section className="catalog-panel">
         <div className="section-title">
           <div><p className="eyebrow">Punto de venta</p><h1>Arma una cotización</h1><p>Selecciona servicios y personaliza el alcance.</p></div>
           <div className="title-actions"><button className="wizard-button" onClick={() => setWizardOpen(true)}>Modo guiado <ChevronRight size={16} /></button><button className="ghost-button" onClick={() => setHistoryOpen(true)}><Archive size={16} /> Cotizaciones</button><button className="ghost-button" onClick={startManualQuote}><FilePenLine size={16} /> Artesanal</button><button className="new-service-button" onClick={() => setCustomDialog(true)}><Plus size={17} /> Crear servicio</button></div>
@@ -305,7 +365,36 @@ export const QuoteBuilder = () => {
           })}
         </div>
         {filtered.length === 0 && <div className="empty-results"><Search size={28} /><b>Sin resultados</b><p>Prueba con otro nombre o categoría.</p></div>}
-      </section>
+      </section>}
+
+      {activeSection === "current" && <section className="management-panel">
+        <div className="section-title"><div><p className="eyebrow">En preparación</p><h1>Cotización actual</h1><p>Revisa el resumen y continúa editando los datos en el panel lateral.</p></div><button className="new-service-button" onClick={() => setActiveSection("create")}><Plus size={17} /> Agregar servicios</button></div>
+        <div className="current-overview">
+          <div><span>Folio</span><b>{quoteNumber}</b></div><div><span>Cliente</span><b>{client.company || client.name || "Sin asignar"}</b></div><div><span>Conceptos</span><b>{lines.length}</b></div><div><span>Total</span><b>{displayMoney(payableTotal)}</b></div>
+        </div>
+      </section>}
+
+      {activeSection === "quotes" && <section className="management-panel">
+        <div className="section-title"><div><p className="eyebrow">Archivo local</p><h1>Cotizaciones</h1><p>Consulta, importa y administra tus cotizaciones guardadas.</p></div><button className="new-service-button" onClick={() => { clearQuote(); setActiveSection("create"); }}><Plus size={17} /> Nueva cotización</button></div>
+        <JsonImportPanel message={importFeedback.message} isError={importFeedback.isError} onImport={importQuotes} onDownloadTemplate={downloadJsonTemplate} />
+        <div className="management-list">
+          {savedQuotes.length === 0 ? <div className="management-empty"><Archive size={28} /><b>No hay cotizaciones guardadas</b><p>Crea una nueva o importa un archivo JSON.</p></div> : savedQuotes.map((quote) => <article key={quote.id}><button onClick={() => { openSavedQuote(quote); setActiveSection("current"); }}><span><b>{quote.client.company || quote.client.name || "Sin cliente"}</b><small>{quote.number} · {quote.lines.length} conceptos</small></span><time>{new Date(quote.updatedAt).toLocaleDateString("es-MX")}</time></button><button className="history-delete" onClick={() => setSavedQuotes((current) => current.filter((item) => item.id !== quote.id))} aria-label={`Eliminar ${quote.number}`}><Trash2 size={16} /></button></article>)}
+        </div>
+      </section>}
+
+      {activeSection === "services" && <section className="management-panel">
+        <div className="section-title"><div><p className="eyebrow">Catálogo</p><h1>Manejo de servicios</h1><p>Consulta el catálogo base y administra tus servicios personalizados.</p></div><button className="new-service-button" onClick={() => setCustomDialog(true)}><Plus size={17} /> Crear servicio</button></div>
+        <div className="service-stats"><div><span>Servicios base</span><b>{services.length}</b></div><div><span>Personalizados</span><b>{customServices.length}</b></div><div><span>Categorías</span><b>{allCategories.length - 1}</b></div></div>
+        <div className="management-list service-management-list">{customServices.length === 0 ? <div className="management-empty"><Package size={28} /><b>Aún no tienes servicios propios</b><p>Crea uno para agregarlo a tu catálogo.</p></div> : customServices.map((service) => <article key={service.id}><div><span><b>{service.name}</b><small>{service.category} · {displayServicePrice(service)}</small></span></div><button className="history-delete" onClick={() => deleteCustomService(service.id)} aria-label={`Eliminar ${service.name}`}><Trash2 size={16} /></button></article>)}</div>
+      </section>}
+
+      {activeSection === "settings" && <section className="management-panel">
+        <div className="section-title"><div><p className="eyebrow">Preferencias</p><h1>Ajustes y configuración</h1><p>Configura valores predeterminados para nuevas cotizaciones.</p></div></div>
+        <div className="settings-grid">
+          <section><h2>Moneda y documento</h2><label><span>Moneda predeterminada</span><select value={currency} onChange={(event) => setCurrency(event.target.value as CurrencyCode)}><option value="MXN">MXN · Peso mexicano</option><option value="USD">USD · Dólar estadounidense</option><option value="CAD">CAD · Dólar canadiense</option><option value="EUR">EUR · Euro</option></select></label><label className="settings-check"><input type="checkbox" checked={showExchangeRate} onChange={(event) => setShowExchangeRate(event.target.checked)} /><span>Mostrar tipo de cambio en el documento</span></label></section>
+          <section><h2>Perfil del asesor</h2><div className="settings-profile"><span className="profile-avatar">{selectedAgent.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span><div><b>{selectedAgent.name}</b><small>{selectedAgent.role}</small></div></div><button className="ghost-button" onClick={() => setProfileDialog(true)}>Administrar perfiles</button></section>
+        </div>
+      </section>}
 
       <aside className={`ticket-panel ${mobileCart ? "mobile-open" : ""}`}>
         <div className="ticket-header"><div><p className="eyebrow">Cotización actual</p><h2>{lines.length} {lines.length === 1 ? "concepto" : "conceptos"}</h2></div><button className="close-mobile" onClick={() => setMobileCart(false)} aria-label="Cerrar"><X /></button></div>

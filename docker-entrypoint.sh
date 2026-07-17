@@ -58,6 +58,11 @@ else
   echo "WARNING: Las migraciones fallaron. La base de datos puede no estar sincronizada."
 fi
 
+# Crear o actualizar el administrador configurado en Railway.
+echo ""
+echo "Sincronizando administrador inicial..."
+node scripts/bootstrap-admin.mjs
+
 # Iniciar aplicacion
 echo ""
 echo "Iniciando aplicacion Next.js..."

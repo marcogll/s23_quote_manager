@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getAuthenticatedUser } from "@/lib/authorization";
 
 export async function GET() {
   try {
+    if (!(await getAuthenticatedUser())) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    }
+
     const products = await prisma.product.findMany({
       orderBy: { createdAt: "desc" },
     });
@@ -18,6 +23,10 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!(await getAuthenticatedUser())) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { name, description, price, category, sku, stock, image } = body;
 
