@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       exists: true,
-      hasPassword,
+      hasPassword: !!userPassword,
       passwordValid: isValid,
       userId: user.id,
       email: user.email,
