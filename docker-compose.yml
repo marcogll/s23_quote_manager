@@ -45,10 +45,6 @@ services:
       DATABASE_URL: "postgresql://postgres:postgres@db:5432/soul23_products?schema=public"
       NEXTAUTH_URL: "http://localhost:3000"
       NEXTAUTH_SECRET: "local-dev-secret-cambiar-en-produccion"
-      ADMIN_NAME: "Marco"
-      ADMIN_USERNAME: "${ADMIN_USERNAME:-marcogll}"
-      ADMIN_EMAIL: "${ADMIN_EMAIL:-}"
-      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-}"
     depends_on:
       db:
         condition: service_healthy

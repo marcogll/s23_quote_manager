@@ -13,14 +13,15 @@ export default withAuth(
   {
     callbacks: {
       authorized({ req, token }) {
-        const path = req.nextUrl.pathname;
-        if (path.startsWith("/admin")) return token?.role === "admin";
-        return token !== null;
+        if (req.nextUrl.pathname.startsWith("/productos")) {
+          return token !== null;
+        }
+        return true;
       },
     },
   }
 );
 
 export const config = {
-  matcher: ["/", "/productos/:path*", "/admin/:path*"],
+  matcher: ["/productos/:path*", "/admin/:path*"],
 };
