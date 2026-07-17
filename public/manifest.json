@@ -1,0 +1,16 @@
+{
+  "name": "Soul:23 Product Editor",
+  "short_name": "S23 Editor",
+  "description": "Editor de productos con autenticacion",
+  "start_url": "/productos",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
