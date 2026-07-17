@@ -75,5 +75,6 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+# Entrypoint must run as root to start PostgreSQL, then drop privileges for the app
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["node", "server.js"]
+CMD ["su-exec", "nextjs:nodejs", "node", "server.js"]

@@ -85,7 +85,7 @@ echo ""
 echo "Sincronizando administrador inicial..."
 node scripts/bootstrap-admin.mjs
 
-# Iniciar aplicacion
+# Iniciar aplicacion (CMD se encarga de bajar privilegios con su-exec)
 echo ""
 echo "Iniciando aplicacion Next.js..."
 echo "============================================================"
