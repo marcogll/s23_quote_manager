@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const hasPassword = !!user.password;
-    const isValid = hasPassword
-      ? await bcrypt.compare(password, user.password)
+    const userPassword = user.password ?? "";
+    const isValid = userPassword
+      ? await bcrypt.compare(password, userPassword)
       : false;
 
     return NextResponse.json({
