@@ -61,64 +61,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   body { zoom: .83; }
 }
 
-@media screen {
-  :root {
-    --surface: #18181b;
-    --ink: #f4f4f5;
-    --line: #2b2b30;
-    --accent: #49bd88;
-    --accent-dark: #071b12;
-    --danger: #fb7185;
-  }
-  html, body { background: #09090b; }
-  h1, h2, h3, .grand-total b, .review-total b { font-family: var(--font-heading); }
-  .app-header { border-color: var(--line); background: rgba(9,9,11,.93); }
-  .brand img { filter: invert(1); }
-  .brand small, .header-meta span, .eyebrow, .section-title p:last-child, .card-category, .billing-badge, .card-footer small, .line-main span, .ticket-totals > div, .ticket-totals > p { color: #a1a1aa; }
-  .ghost-button, .wizard-button { color: #e4e4e7; border-color: #34343a; background: #18181b; border-radius: 10px; }
-  .ghost-button:hover, .wizard-button:hover { border-color: #52525b; background: #222226; }
-  .new-service-button, .card-footer button, .wizard-next, .dialog-save { color: #071b12; border-color: var(--accent); background: var(--accent); border-radius: 10px; }
-  .new-service-button:hover, .card-footer button:hover, .wizard-next:hover, .dialog-save:hover { color: #071b12; background: #60d69f; }
-  .search-box { border-color: #34343a; background: #18181b; border-radius: 12px; }
-  .search-box input, .wizard-search input { color: #f4f4f5; }
-  .search-box input::placeholder, input::placeholder, textarea::placeholder { color: #71717a; }
-  .category-tabs button { color: #a1a1aa; border-color: #2d2d32; background: #141416; }
-  .category-tabs button:hover, .category-tabs button.active { color: #071b12; border-color: var(--accent); background: var(--accent); }
-  .service-card { border-color: #29292e; background: #18181b; border-radius: 16px; }
-  .service-card:hover { border-color: #44444c; box-shadow: 0 14px 34px rgba(0,0,0,.25); }
-  .service-card.selected { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
-  .card-description, .service-card ul { color: #a1a1aa; }
-  .card-footer { border-color: #2b2b30; }
-  .recommended { border-radius: 6px; }
-  .ticket-panel { border-color: #2b2b30; background: #141416; box-shadow: -18px 0 45px rgba(0,0,0,.3); }
-  .ticket-header, .ticket-line, .form-section, .ticket-totals { border-color: #2b2b30; }
-  .empty-ticket { color: #71717a; border-color: #2b2b30; }
-  .form-section label { color: #a1a1aa; }
-  .form-section input:not([type="checkbox"]), .form-section select, .form-section textarea { color: #e4e4e7; border-color: #34343a; background: #202024; border-radius: 9px; }
-  .check-row > span { color: #e4e4e7; }
-  .stepper { border-color: #34343a; border-radius: 8px; overflow: hidden; }
-  .stepper button:hover { background: #29292e; }
-  .ticket-totals { background: #18181b; }
-  .ticket-totals .grand-total { color: #f4f4f5; }
-  .primary-button { color: #071b12; background: var(--accent); border-radius: 11px; }
-  .primary-button:hover { background: #60d69f; }
-  .primary-button:disabled { color: #71717a; background: #2b2b30; }
-  .custom-dialog, .quote-wizard { color: #f4f4f5; border-color: #34343a; background: #141416; border-radius: 18px; overflow: hidden; }
-  .dialog-header, .wizard-header, .wizard-steps, .wizard-footer { border-color: #2b2b30; background: #18181b; }
-  .dialog-header button, .wizard-header > button { color: #d4d4d8; background: #29292e; border-radius: 50%; }
-  .custom-dialog label, .wizard-fields label { color: #d4d4d8; }
-  .custom-dialog input, .custom-dialog textarea, .wizard-fields input, .wizard-search { color: #f4f4f5; border-color: #34343a; background: #202024; border-radius: 9px; }
-  .fixed-type, .wizard-service-list article, .discount-options button, .wizard-referral, .review-lines { color: #e4e4e7; border-color: #2f2f35; background: #1c1c20; border-radius: 11px; }
-  .wizard-steps button.active { color: #f4f4f5; }
-  .wizard-content { background: #111113; }
-  .wizard-copy p, .wizard-service-list span, .discount-options small, .wizard-referral small, .review-lines small { color: #a1a1aa; }
-  .wizard-add { color: #071b12; border-color: var(--accent); background: var(--accent); border-radius: 8px; }
-  .wizard-back { color: #d4d4d8; border-color: #34343a; background: #202024; border-radius: 9px; }
-  .review-client { background: #202024; border-radius: 12px 12px 0 0; }
-  .review-total { color: #071b12; border-radius: 0 0 12px 12px; }
-  .dialog-cancel { color: #d4d4d8; border-color: #34343a; background: #202024; border-radius: 9px; }
-}
-
 .workspace { min-height: 100vh; padding-right: 460px; }
 .workspace-nav { min-height: 58px; display: flex; align-items: stretch; gap: 4px; padding: 7px 30px; border-bottom: 1px solid var(--line); background: #111113; position: sticky; top: 74px; z-index: 9; overflow-x: auto; scrollbar-width: none; }
 .workspace-nav button { min-width: max-content; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border: 1px solid transparent; border-radius: 9px; color: #a1a1aa; background: transparent; font-size: 12px; font-weight: 750; transition: color .18s ease, background .18s ease, border-color .18s ease; }
@@ -472,78 +414,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 
-/* Theme layer: kept after component rules so light document styles cannot leak into the app. */
-@media screen {
-  :root {
-    --background: #09090b;
-    --foreground: #f4f4f5;
-    --surface: #18181b;
-    --ink: #f4f4f5;
-    --muted: #a1a1aa;
-    --line: #303036;
-    --accent: #49bd88;
-  }
-  .app-header { color: #f4f4f5; border-color: #303036; background: rgba(9,9,11,.96); }
-  .brand img { filter: invert(1); }
-  .brand small, .header-meta span, .section-title p:last-child, .billing-badge, .card-category, .card-description, .service-card ul, .card-footer small, .empty-ticket, .empty-ticket p, .line-main span, .ticket-totals > p { color: #a1a1aa; }
-  .eyebrow, .form-section h3, .form-section label > span, .markdown-field > span { color: #d4d4d8; }
-  .ghost-button, .wizard-button { color: #e4e4e7; border-color: #3f3f46; background: #18181b; border-radius: 10px; }
-  .agent-trigger { color: #e4e4e7; border-color: #303036; background: #141416; border-radius: 11px; }
-  .agent-trigger:hover { border-color: #52525b; background: #202024; }
-  .ghost-button:hover, .wizard-button:hover { color: #fff; border-color: #71717a; background: #27272a; }
-  .new-service-button, .card-footer button, .wizard-next, .dialog-save { color: #071b12; border-color: #49bd88; background: #49bd88; border-radius: 10px; }
-  .new-service-button:hover, .card-footer button:hover, .wizard-next:hover, .dialog-save:hover { color: #071b12; background: #67d7a5; }
-  .search-box { color: #e4e4e7; border-color: #52525b; background: #18181b; border-radius: 12px; }
-  .search-box input { color: #f4f4f5; }
-  .search-box input::placeholder, input::placeholder, textarea::placeholder { color: #8b8b95; opacity: 1; }
-  .category-tabs button { color: #a1a1aa; border-color: #303036; background: #111113; }
-  .category-tabs button:hover, .category-tabs button.active { color: #071b12; border-color: #49bd88; background: #49bd88; }
-  .service-card { color: #f4f4f5; border-color: #29292e; background: #18181b; border-radius: 16px; }
-  .service-card:hover { border-color: #52525b; box-shadow: 0 14px 34px rgba(0,0,0,.28); }
-  .service-card.selected { border-color: #49bd88; box-shadow: inset 4px 0 0 #49bd88; }
-  .card-footer { border-color: #3f3f46; }
-  .recommended { color: #071b12; background: #49bd88; border-radius: 6px; }
-  .ticket-panel { color: #f4f4f5; border-color: #303036; background: #18181b; box-shadow: -18px 0 45px rgba(0,0,0,.35); }
-  .ticket-header, .ticket-line, .form-section, .ticket-totals, .empty-ticket { border-color: #303036; }
-  .form-section label { color: #d4d4d8; }
-  .form-section input:not([type="checkbox"]), .form-section select, .form-section textarea { color: #f4f4f5; border-color: #3f3f46; background: #242428; border-radius: 9px; color-scheme: dark; }
-  .check-row > span, .grand-total, .ticket-totals .grand-total { color: #f4f4f5; }
-  .check-row small { color: #a1a1aa; }
-  .stepper { color: #f4f4f5; border-color: #3f3f46; border-radius: 8px; overflow: hidden; }
-  .stepper button { color: #d4d4d8; }
-  .stepper button:hover { background: #303036; }
-  .ticket-totals { background: #141416; }
-  .ticket-totals > div { color: #a1a1aa; }
-  .primary-button { color: #071b12; background: #49bd88; border-radius: 11px; }
-  .primary-button:hover { background: #67d7a5; }
-  .primary-button:disabled { color: #a1a1aa; background: #303036; }
-  .custom-dialog, .quote-wizard, .profile-dialog { color: #f4f4f5; border-color: #3f3f46; background: #141416; border-radius: 18px; }
-  .dialog-header, .wizard-header, .wizard-steps, .wizard-footer { color: #f4f4f5; border-color: #303036; background: #18181b; }
-  .wizard-content { background: #111113; }
-  .wizard-steps button { color: #a1a1aa !important; }
-  .wizard-steps button.active, .wizard-steps button.done { color: #f4f4f5 !important; }
-  .wizard-steps button span { color: #d4d4d8; border-color: #52525b; }
-  .wizard-copy h3, .wizard-service-list b, .review-lines b { color: #f4f4f5; }
-  .wizard-copy p, .wizard-service-list small, .wizard-service-list span, .wizard-footer > span, .discount-options small, .wizard-referral small { color: #a1a1aa !important; }
-  .wizard-search { color: #d4d4d8; }
-  .wizard-stepper { color: #f4f4f5; border-color: #52525b; }
-  .wizard-stepper button { color: #e4e4e7; }
-  .wizard-footer button { color: #e4e4e7; }
-  .wizard-footer .wizard-next { color: #071b12; }
-  .wizard-add { color: #071b12 !important; border-color: #49bd88 !important; background: #49bd88 !important; border-radius: 8px; }
-  .wizard-add:hover { background: #67d7a5; }
-  .dialog-header button, .wizard-header > button { color: #d4d4d8 !important; background: #29292e !important; }
-  .wizard-back { border-color: #3f3f46; background: #242428; }
-  .custom-dialog input, .custom-dialog textarea, .wizard-fields input, .wizard-search { color: #f4f4f5; border-color: #3f3f46; background: #242428; color-scheme: dark; }
-  .fixed-type, .wizard-service-list article, .discount-options button, .wizard-referral, .review-lines { color: #e4e4e7; border-color: #34343a; background: #1c1c20; }
-  .history-trigger, .save-quote-button { color: #e4e4e7; border-color: #34343a; background: #18181b; }
-  .history-dialog { color: #f4f4f5; border-color: #303036; background: #18181b; }
-  .history-toolbar, .history-list article { border-color: #303036; }
-  .history-open { color: #f4f4f5; }
-  .history-open small, .history-open time, .history-toolbar > span, .history-empty { color: #a1a1aa; }
-  .history-list article:hover { background: #202024; }
-  .history-delete { color: #a1a1aa; }
-}
+
 
 .history-trigger, .save-quote-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line); border-radius: 9px; }
 .history-trigger { padding: 9px 12px; }
