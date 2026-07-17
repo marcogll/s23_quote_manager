@@ -13,17 +13,32 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          console.error("[AUTH] Missing credentials");
           return null;
         }
 
         const identifier = credentials.email.trim().toLowerCase();
-        const user = await prisma.user.findFirst({
-          where: {
-            OR: [{ email: identifier }, { username: identifier }],
-          },
-        });
+        console.log(`[AUTH] Login attempt: ${identifier}`);
 
-        if (!user || !user.password) {
+        let user;
+        try {
+          user = await prisma.user.findFirst({
+            where: {
+              OR: [{ email: identifier }, { username: identifier }],
+            },
+          });
+        } catch (dbError) {
+          console.error("[AUTH] Database error during user lookup:", dbError);
+          return null;
+        }
+
+        if (!user) {
+          console.error(`[AUTH] User not found: ${identifier}`);
+          return null;
+        }
+
+        if (!user.password) {
+          console.error(`[AUTH] User has no password: ${identifier}`);
           return null;
         }
 
@@ -33,9 +48,11 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isPasswordValid) {
+          console.error(`[AUTH] Invalid password for: ${identifier}`);
           return null;
         }
 
+        console.log(`[AUTH] Successful login: ${identifier} (${user.role})`);
         return {
           id: user.id,
           email: user.email,

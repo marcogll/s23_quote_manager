@@ -24,13 +24,18 @@ export default function LoginPage() {
         redirect: false,
       });
 
+      console.log("[LOGIN] signIn result:", result);
+
       if (result?.error) {
         setError("Credenciales inválidas");
-      } else {
+      } else if (result?.ok) {
         router.push("/productos");
         router.refresh();
+      } else {
+        setError("Respuesta inesperada del servidor. Revisa la consola.");
       }
-    } catch {
+    } catch (err) {
+      console.error("[LOGIN] signIn exception:", err);
       setError("Error al iniciar sesión");
     } finally {
       setLoading(false);
