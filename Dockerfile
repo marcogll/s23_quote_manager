@@ -28,8 +28,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Install PostgreSQL 15, client tools, and netcat
-RUN apk add --no-cache postgresql15 postgresql15-client netcat-openbsd su-exec
+# Install PostgreSQL, client tools, and netcat
+RUN apk add --no-cache postgresql postgresql-client netcat-openbsd su-exec
 RUN npm install -g pnpm
 
 # Create system user for Next.js
