@@ -63,7 +63,7 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=5 \
-  CMD wget --quiet --tries=1 --spider http://127.0.0.1:${PORT}/api/health || exit 1
+  CMD wget --quiet --tries=1 --output-document=- http://127.0.0.1:${PORT}/api/health >/dev/null || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
