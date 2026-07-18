@@ -72,10 +72,10 @@ La aplicacion estara disponible en `http://localhost:3000`.
 
 ```bash
 # Construir e iniciar todos los servicios
-docker-compose up --build
+docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
 
 # O en segundo plano
-docker-compose up -d --build
+docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 ```
 
 Servicios expuestos:
@@ -123,7 +123,8 @@ src/
     auth.ts                # Configuracion de NextAuth
     prisma.ts              # Cliente Prisma con adaptador PostgreSQL
 Dockerfile                 # Build multi-stage para produccion
-docker-compose.yml         # Desarrollo local
+docker-compose.yml         # Produccion y archivo predeterminado de Coolify
+docker-compose.local.yml   # Puertos adicionales para desarrollo local
 docker-compose.coolify.yml # Stack de produccion para Coolify
 ```
 
