@@ -1,0 +1,15 @@
+.git
+.github
+.next
+.playwright-cli
+node_modules
+*.log
+*.db
+*.db-journal
+.env
+.env.*
+!.env.example
+tsconfig.tsbuildinfo
+machotes
+baserow-seeds
+exports

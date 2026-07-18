@@ -9,7 +9,7 @@
 <h1 align="center">Soul:23 Product Editor</h1>
 
 <p align="center">
-  Editor de productos con autenticacion, base de datos PostgreSQL y despliegue containerizado para Railway.
+  Gestor de cotizaciones con autenticacion, PostgreSQL y despliegue containerizado para Coolify.
 </p>
 
 <p align="center">
@@ -31,7 +31,8 @@
 - Middleware de proteccion de rutas
 - Base de datos PostgreSQL con Prisma ORM
 - Generacion de cliente Prisma autonoma
-- Docker y Docker Compose para despliegue en Railway
+- Cotizaciones persistentes por usuario, con importacion y exportacion JSON
+- Docker Compose listo para Coolify en un VPS
 - PWA lista para instalacion
 
 ## Requisitos
@@ -81,14 +82,27 @@ Servicios expuestos:
 - Aplicacion: `http://localhost:3000`
 - PostgreSQL: `localhost:5432`
 
-## Despliegue en Railway
+## Despliegue en Coolify
 
-1. Conectar el repositorio a Railway
-2. Configurar variables de entorno:
-   - `DATABASE_URL` (Railway genera esto automaticamente al agregar PostgreSQL)
-   - `NEXTAUTH_SECRET` (generar con `openssl rand -base64 32`)
-   - `NEXTAUTH_URL` (dominio asignado por Railway)
-3. Railway detectara automaticamente el `Dockerfile` y `docker-compose.yml`
+1. Crear un recurso desde el repositorio Git y seleccionar **Docker Compose**.
+2. Indicar `docker-compose.coolify.yml` como archivo Compose.
+3. Configurar estas variables en Coolify:
+   - `POSTGRES_PASSWORD`: contraseña aleatoria y larga.
+   - `NEXTAUTH_SECRET`: generar con `openssl rand -base64 32`.
+   - `APP_URL`: dominio completo, por ejemplo `https://cotizaciones.example.com`.
+   - Opcionalmente `ADMIN_EMAIL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `ADMIN_NAME`.
+   Se puede copiar la plantilla `.env.coolify.example` en **Environment
+   Variables > Developer View** y reemplazar todos sus valores de ejemplo.
+4. Asignar el dominio al servicio `app` y al puerto `3000`.
+5. Desplegar. El contenedor espera PostgreSQL, aplica migraciones y después
+   inicia Next.js. El healthcheck disponible es `/api/health`.
+6. En la base PostgreSQL de Coolify, configurar respaldos programados hacia un
+   almacenamiento S3 compatible. El volumen `postgres_data` conserva los datos
+   entre deployments, pero no sustituye un respaldo externo.
+
+Las cotizaciones guardadas anteriormente en `localStorage` se importan una vez
+a PostgreSQL al iniciar sesión. Después se consultan siempre desde la base de
+datos y pueden exportarse o importarse desde la sección Cotizaciones.
 
 ## Estructura del proyecto
 
@@ -109,16 +123,21 @@ src/
     auth.ts                # Configuracion de NextAuth
     prisma.ts              # Cliente Prisma con adaptador PostgreSQL
 Dockerfile                 # Build multi-stage para produccion
-docker-compose.yml         # Servicios app + PostgreSQL
+docker-compose.yml         # Desarrollo local
+docker-compose.coolify.yml # Stack de produccion para Coolify
 ```
 
 ## Variables de entorno
 
-| Variable         | Descripcion                                      |
-|------------------|--------------------------------------------------|
-| DATABASE_URL     | URL de conexion a PostgreSQL                     |
-| NEXTAUTH_URL     | URL base de la aplicacion                        |
-| NEXTAUTH_SECRET  | Clave secreta para firmar tokens de sesion       |
+| Variable         | Descripcion                                        |
+|------------------|----------------------------------------------------|
+| DATABASE_URL     | URL de conexion a PostgreSQL                       |
+| NEXTAUTH_URL     | URL publica HTTPS de la aplicacion                 |
+| NEXTAUTH_SECRET  | Clave secreta para firmar tokens de sesion         |
+| ADMIN_EMAIL      | Correo del administrador inicial (opcional)        |
+| ADMIN_USERNAME   | Usuario del administrador inicial (opcional)       |
+| ADMIN_PASSWORD   | Contraseña segura del administrador (opcional)     |
+| ADMIN_NAME       | Nombre visible del administrador (opcional)        |
 
 ## Comandos utiles
 
@@ -147,4 +166,3 @@ npx prisma studio
 - bcryptjs (hashing de passwords)
 - Docker / Docker Compose
 - PWA (next-pwa)
-

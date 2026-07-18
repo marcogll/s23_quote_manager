@@ -56,15 +56,60 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  username      String?   @unique
   email         String    @unique
   emailVerified DateTime?
   image         String?
-  password      String?   // For credentials provider
+  password      String? // For credentials provider
   accounts      Account[]
   sessions      Session[]
+  clients       Client[]
+  quotes        Quote[]
   role          String    @default("user") // admin, user
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+model Quote {
+  id        String   @id @default(cuid())
+  quoteKey  String
+  number    String
+  payload   Json
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, quoteKey])
+  @@index([userId, updatedAt])
+}
+
+model Client {
+  id              String   @id @default(uuid())
+  name            String
+  company         String?
+  accountName     String?
+  purchases       String?  @db.Text
+  estimatedValue  Float?
+  currency        String   @default("MXN")
+  requiresInvoice Boolean  @default(false)
+  legalName       String?
+  taxId           String?
+  taxRegime       String?
+  fiscalZipCode   String?
+  cfdiUse         String?
+  billingEmail    String?
+  email           String?
+  phone           String?
+  notes           String?  @db.Text
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([userId, email])
+  @@index([userId, name])
+  @@index([userId, company])
 }
 
 model VerificationToken {

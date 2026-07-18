@@ -3,8 +3,8 @@ import "./globals.css";
 import { AuthProvider } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Editor de Productos · Soul:23",
-  description: "Editor de productos con autenticación",
+  title: "Cotizaciones · Soul:23",
+  description: "Cotizaciones y gestión de clientes",
   manifest: "/manifest.json",
 };
 

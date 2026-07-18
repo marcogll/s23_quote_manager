@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Usuario o correo", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -16,8 +16,11 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+        const identifier = credentials.email.trim().toLowerCase();
+        const user = await prisma.user.findFirst({
+          where: {
+            OR: [{ email: identifier }, { username: identifier }],
+          },
         });
 
         if (!user || !user.password) {
@@ -62,5 +65,7 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 8 * 60 * 60,
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };

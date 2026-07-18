@@ -9,12 +9,7 @@ echo "============================================================"
 if [ -z "$DATABASE_URL" ]; then
   echo "WARNING: DATABASE_URL no esta definida"
   echo ""
-  echo "Para Railway:"
-  echo "  1. Ve a tu proyecto en Railway"
-  echo "  2. Haz clic en 'New' y selecciona 'Database' -> 'Add PostgreSQL'"
-  echo "  3. Railway generara automaticamente DATABASE_URL"
-  echo ""
-  echo "O configura manualmente la variable en Settings -> Variables"
+  echo "Configura DATABASE_URL antes de iniciar la aplicacion."
   echo ""
   echo "Iniciando aplicacion de todos modos..."
   echo "============================================================"
@@ -50,12 +45,18 @@ echo "Base de datos lista."
 # Ejecutar migraciones de Prisma
 echo ""
 echo "Ejecutando migraciones de Prisma..."
-if npx prisma migrate deploy; then
+npx prisma migrate deploy
+echo ""
+echo "Migraciones completadas exitosamente."
+
+# Sincronizar administrador inicial
+if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_USERNAME" ] && [ -n "$ADMIN_PASSWORD" ]; then
   echo ""
-  echo "Migraciones completadas exitosamente."
+  echo "Sincronizando administrador..."
+  node scripts/bootstrap-admin.mjs
 else
   echo ""
-  echo "WARNING: Las migraciones fallaron. La base de datos puede no estar sincronizada."
+  echo "Variables de administrador no configuradas. Omitiendo bootstrap."
 fi
 
 # Iniciar aplicacion
