@@ -1,8 +1,8 @@
 {
-  "name": "Soul:23 Product Editor",
-  "short_name": "S23 Editor",
-  "description": "Editor de productos con autenticacion",
-  "start_url": "/productos",
+  "name": "Cotizaciones · Soul:23",
+  "short_name": "S23 Cotizaciones",
+  "description": "Cotizaciones y gestión de clientes",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
