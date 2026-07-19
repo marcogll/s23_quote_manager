@@ -25,7 +25,7 @@ type QuoteDocumentProps = {
   displayLineTotal: (line: QuoteLine) => string;
 };
 
-const logoUrl = "https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg";
+const logoUrl = "/soul23_logo.svg";
 
 const DocumentLogo = () => (
   <div className="logo-wrap">

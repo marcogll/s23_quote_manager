@@ -42,7 +42,7 @@ export default function LoginPage() {
       <section className="login-shell" aria-labelledby="login-title">
         <div className="login-brand-panel">
           <img
-            src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg"
+            src="/soul23_logo.svg"
             alt="Soul:23"
           />
           <div>
@@ -57,7 +57,7 @@ export default function LoginPage() {
 
         <div className="login-form-panel">
           <div className="login-heading">
-            <span className="login-mark" aria-hidden="true">S:23</span>
+            <img className="login-mark" src="/soul23_logo.svg" alt="Soul:23" />
             <p className="login-eyebrow">Acceso seguro</p>
             <h2 id="login-title">Bienvenido</h2>
             <p>Ingresa tus credenciales para continuar.</p>

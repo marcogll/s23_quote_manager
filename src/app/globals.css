@@ -98,7 +98,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .login-brand-footer { position: relative; z-index: 1; margin: 0; color: #71717a; font-size: 11px; }
 .login-form-panel { display: flex; flex-direction: column; justify-content: center; padding: 56px; background: #18181b; }
 .login-heading { margin-bottom: 34px; }
-.login-mark { display: none; width: 52px; height: 42px; place-items: center; margin-bottom: 28px; border: 1px solid #3f3f46; border-radius: 10px; color: #d9f99d; font-family: var(--font-heading); font-size: 11px; font-weight: 900; }
+.login-mark { display: none; width: 138px; height: auto; margin-bottom: 34px; filter: invert(1); }
 .login-heading h2 { margin: 0; color: #f4f4f5; font-family: var(--font-heading); font-size: 36px; letter-spacing: -1.5px; }
 .login-heading > p:last-child { margin: 10px 0 0; color: #a1a1aa; font-size: 13px; }
 .login-form { display: grid; gap: 20px; }
@@ -118,7 +118,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .login-shell { min-height: calc(100vh - 36px); grid-template-columns: 1fr; }
   .login-brand-panel { display: none; }
   .login-form-panel { padding: clamp(28px, 8vw, 48px); }
-  .login-mark { display: grid; }
+  .login-mark { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {

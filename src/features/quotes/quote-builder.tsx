@@ -603,7 +603,7 @@ export const QuoteBuilder = () => {
   return (
     <main className={`workspace${sidebarCollapsed ? " sidebar-collapsed" : ""}`}>
       <header className="app-header">
-        <div className="brand"><img src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg" alt="Soul:23" /><span><b>Cotizaciones</b><small>Marketing & Systems</small></span></div>
+        <div className="brand"><img src="/soul23_logo.svg" alt="Soul:23" /><span><b>Cotizaciones</b><small>Marketing & Systems</small></span></div>
         <div className="header-tools"><button className="history-trigger" onClick={() => setHistoryOpen(true)}><Archive size={16} /> Cotizaciones</button><button className="agent-trigger" onClick={() => setProfileDialog(true)}><span className="profile-avatar">{selectedAgent.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span><span><b>{selectedAgent.name}</b><small>{selectedAgent.role}</small></span><ChevronRight size={14} /></button><div className="header-meta"><span>Borrador guardado</span><b>{quoteNumber}</b></div><SessionControls /></div>
       </header>
 
