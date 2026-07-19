@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  Archive, Check, ChevronRight, FilePenLine, Minus, Plus, Printer,
+  Archive, Check,   ChevronLeft, ChevronRight, FilePenLine, Minus, Plus, Printer,
   RotateCcw, Save, Search, ShoppingBag, Trash2, UserRound, X, Pencil,
   LayoutGrid, Headphones, CalendarClock, Briefcase, FolderOpen, Watch,
   Key, Package, Server, PieChart, SlidersHorizontal, PlusCircle, Code2,
@@ -14,9 +14,10 @@ import {
   Bell, Lock, Paintbrush, Layout, FolderKanban, CalendarDays, Rocket,
   Settings, Terminal, Wifi, PackageSearch
 } from "lucide-react";
-import { categories, categoryIcons, discountOptions, services, type Service } from "@/domain/catalog";
-import { billingLabel, calculateQuote, lineTotalInUsd, money, unitPriceInUsd, type QuoteLine } from "@/domain/quote-calculator";
+import { categories, categoryIcons, discountOptions, loadServices, type Service } from "@/domain/catalog";
+import { billingLabel, calculateQuote, lineTotalInUsd, money, roundPayableTotal, unitPriceInUsd, type QuoteLine } from "@/domain/quote-calculator";
 import { CustomServiceDialog } from "./custom-service-dialog";
+import { ServiceEditDialog } from "./service-edit-dialog";
 import { QuoteWizardDialog } from "./quote-wizard-dialog";
 import { MarkdownEditor } from "./markdown-editor";
 import { ProfileDialog, type AgentProfile } from "./profile-dialog";
@@ -34,6 +35,7 @@ import { isStoredQuote } from "@/features/quotes/quote-input";
 
 type Client = { name: string; company: string; email: string; phone: string };
 type CurrencyCode = "MXN" | "USD" | "CAD" | "EUR";
+type QuoteDraft = { lineIds: { id: string; quantity: number }[]; client: Client; serviceOverview?: string; notes: string; discountId?: string; customDiscountName?: string; customDiscountRate?: number; includeVat?: boolean; roundTotal?: boolean; roundingStep?: number; targetPrice?: string };
 const emptyClient: Client = { name: "", company: "", email: "", phone: "" };
 const defaultAgent: AgentProfile = { id: "marco", name: "Marco Gallegos", role: "Lead Engineer", email: "marco@soul23.mx", phone: "+52 844 227 8408" };
 const toCamelCase = (value: string) => value
@@ -115,6 +117,7 @@ export const QuoteBuilder = () => {
   const [serviceOverview, setServiceOverview] = useState("");
   const [notes, setNotes] = useState("Vigencia de 15 días. El proyecto inicia con 50% de anticipo.");
   const [mobileCart, setMobileCart] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [customDialog, setCustomDialog] = useState(false);
   const [wizardOpen, setWizardOpen] = useState(false);
   const [customServices, setCustomServices] = useState<Service[]>([]);
@@ -125,6 +128,9 @@ export const QuoteBuilder = () => {
   const [exchangeDate, setExchangeDate] = useState("");
   const [showExchangeRate, setShowExchangeRate] = useState(true);
   const [includeVat, setIncludeVat] = useState(false);
+  const [roundTotal, setRoundTotal] = useState(true);
+  const [roundingStep, setRoundingStep] = useState(100);
+  const [targetPrice, setTargetPrice] = useState("");
   const [exchangeStatus, setExchangeStatus] = useState<"loading" | "ready" | "error">("loading");
   const [profiles, setProfiles] = useState<AgentProfile[]>([defaultAgent]);
   const [selectedProfileId, setSelectedProfileId] = useState("marco");
@@ -132,17 +138,21 @@ export const QuoteBuilder = () => {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [savedQuotes, setSavedQuotes] = useState<StoredQuote[]>([]);
   const [paymentQuote, setPaymentQuote] = useState<StoredQuote | null>(null);
-  const [currentQuoteId, setCurrentQuoteId] = useState(() => `quote-${Date.now()}`);
-  const [quoteNumber, setQuoteNumber] = useState(createQuoteNumber);
-  const [quoteDate, setQuoteDate] = useState(() => new Date());
+  const [currentQuoteId, setCurrentQuoteId] = useState("");
+  const [quoteNumber, setQuoteNumber] = useState("");
+  const [quoteDate, setQuoteDate] = useState<Date>(undefined as unknown as Date);
   const [pendingPrint, setPendingPrint] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<WorkspaceSection>("create");
   const [importFeedback, setImportFeedback] = useState({ message: "", isError: false });
   const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
+  const [serviceOverrides, setServiceOverrides] = useState<Record<string, Partial<Service>>>({});
+  const [masterServices, setMasterServices] = useState<Service[]>([]);
   const [serviceCategory, setServiceCategory] = useState("Todos");
   const [serviceQuery, setServiceQuery] = useState("");
   const [editingServiceId, setEditingServiceId] = useState<string | null>(null);
   const [editingPrice, setEditingPrice] = useState("");
+  const [editingCustomService, setEditingCustomService] = useState<Service | null>(null);
+  const [editingCatalogService, setEditingCatalogService] = useState<Service | null>(null);
   const [backupFeedback, setBackupFeedback] = useState({ message: "", isError: false });
   const [backupBusy, setBackupBusy] = useState(false);
 
@@ -150,30 +160,36 @@ export const QuoteBuilder = () => {
     const savedCustom = readStoredArray<Service>("s23-custom-services");
     const savedPriceOverrides = readStoredRecord<number>("s23-service-price-overrides");
     setPriceOverrides(savedPriceOverrides);
+    const savedServiceOverrides = readStoredRecord<Partial<Service>>("s23-service-overrides");
+    setServiceOverrides(savedServiceOverrides);
     const savedCurrency = localStorage.getItem("s23-quote-currency") as CurrencyCode | null;
     if (savedCurrency) setCurrency(savedCurrency);
     setShowExchangeRate(localStorage.getItem("s23-show-exchange") !== "false");
     const savedProfiles = readStoredArray<AgentProfile>("s23-agent-profiles");
     const localQuotes = readStoredArray<StoredQuote>("s23-saved-quotes").filter(isStoredQuote);
-    void (async () => {
-      try {
-        const persistedQuotes = localQuotes.length ? await quoteApi.import(localQuotes) : await quoteApi.list();
-        setSavedQuotes(persistedQuotes);
-        if (localQuotes.length) localStorage.removeItem("s23-saved-quotes");
-      } catch {
-        setSavedQuotes(localQuotes);
-        setImportFeedback({ message: "No fue posible sincronizar las cotizaciones con el servidor.", isError: true });
-      }
-    })();
     setProfiles([defaultAgent, ...savedProfiles.filter((profile) => profile.id !== "marco")]);
     setSelectedProfileId(localStorage.getItem("s23-selected-agent") ?? "marco");
     setCustomServices(savedCustom);
-    const saved = localStorage.getItem("s23-quote-draft");
-    if (saved) {
+    const draftJson = localStorage.getItem("s23-quote-draft");
+    let draft: QuoteDraft | null = null;
+    if (draftJson) {
       try {
-        const draft = JSON.parse(saved) as { lineIds: { id: string; quantity: number }[]; client: Client; serviceOverview?: string; notes: string; discountId?: string; customDiscountName?: string; customDiscountRate?: number; includeVat?: boolean };
+        draft = JSON.parse(draftJson) as QuoteDraft;
+      } catch {
+        localStorage.removeItem("s23-quote-draft");
+      }
+    }
+    void (async () => {
+      let loaded: Service[] = [];
+      try {
+        loaded = await loadServices();
+        setMasterServices(loaded);
+      } catch {
+        setMasterServices([]);
+      }
+      if (draft) {
         setLines((draft.lineIds ?? []).flatMap(({ id, quantity }) => {
-          const service = [...services, ...savedCustom].find((candidate) => candidate.id === id);
+          const service = [...loaded, ...savedCustom].find((candidate) => candidate.id === id);
           return service ? [{ service: { ...service, price: savedPriceOverrides[service.id] ?? service.price }, quantity }] : [];
         }));
         setClient(draft.client ?? emptyClient);
@@ -183,17 +199,29 @@ export const QuoteBuilder = () => {
         setCustomDiscountName(draft.customDiscountName ?? "");
         setCustomDiscountRate(draft.customDiscountRate ?? 0);
         setIncludeVat(draft.includeVat ?? false);
-      } catch {
-        localStorage.removeItem("s23-quote-draft");
+        setRoundTotal(draft.roundTotal ?? true);
+        setRoundingStep(draft.roundingStep === 50 ? 50 : 100);
+        setTargetPrice(draft.targetPrice ?? "");
       }
-    }
-    setHydrated(true);
+      setCurrentQuoteId(`quote-${Date.now()}`);
+      setQuoteNumber(createQuoteNumber());
+      setQuoteDate(new Date());
+      setHydrated(true);
+      try {
+        const persistedQuotes = localQuotes.length ? await quoteApi.import(localQuotes) : await quoteApi.list();
+        setSavedQuotes(persistedQuotes);
+        if (localQuotes.length) localStorage.removeItem("s23-saved-quotes");
+      } catch {
+        setSavedQuotes(localQuotes);
+        setImportFeedback({ message: "No fue posible sincronizar las cotizaciones con el servidor.", isError: true });
+      }
+    })();
   }, []);
 
   useEffect(() => {
     if (!hydrated) return;
-    localStorage.setItem("s23-quote-draft", JSON.stringify({ lineIds: lines.map(({ service, quantity }) => ({ id: service.id, quantity })), client, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, includeVat }));
-  }, [lines, client, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, includeVat, hydrated]);
+    localStorage.setItem("s23-quote-draft", JSON.stringify({ lineIds: lines.map(({ service, quantity }) => ({ id: service.id, quantity })), client, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, includeVat, roundTotal, roundingStep, targetPrice }));
+  }, [lines, client, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, includeVat, roundTotal, roundingStep, targetPrice, hydrated]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -204,6 +232,11 @@ export const QuoteBuilder = () => {
     if (!hydrated) return;
     localStorage.setItem("s23-service-price-overrides", JSON.stringify(priceOverrides));
   }, [priceOverrides, hydrated]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    localStorage.setItem("s23-service-overrides", JSON.stringify(serviceOverrides));
+  }, [serviceOverrides, hydrated]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -251,10 +284,11 @@ export const QuoteBuilder = () => {
     return () => controller.abort();
   }, [currency]);
 
-  const catalogServices = useMemo(() => services.map((service) => ({
+  const catalogServices = useMemo(() => masterServices.map((service) => ({
     ...service,
-    price: priceOverrides[service.id] ?? service.price,
-  })), [priceOverrides]);
+    ...serviceOverrides[service.id],
+    price: priceOverrides[service.id] ?? serviceOverrides[service.id]?.price ?? service.price,
+  })), [masterServices, priceOverrides, serviceOverrides]);
   const allServices = useMemo(() => [...customServices, ...catalogServices], [customServices, catalogServices]);
   const allCategories = useMemo(() => customServices.length ? ["Todos", "Mis servicios", ...categories.slice(1)] : categories, [customServices]);
   const subcategories = useMemo(() => {
@@ -281,7 +315,13 @@ export const QuoteBuilder = () => {
     : discountOptions.find((option) => option.id === discountId) ?? discountOptions[0];
   const totals = calculateQuote(lines, selectedDiscount.rate, referral, usdRates);
   const vat = includeVat ? totals.total * 0.16 : 0;
-  const payableTotal = totals.total + vat;
+  const unroundedPayableTotal = totals.total + vat;
+  const numericTargetPrice = Number(targetPrice);
+  const hasTargetPrice = currency === "MXN" && targetPrice.trim() !== "" && Number.isFinite(numericTargetPrice) && numericTargetPrice >= 0 && exchangeRate > 0;
+  const payableTotal = hasTargetPrice
+    ? numericTargetPrice / exchangeRate
+    : roundPayableTotal(unroundedPayableTotal, currency, exchangeRate, roundTotal ? roundingStep : 0);
+  const roundingAdjustment = payableTotal - unroundedPayableTotal;
   const displayMoney = (amount: number) => money(amount, currency, exchangeRate);
   const displayServicePrice = (service: Service) => displayMoney(unitPriceInUsd(service, usdRates));
   const displayLineTotal = (line: QuoteLine) => displayMoney(lineTotalInUsd(line, usdRates));
@@ -308,6 +348,9 @@ export const QuoteBuilder = () => {
     setReferral(false);
     setCustomDiscountRate(0);
     setIncludeVat(false);
+    setRoundTotal(true);
+    setRoundingStep(100);
+    setTargetPrice("");
     setCurrentQuoteId(`quote-${Date.now()}`);
     setQuoteNumber(createQuoteNumber());
     setQuoteDate(new Date());
@@ -315,7 +358,7 @@ export const QuoteBuilder = () => {
 
   const createQuoteSnapshot = (): StoredQuote => {
     const existing = savedQuotes.find((quote) => quote.id === currentQuoteId);
-    return { id: currentQuoteId, number: quoteNumber, updatedAt: new Date().toISOString(), date: quoteDate.toISOString(), client, lines, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, referral, currency, showExchangeRate, includeVat, status: existing?.status ?? "draft", agent: selectedAgent, exchangeRate, exchangeDate, payment: existing?.payment };
+    return { id: currentQuoteId, number: quoteNumber, updatedAt: new Date().toISOString(), date: quoteDate.toISOString(), client, lines, serviceOverview, notes, discountId, customDiscountName, customDiscountRate, referral, currency, showExchangeRate, includeVat, roundTotal, roundingStep, targetPrice, status: existing?.status ?? "draft", archivedAt: existing?.archivedAt, agent: selectedAgent, exchangeRate, exchangeDate, payment: existing?.payment };
   };
 
   const persistQuote = async (quote: StoredQuote) => {
@@ -341,6 +384,15 @@ export const QuoteBuilder = () => {
     if (quote) void persistQuote({ ...quote, status, updatedAt: new Date().toISOString() });
   };
 
+  const changeQuoteArchive = (quote: StoredQuote, archived: boolean) => {
+    void persistQuote({ ...quote, archivedAt: archived ? new Date().toISOString() : undefined, updatedAt: new Date().toISOString() });
+  };
+
+  const deleteQuote = (id: string) => {
+    setSavedQuotes((current) => current.filter((quote) => quote.id !== id));
+    void quoteApi.remove(id);
+  };
+
   const printQuote = () => {
     saveQuote();
     openPrintDialog(quotePdfName(quoteNumber, client));
@@ -361,6 +413,9 @@ export const QuoteBuilder = () => {
     setCurrency(quote.currency);
     setShowExchangeRate(quote.showExchangeRate);
     setIncludeVat(quote.includeVat ?? false);
+    setRoundTotal(quote.roundTotal ?? false);
+    setRoundingStep(quote.roundingStep === 50 ? 50 : 100);
+    setTargetPrice(quote.targetPrice ?? "");
     if (quote.agent) {
       setProfiles((current) => current.some((profile) => profile.id === quote.agent?.id) ? current : [...current, quote.agent!]);
       setSelectedProfileId(quote.agent.id);
@@ -382,15 +437,37 @@ export const QuoteBuilder = () => {
   };
 
   const saveCustomService = (service: Service) => {
-    setCustomServices((current) => [service, ...current]);
-    addService(service);
-    setCategory("Mis servicios");
+    const exists = customServices.some((s) => s.id === service.id);
+    if (exists) {
+      setCustomServices((current) => current.map((s) => s.id === service.id ? service : s));
+      setLines((current) => current.map((line) => line.service.id === service.id ? { ...line, service } : line));
+    } else {
+      setCustomServices((current) => [service, ...current]);
+      addService(service);
+      setCategory("Mis servicios");
+    }
     setCustomDialog(false);
+    setEditingCustomService(null);
   };
 
   const startEditingPrice = (service: Service) => {
     setEditingServiceId(service.id);
     setEditingPrice(String(service.price));
+  };
+
+  const startEditCustomService = (service: Service) => {
+    setEditingCustomService(service);
+    setCustomDialog(true);
+  };
+
+  const startEditCatalogService = (service: Service) => {
+    setEditingCatalogService(service);
+  };
+
+  const saveCatalogService = (originalId: string, updated: Service) => {
+    setServiceOverrides((current) => ({ ...current, [originalId]: updated }));
+    setLines((current) => current.map((line) => line.service.id === originalId ? { ...line, service: updated } : line));
+    setEditingCatalogService(null);
   };
 
   const saveServicePrice = (service: Service) => {
@@ -457,6 +534,7 @@ export const QuoteBuilder = () => {
       customServices,
       agentProfiles: profiles.filter((profile) => profile.id !== defaultAgent.id),
       priceOverrides,
+      serviceOverrides,
       preferences: { currency, showExchangeRate, selectedAgentId: selectedProfileId },
       draft: (() => {
         try { return JSON.parse(localStorage.getItem("s23-quote-draft") ?? "null") as unknown; }
@@ -502,6 +580,7 @@ export const QuoteBuilder = () => {
       localStorage.setItem("s23-custom-services", JSON.stringify(backup.data.customServices));
       localStorage.setItem("s23-agent-profiles", JSON.stringify(backup.data.agentProfiles));
       localStorage.setItem("s23-service-price-overrides", JSON.stringify(backup.data.priceOverrides));
+      localStorage.setItem("s23-service-overrides", JSON.stringify(backup.data.serviceOverrides));
       localStorage.setItem("s23-quote-currency", backup.data.preferences.currency);
       localStorage.setItem("s23-show-exchange", String(backup.data.preferences.showExchangeRate));
       localStorage.setItem("s23-selected-agent", backup.data.preferences.selectedAgentId);
@@ -522,13 +601,13 @@ export const QuoteBuilder = () => {
   const changeSection = (section: WorkspaceSection) => setActiveSection(section);
 
   return (
-    <main className="workspace">
+    <main className={`workspace${sidebarCollapsed ? " sidebar-collapsed" : ""}`}>
       <header className="app-header">
         <div className="brand"><img src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg" alt="Soul:23" /><span><b>Cotizaciones</b><small>Marketing & Systems</small></span></div>
         <div className="header-tools"><button className="history-trigger" onClick={() => setHistoryOpen(true)}><Archive size={16} /> Cotizaciones</button><button className="agent-trigger" onClick={() => setProfileDialog(true)}><span className="profile-avatar">{selectedAgent.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span><span><b>{selectedAgent.name}</b><small>{selectedAgent.role}</small></span><ChevronRight size={14} /></button><div className="header-meta"><span>Borrador guardado</span><b>{quoteNumber}</b></div><SessionControls /></div>
       </header>
 
-      <QuoteWorkspaceNav active={activeSection} quoteCount={savedQuotes.length} currentLineCount={lines.length} onChange={changeSection} />
+      <QuoteWorkspaceNav active={activeSection} quoteCount={savedQuotes.filter((quote) => !quote.archivedAt).length} currentLineCount={lines.length} onChange={changeSection} />
 
       {activeSection === "create" && (
         <section className="catalog-panel">
@@ -594,7 +673,7 @@ export const QuoteBuilder = () => {
         <section className="quotes-panel">
           <div className="section-title"><div><p className="eyebrow">Control comercial</p><h1>Cotizaciones</h1><p>Consulta, clasifica y da seguimiento a cada oportunidad.</p></div></div>
           <JsonImportPanel message={importFeedback.message} isError={importFeedback.isError} onImport={importQuotes} onExport={() => downloadJson(savedQuotes, `cotizaciones-s23-${new Date().toISOString().slice(0, 10)}.json`)} onDownloadTemplate={downloadJsonTemplate} />
-          <QuoteControlTable quotes={savedQuotes} onOpen={openSavedQuote} onPrint={reprintSavedQuote} onTrackPayment={(quote) => setPaymentQuote(quote)} onStatusChange={saveQuoteStatus} />
+          <QuoteControlTable quotes={savedQuotes} onOpen={openSavedQuote} onPrint={reprintSavedQuote} onTrackPayment={(quote) => setPaymentQuote(quote)} onStatusChange={saveQuoteStatus} onArchiveChange={changeQuoteArchive} onDelete={deleteQuote} />
         </section>
       )}
 
@@ -615,7 +694,7 @@ export const QuoteBuilder = () => {
             <div className="service-management-head"><span className="service-management-icon"><ServiceIcon name={service.icon || categoryIcons[service.category] || "zap"} size={22} /></span><div><p className="card-category">{service.category}{service.subcategory && ` · ${service.subcategory}`}</p><h3>{service.name}</h3></div>{service.id.startsWith("custom-") && <span className="custom-badge">Personalizado</span>}</div>
             <p className="service-management-description">{service.description}</p>
             <div className="service-management-price"><span>{billingLabel[service.billing]}</span><strong>{displayServicePrice(service)}</strong></div>
-            {editingServiceId === service.id ? <div className="service-price-editor"><span>$</span><input aria-label={`Nuevo precio para ${service.name}`} autoFocus type="number" min="0.01" step="0.01" value={editingPrice} onChange={(event) => setEditingPrice(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") saveServicePrice(service); if (event.key === "Escape") setEditingServiceId(null); }} /><small>{service.sourceCurrency ?? "USD"}</small><button type="button" onClick={() => saveServicePrice(service)}>Guardar</button><button type="button" onClick={() => setEditingServiceId(null)}>Cancelar</button></div> : <div className="service-item-actions"><button className="edit-service-price" onClick={() => startEditingPrice(service)}><Pencil size={14} /> Editar precio</button><button className={`add-from-catalog ${inQuote ? "added" : ""}`} onClick={() => addService(service)}><Plus size={14} /> {inQuote ? "Agregar otro" : "Cotizar"}</button>{service.id.startsWith("custom-") && <button className="delete-custom" onClick={() => deleteCustomService(service.id)} aria-label={`Eliminar ${service.name}`}><Trash2 size={14} /></button>}</div>}
+            {editingServiceId === service.id ? <div className="service-price-editor"><span>$</span><input aria-label={`Nuevo precio para ${service.name}`} autoFocus type="number" min="0.01" step="0.01" value={editingPrice} onChange={(event) => setEditingPrice(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") saveServicePrice(service); if (event.key === "Escape") setEditingServiceId(null); }} /><small>{service.sourceCurrency ?? "MXN"}</small><button type="button" onClick={() => saveServicePrice(service)}>Guardar</button><button type="button" onClick={() => setEditingServiceId(null)}>Cancelar</button></div> : <div className="service-item-actions"><button className="edit-service-price" onClick={() => startEditingPrice(service)}><Pencil size={14} /> Editar precio</button><button className={`add-from-catalog ${inQuote ? "added" : ""}`} onClick={() => addService(service)}><Plus size={14} /> {inQuote ? "Agregar otro" : "Cotizar"}</button>{service.id.startsWith("custom-") ? <><button className="edit-custom" onClick={() => startEditCustomService(service)}><Pencil size={14} /> Editar</button><button className="delete-custom" onClick={() => deleteCustomService(service.id)} aria-label={`Eliminar ${service.name}`}><Trash2 size={14} /></button></> : <button className="edit-catalog" onClick={() => startEditCatalogService(service)}><Pencil size={14} /> Editar</button>}</div>}
           </article>); })}</div> : <div className="services-empty"><Search size={26} /><b>No encontramos servicios</b><p>Prueba con otra búsqueda o cambia la categoría.</p><button type="button" onClick={() => { setServiceQuery(""); setServiceCategory("Todos"); }}>Limpiar filtros</button></div>}
         </section>
       )}
@@ -633,8 +712,8 @@ export const QuoteBuilder = () => {
         </section>
       )}
 
-      <aside className={`ticket-panel ${mobileCart ? "mobile-open" : ""}`}>
-        <div className="ticket-header"><div><p className="eyebrow">Cotización actual</p><h2>{lines.length} {lines.length === 1 ? "concepto" : "conceptos"}</h2></div><button className="close-mobile" onClick={() => setMobileCart(false)} aria-label="Cerrar"><X /></button></div>
+      <aside className={`ticket-panel${sidebarCollapsed ? " collapsed" : ""}${mobileCart ? " mobile-open" : ""}`}>
+        <div className="ticket-header"><div><p className="eyebrow">Cotización actual</p><h2>{lines.length} {lines.length === 1 ? "concepto" : "conceptos"}</h2></div><button className="close-panel" onClick={() => { setSidebarCollapsed(true); setMobileCart(false); }} aria-label="Cerrar panel"><X /></button></div>
         <div className="ticket-scroll">
           {lines.length === 0 ? (
             <div className="empty-ticket"><ShoppingBag size={32} /><b>Tu cotización está vacía</b><p>Agrega servicios del catálogo para comenzar.</p></div>
@@ -654,22 +733,24 @@ export const QuoteBuilder = () => {
 
           <div className="form-section"><h3>Descuento</h3><label><span>Promoción principal</span><select value={discountId} onChange={(e) => setDiscountId(e.target.value)}>{discountOptions.map((option) => <option key={option.id} value={option.id}>{option.label}{option.rate ? ` · ${option.rate * 100}%` : ""}</option>)}<option value="custom">Personalizado</option></select></label>{discountId === "custom" && <><label><span>Nombre del descuento</span><input value={customDiscountName} onChange={(event) => setCustomDiscountName(event.target.value)} placeholder="Ej. Convenio especial" /></label><label><span>Porcentaje personalizado</span><div className="percent-input"><input type="number" min="0" max="100" step="0.5" value={customDiscountRate * 100} onChange={(event) => setCustomDiscountRate(Math.min(1, Math.max(0, Number(event.target.value) / 100)))} /><b>%</b></div></label></>}<label className="check-row"><input type="checkbox" checked={referral} onChange={(e) => setReferral(e.target.checked)} /><span>Agregar referral 10% <small>Único descuento acumulable</small></span></label></div>
           <div className="form-section currency-section"><h3>Moneda</h3><label><span>Mostrar cotización en</span><select value={currency} onChange={(event) => setCurrency(event.target.value as CurrencyCode)}><option value="MXN">MXN · Peso mexicano</option><option value="USD">USD · Dólar estadounidense</option><option value="CAD">CAD · Dólar canadiense</option><option value="EUR">EUR · Euro</option></select></label><div className={`exchange-note ${exchangeStatus}`}><span>1 USD = {exchangeStatus === "ready" ? `${exchangeRate.toFixed(4)} ${currency}` : exchangeStatus === "loading" ? "Consultando…" : "No disponible"}</span>{exchangeDate && <small>Actualizado {exchangeDate}</small>}</div><label className="check-row"><input type="checkbox" checked={showExchangeRate} onChange={(event) => setShowExchangeRate(event.target.checked)} /><span>Mostrar tipo de cambio <small>Incluye tasa y fecha en el PDF</small></span></label></div>
-          <div className="form-section tax-section"><h3>Facturación e IVA</h3><label><span>Tratamiento fiscal</span><select value={includeVat ? "with-vat" : "without-vat"} onChange={(event) => setIncludeVat(event.target.value === "with-vat")}><option value="without-vat">Sin IVA · No requiere factura</option><option value="with-vat">Requiere factura · Agregar IVA 16%</option></select></label><p className="tax-note">El IVA aplica solamente a honorarios Soul:23, después de descuentos.</p></div>
+          <div className="form-section tax-section"><h3>Facturación e IVA</h3><label><span>Tratamiento fiscal</span><select value={includeVat ? "with-vat" : "without-vat"} onChange={(event) => setIncludeVat(event.target.value === "with-vat")}><option value="without-vat">Sin IVA · No requiere factura</option><option value="with-vat">Requiere factura · Agregar IVA 16%</option></select></label><p className="tax-note">El IVA aplica solamente a honorarios Soul:23, después de descuentos.</p>{currency === "MXN" && <><label><span>Precio final objetivo (opcional)</span><input type="number" min="0" step="50" value={targetPrice} onChange={(event) => setTargetPrice(event.target.value)} placeholder="Ej. 4100" /></label><label className="check-row"><input type="checkbox" checked={roundTotal && !hasTargetPrice} onChange={(event) => setRoundTotal(event.target.checked)} disabled={hasTargetPrice} /><span>Redondeo automático <small>Al múltiplo de <select value={roundingStep} onChange={(event) => setRoundingStep(Number(event.target.value))} onClick={(event) => event.stopPropagation()} disabled={hasTargetPrice}><option value="50">$50</option><option value="100">$100</option></select> más cercano</small></span></label></>}</div>
           <div className="form-section"><div className="markdown-field"><span>Descripción general del servicio</span><MarkdownEditor compact value={serviceOverview} onChange={setServiceOverview} placeholder="Describe qué incluye el servicio en general, sus objetivos y alcance..." /></div><p className="tax-note">Aparece en la propuesta antes del desglose de conceptos.</p></div>
           <div className="form-section"><div className="markdown-field"><span>Notas y condiciones</span><MarkdownEditor compact value={notes} onChange={setNotes} placeholder="Escribe condiciones en Markdown..." /></div></div>
         </div>
 
-        <div className="ticket-totals"><div><span>Honorarios Soul:23</span><b>{displayMoney(totals.subtotal)}</b></div>{totals.discount > 0 && <div className="discount-row"><span>Descuento</span><b>−{displayMoney(totals.discount)}</b></div>}{totals.thirdPartyTotal > 0 && <div className="third-party-row"><span>Pagos directos a terceros</span><b>{displayMoney(totals.thirdPartyTotal)}</b></div>}{includeVat && <div className="vat-row"><span>IVA 16%</span><b>{displayMoney(vat)}</b></div>}<div className="grand-total"><span>Total a pagar a Soul:23</span><b>{displayMoney(payableTotal)}</b></div>{totals.thirdPartyTotal > 0 && <div className="project-total"><span>Costo total estimado del proyecto</span><b>{displayMoney(totals.thirdPartyTotal + payableTotal)}</b></div>}<button className="save-quote-button" disabled={!lines.length} onClick={saveQuote}><Save size={17} /> Guardar cotización</button><button className="primary-button" disabled={!lines.length || (currency !== "MXN" && exchangeStatus !== "ready")} onClick={printQuote}><Printer size={18} /> Generar cotización <ChevronRight size={18} /></button><p>{exchangeStatus === "error" && currency !== "MXN" ? "No se pudo obtener el tipo de cambio." : "Se guardará y abrirá la vista lista para PDF."}</p></div>
+        <div className="ticket-totals"><div><span>Honorarios Soul:23</span><b>{displayMoney(totals.subtotal)}</b></div>{totals.discount > 0 && <div className="discount-row"><span>Descuento</span><b>−{displayMoney(totals.discount)}</b></div>}{totals.thirdPartyTotal > 0 && <div className="third-party-row"><span>Pagos directos a terceros</span><b>{displayMoney(totals.thirdPartyTotal)}</b></div>}{includeVat && <div className="vat-row"><span>IVA 16%</span><b>{displayMoney(vat)}</b></div>}{Math.abs(roundingAdjustment) > 0.001 && <div><span>Ajuste por redondeo</span><b>{roundingAdjustment < 0 ? "−" : "+"}{displayMoney(Math.abs(roundingAdjustment))}</b></div>}<div className="grand-total"><span>Total a pagar a Soul:23</span><b>{displayMoney(payableTotal)}</b></div>{totals.thirdPartyTotal > 0 && <div className="project-total"><span>Costo total estimado del proyecto</span><b>{displayMoney(totals.thirdPartyTotal + payableTotal)}</b></div>}<button className="save-quote-button" disabled={!lines.length} onClick={saveQuote}><Save size={17} /> Guardar cotización</button><button className="primary-button" disabled={!lines.length || (currency !== "MXN" && exchangeStatus !== "ready")} onClick={printQuote}><Printer size={18} /> Generar cotización <ChevronRight size={18} /></button><p>{exchangeStatus === "error" && currency !== "MXN" ? "No se pudo obtener el tipo de cambio." : "Se guardará y abrirá la vista lista para PDF."}</p></div>
       </aside>
 
       <button className="mobile-cart-button" onClick={() => setMobileCart(true)}><ShoppingBag size={18} /><span>Ver cotización ({lines.length})</span><b>{displayMoney(totals.total)}</b></button>
-      <CustomServiceDialog open={customDialog} onClose={() => setCustomDialog(false)} onSave={saveCustomService} />
-      <QuoteHistoryDialog open={historyOpen} quotes={savedQuotes} onClose={() => setHistoryOpen(false)} onOpen={openSavedQuote} onReprint={reprintSavedQuote} onDelete={(id) => { setSavedQuotes((current) => current.filter((quote) => quote.id !== id)); void quoteApi.remove(id); }} onTrackPayment={(quote) => { setPaymentQuote(quote); setHistoryOpen(false); }} onNewManual={startManualQuote} />
+      <button className="sidebar-reopen" onClick={() => setSidebarCollapsed(false)} aria-label="Abrir panel"><ChevronLeft size={18} /></button>
+      <CustomServiceDialog open={customDialog} onClose={() => { setCustomDialog(false); setEditingCustomService(null); }} onSave={saveCustomService} editingService={editingCustomService} />
+      <ServiceEditDialog open={!!editingCatalogService} onClose={() => setEditingCatalogService(null)} onSave={saveCatalogService} editingService={editingCatalogService} />
+      <QuoteHistoryDialog open={historyOpen} quotes={savedQuotes} onClose={() => setHistoryOpen(false)} onOpen={openSavedQuote} onReprint={reprintSavedQuote} onDelete={deleteQuote} onTrackPayment={(quote) => { setPaymentQuote(quote); setHistoryOpen(false); }} onArchiveChange={changeQuoteArchive} onNewManual={startManualQuote} />
       <QuotePaymentDialog quote={paymentQuote} onClose={() => setPaymentQuote(null)} onSave={savePaymentTracking} />
       <ProfileDialog open={profileDialog} profiles={profiles} selectedId={selectedProfileId} onSelect={(id) => { setSelectedProfileId(id); setProfileDialog(false); }} onSave={(profile) => { setProfiles((current) => [...current, profile]); setSelectedProfileId(profile.id); setProfileDialog(false); }} onDelete={(id) => { setProfiles((current) => current.filter((profile) => profile.id !== id)); if (selectedProfileId === id) setSelectedProfileId("marco"); }} onClose={() => setProfileDialog(false)} />
       <QuoteWizardDialog open={wizardOpen} services={allServices} lines={lines} client={client} discountId={discountId} referral={referral} total={totals.total} currency={currency} exchangeRate={exchangeRate} usdRates={usdRates} exchangeDate={exchangeDate} showExchangeRate={showExchangeRate} onCurrencyChange={(value) => setCurrency(value as CurrencyCode)} onShowExchangeRateChange={setShowExchangeRate} onClose={() => setWizardOpen(false)} onClientChange={setClient} onAddService={addService} onQuantityChange={changeQuantity} onDiscountChange={setDiscountId} onReferralChange={setReferral} onPrint={printQuote} />
 
-      <QuoteDocument number={quoteNumber} date={quoteDate} agent={selectedAgent} client={client} lines={lines} totals={{ ...totals, vat, payableTotal }} discountLabel={selectedDiscount.label} includeVat={includeVat} currency={currency} serviceOverview={serviceOverview} notes={notes} exchangeRate={exchangeRate} exchangeDate={exchangeDate} showExchangeRate={showExchangeRate} displayMoney={displayMoney} displayLineTotal={displayLineTotal} />
+      {hydrated && <QuoteDocument number={quoteNumber} date={quoteDate} agent={selectedAgent} client={client} lines={lines} totals={{ ...totals, vat, roundingAdjustment, payableTotal }} discountLabel={selectedDiscount.label} includeVat={includeVat} currency={currency} serviceOverview={serviceOverview} notes={notes} exchangeRate={exchangeRate} exchangeDate={exchangeDate} showExchangeRate={showExchangeRate} displayMoney={displayMoney} displayLineTotal={displayLineTotal} />}
     </main>
   );
 };

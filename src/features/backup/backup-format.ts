@@ -17,6 +17,7 @@ export type WorkspaceBackup = {
     customServices: Service[];
     agentProfiles: AgentProfile[];
     priceOverrides: Record<string, number>;
+    serviceOverrides: Record<string, Partial<Service>>;
     preferences: {
       currency: "MXN" | "USD" | "CAD" | "EUR";
       showExchangeRate: boolean;
@@ -68,5 +69,6 @@ export const isWorkspaceBackup = (value: unknown): value is WorkspaceBackup => {
     && Array.isArray(data.customServices) && data.customServices.every(isService)
     && Array.isArray(data.agentProfiles) && data.agentProfiles.every(isAgent)
     && Boolean(data.priceOverrides && typeof data.priceOverrides === "object")
+    && Boolean(data.serviceOverrides && typeof data.serviceOverrides === "object")
     && Boolean(data.preferences && typeof data.preferences === "object");
 };

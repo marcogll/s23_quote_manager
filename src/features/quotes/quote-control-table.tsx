@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CircleDollarSign, Download, ExternalLink, Search, X } from "lucide-react";
+import { Archive, ArchiveRestore, CircleDollarSign, Download, ExternalLink, Search, Trash2, X } from "lucide-react";
 import { paymentStatus } from "./quote-payment-dialog";
 import type { QuoteStatus, StoredQuote } from "./quote-history-dialog";
 
@@ -11,6 +11,8 @@ type QuoteControlTableProps = {
   onPrint: (quote: StoredQuote) => void;
   onTrackPayment: (quote: StoredQuote) => void;
   onStatusChange: (quoteId: string, status: QuoteStatus) => void;
+  onArchiveChange: (quote: StoredQuote, archived: boolean) => void;
+  onDelete: (id: string) => void;
 };
 
 const quoteStatuses: { value: QuoteStatus; label: string }[] = [
@@ -21,26 +23,30 @@ const quoteStatuses: { value: QuoteStatus; label: string }[] = [
   { value: "rejected", label: "Rechazada" },
 ];
 
-export const QuoteControlTable = ({ quotes, onOpen, onPrint, onTrackPayment, onStatusChange }: QuoteControlTableProps) => {
+export const QuoteControlTable = ({ quotes, onOpen, onPrint, onTrackPayment, onStatusChange, onArchiveChange, onDelete }: QuoteControlTableProps) => {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<QuoteStatus | "all">("all");
+  const [archiveFilter, setArchiveFilter] = useState<"active" | "archived">("active");
 
   const filteredQuotes = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return quotes.filter((quote) => {
+      if (Boolean(quote.archivedAt) !== (archiveFilter === "archived")) return false;
       const status = quote.status ?? "draft";
       const matchesStatus = statusFilter === "all" || status === statusFilter;
       const searchable = `${quote.number} ${quote.client.name} ${quote.client.company} ${quote.client.email}`.toLowerCase();
       return matchesStatus && searchable.includes(normalizedQuery);
     });
-  }, [query, quotes, statusFilter]);
+  }, [archiveFilter, query, quotes, statusFilter]);
+  const visibleQuoteCount = useMemo(() => quotes.filter((quote) => Boolean(quote.archivedAt) === (archiveFilter === "archived")).length, [archiveFilter, quotes]);
 
   return (
     <section className="quote-control">
       <div className="quote-control-toolbar">
         <label className="quote-control-search"><Search size={17} /><span className="sr-only">Buscar cotizaciones</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar folio, cliente o correo…" />{query && <button type="button" onClick={() => setQuery("")} aria-label="Limpiar búsqueda"><X size={15} /></button>}</label>
         <label className="quote-status-filter"><span>Estado</span><select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as QuoteStatus | "all")}><option value="all">Todos</option>{quoteStatuses.map((status) => <option key={status.value} value={status.value}>{status.label}</option>)}</select></label>
-        <span className="quote-result-count">{filteredQuotes.length} de {quotes.length}</span>
+        <label className="quote-status-filter"><span>Archivo</span><select value={archiveFilter} onChange={(event) => setArchiveFilter(event.target.value as "active" | "archived")}><option value="active">Activas</option><option value="archived">Archivadas</option></select></label>
+        <span className="quote-result-count">{filteredQuotes.length} de {visibleQuoteCount}</span>
       </div>
 
       {filteredQuotes.length === 0 ? <div className="quote-control-empty"><Search size={25} /><b>Sin coincidencias</b><p>Cambia la búsqueda o el filtro de estado.</p></div> : <div className="quote-table-scroll"><table className="quote-table">
@@ -52,7 +58,7 @@ export const QuoteControlTable = ({ quotes, onOpen, onPrint, onTrackPayment, onS
           <td data-label="Cobranza"><button className={`payment-status ${payment.tone}`} onClick={() => onTrackPayment(quote)}>{payment.label}</button></td>
           <td data-label="Conceptos"><span className="quote-line-count">{quote.lines.length}</span></td>
           <td data-label="Actualizada"><time>{new Date(quote.updatedAt).toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" })}</time></td>
-          <td className="quote-row-actions"><button onClick={() => onOpen(quote)} aria-label={`Abrir ${quote.number}`} title="Abrir"><ExternalLink size={15} /></button><button onClick={() => onPrint(quote)} aria-label={`Generar PDF de ${quote.number}`} title="Generar PDF"><Download size={15} /></button><button onClick={() => onTrackPayment(quote)} aria-label={`Registrar pago de ${quote.number}`} title="Cobranza"><CircleDollarSign size={16} /></button></td>
+          <td className="quote-row-actions"><button onClick={() => onOpen(quote)} aria-label={`Abrir ${quote.number}`} title="Abrir"><ExternalLink size={15} /></button><button onClick={() => onPrint(quote)} aria-label={`Generar PDF de ${quote.number}`} title="Generar PDF"><Download size={15} /></button><button onClick={() => onTrackPayment(quote)} aria-label={`Registrar pago de ${quote.number}`} title="Cobranza"><CircleDollarSign size={16} /></button><button onClick={() => onArchiveChange(quote, !quote.archivedAt)} aria-label={`${quote.archivedAt ? "Restaurar" : "Archivar"} ${quote.number}`} title={quote.archivedAt ? "Restaurar" : "Archivar"}>{quote.archivedAt ? <ArchiveRestore size={16} /> : <Archive size={16} />}</button>{quote.archivedAt && <button onClick={() => onDelete(quote.id)} aria-label={`Eliminar definitivamente ${quote.number}`} title="Eliminar definitivamente"><Trash2 size={15} /></button>}</td>
         </tr>; })}</tbody>
       </table></div>}
     </section>

@@ -1,0 +1,1168 @@
+[
+  {
+    "id": "support-remote",
+    "name": "Soporte remoto",
+    "category": "Soporte",
+    "subcategory": "Soporte Técnico",
+    "price": 950,
+    "billing": "one-time",
+    "description": "Sesión de soporte remoto de 1 hora.",
+    "features": [
+      "Atención remota",
+      "Diagnóstico y resolución",
+      "15% de descuento desde 4 horas"
+    ],
+    "icon": "headphones",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23",
+    "volumeDiscount": {
+      "minQuantity": 4,
+      "rate": 0.15
+    }
+  },
+  {
+    "id": "plan-starter",
+    "name": "Starter",
+    "category": "Web",
+    "subcategory": "Planes Mensuales",
+    "price": 240.95,
+    "billing": "monthly",
+    "description": "Presencia digital y automatización esencial.",
+    "features": [
+      "Landing page inicial",
+      "1–2 workflows",
+      "1 red social",
+      "Soporte y reporte mensual"
+    ],
+    "recommended": false,
+    "icon": "zap",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "plan-grow",
+    "name": "Grow",
+    "category": "Web",
+    "subcategory": "Planes Mensuales",
+    "price": 486.95,
+    "billing": "monthly",
+    "description": "Operación multicanal con IA y métricas.",
+    "features": [
+      "2 redes sociales",
+      "SEO + contenido",
+      "Integración IA",
+      "Dashboard",
+      "Soporte prioritario"
+    ],
+    "recommended": true,
+    "icon": "trending-up",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "plan-scale",
+    "name": "Scale",
+    "category": "Web",
+    "subcategory": "Planes Mensuales",
+    "price": 907.95,
+    "billing": "monthly",
+    "description": "Ejecución avanzada con PMO, BI e IA.",
+    "features": [
+      "PMO parcial",
+      "Automatización avanzada",
+      "Paid media",
+      "BI en tiempo real",
+      "Seguimiento semanal"
+    ],
+    "recommended": false,
+    "icon": "bar-chart-3",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "plan-enterprise",
+    "name": "Enterprise",
+    "category": "Web",
+    "subcategory": "Planes Mensuales",
+    "price": 1717.95,
+    "billing": "monthly",
+    "description": "Equipo dedicado con SLA y supervisión senior.",
+    "features": [
+      "PMO dedicado",
+      "1 perfil técnico",
+      "Automatización integral",
+      "Standup diario",
+      "SLA garantizado"
+    ],
+    "recommended": false,
+    "icon": "shield-check",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "plan-marketing",
+    "name": "Marketing 360°",
+    "category": "Media & Marketing",
+    "subcategory": "Planes",
+    "price": 711.95,
+    "billing": "monthly",
+    "description": "Marketing integral en tres canales.",
+    "features": [
+      "3 redes sociales",
+      "SEO",
+      "Meta + Google Ads",
+      "Dashboard unificado"
+    ],
+    "recommended": false,
+    "icon": "megaphone",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "ret-social",
+    "name": "Redes sociales",
+    "category": "Media & Marketing",
+    "subcategory": "Redes Sociales",
+    "price": 269.95,
+    "billing": "monthly",
+    "description": "2 redes, copy, publicaciones y métricas.",
+    "recommended": false,
+    "icon": "share-2",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "ret-seo",
+    "name": "SEO técnico",
+    "category": "Media & Marketing",
+    "subcategory": "SEO",
+    "price": 318.95,
+    "billing": "monthly",
+    "description": "Posicionamiento, blog y link building.",
+    "recommended": false,
+    "icon": "search",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "ret-paid",
+    "name": "Paid media",
+    "category": "Media & Marketing",
+    "subcategory": "Anuncios",
+    "price": 284.95,
+    "billing": "monthly",
+    "description": "Gestión de Meta y Google Ads.",
+    "recommended": false,
+    "icon": "target",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "ret-staff",
+    "name": "Staffing",
+    "category": "Web",
+    "subcategory": "Staffing",
+    "price": 1079.95,
+    "billing": "monthly",
+    "description": "Dev, diseñador o copy supervisado.",
+    "recommended": false,
+    "icon": "users",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-diagnostic",
+    "name": "Diagnóstico / Consultoría",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 417.95,
+    "billing": "one-time",
+    "description": "Mapeo de procesos y roadmap priorizado.",
+    "features": [
+      "Sesión de 2–3 horas",
+      "Documento PDF",
+      "Seguimiento 30 días"
+    ],
+    "recommended": false,
+    "icon": "clipboard-list",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-landing",
+    "name": "Landing Page",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 436.95,
+    "billing": "one-time",
+    "description": "Página de alta conversión conectada a tu funnel.",
+    "features": [
+      "UI/UX custom",
+      "Copy",
+      "CRM",
+      "SEO on-page",
+      "Analytics",
+      "10 días"
+    ],
+    "recommended": false,
+    "icon": "layout",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-auto-basic",
+    "name": "Automatización Básica",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 589.95,
+    "billing": "one-time",
+    "description": "1–2 workflows con CRM y mensajería.",
+    "features": [
+      "Email/WhatsApp",
+      "14 días"
+    ],
+    "recommended": false,
+    "icon": "bot",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-site",
+    "name": "Sitio Corporativo",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 1079.95,
+    "billing": "one-time",
+    "description": "Sitio administrable de hasta 8 secciones.",
+    "features": [
+      "CMS",
+      "SEO técnico",
+      "Hosting y dominio 1 año",
+      "21 días"
+    ],
+    "recommended": false,
+    "icon": "globe",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-audit",
+    "name": "Auditoría TI",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 686.95,
+    "billing": "one-time",
+    "description": "Revisión técnica y de experiencia de usuario.",
+    "features": [
+      "Código",
+      "UI/UX",
+      "Reporte ejecutivo",
+      "7 días"
+    ],
+    "recommended": false,
+    "icon": "scan-line",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-auto-advanced",
+    "name": "Automatización Avanzada",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 1374.95,
+    "billing": "one-time",
+    "description": "Automatización n8n multi-sistema con IA.",
+    "features": [
+      "WhatsApp Business",
+      "APIs",
+      "Monitoreo",
+      "3 meses soporte",
+      "30 días"
+    ],
+    "recommended": false,
+    "icon": "cpu",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-commerce",
+    "name": "E-commerce",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 1865.95,
+    "billing": "one-time",
+    "description": "Tienda con pagos, CFDI y WhatsApp.",
+    "features": [
+      "Catálogo ilimitado",
+      "Pasarelas MX",
+      "45 días"
+    ],
+    "recommended": false,
+    "icon": "shopping-cart",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "project-bi",
+    "name": "Sistema BI + IA",
+    "category": "Web",
+    "subcategory": "Proyectos",
+    "price": 2700.95,
+    "billing": "one-time",
+    "description": "Inteligencia de negocio y agentes autónomos.",
+    "features": [
+      "Scoring predictivo",
+      "Reportes automáticos",
+      "6 meses soporte",
+      "60 días"
+    ],
+    "recommended": false,
+    "icon": "brain-circuit",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "hw-basic",
+    "name": "Reloj básico",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 202,
+    "billing": "one-time",
+    "description": "Huella/PIN para hasta 50 empleados.",
+    "recommended": false,
+    "icon": "watch",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "hw-pro",
+    "name": "Reloj Pro",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 398,
+    "billing": "one-time",
+    "description": "Facial + huella para hasta 200 empleados.",
+    "recommended": false,
+    "icon": "watch",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "hw-enterprise",
+    "name": "Reloj Enterprise",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 722,
+    "billing": "one-time",
+    "description": "Facial + huella + NFC, empleados ilimitados.",
+    "recommended": false,
+    "icon": "watch",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "lic-month",
+    "name": "Licencia mensual",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 49.99,
+    "billing": "monthly",
+    "description": "Software de control de asistencia.",
+    "recommended": false,
+    "icon": "key",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "lic-quarter",
+    "name": "Licencia trimestral",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 129.99,
+    "billing": "one-time",
+    "description": "Tres meses de licencia, ahorro aproximado 13%.",
+    "recommended": false,
+    "icon": "key",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "lic-half",
+    "name": "Licencia semestral",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 219.99,
+    "billing": "one-time",
+    "description": "Seis meses de licencia, ahorro aproximado 26%.",
+    "recommended": false,
+    "icon": "key",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "lic-year",
+    "name": "Licencia anual",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 349.99,
+    "billing": "annual",
+    "description": "Doce meses de licencia, ahorro aproximado 41%.",
+    "recommended": true,
+    "icon": "key",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "bundle-starter",
+    "name": "Bundle Starter",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 497,
+    "billing": "one-time",
+    "description": "Reloj básico + licencia anual.",
+    "recommended": false,
+    "icon": "package",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "bundle-pro",
+    "name": "Bundle Pro",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 674,
+    "billing": "one-time",
+    "description": "Reloj Pro + licencia anual.",
+    "recommended": false,
+    "icon": "package",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "bundle-enterprise",
+    "name": "Bundle Enterprise",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 943,
+    "billing": "one-time",
+    "description": "Reloj Enterprise + licencia anual.",
+    "recommended": false,
+    "icon": "package",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "self-hosted",
+    "name": "Asistencia self-hosted",
+    "category": "Soporte",
+    "subcategory": "Asistencia",
+    "price": 260,
+    "billing": "one-time",
+    "description": "Licencia perpetua; infraestructura estimada $400/año.",
+    "recommended": false,
+    "icon": "server",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dashboard-base",
+    "name": "Dashboard base",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 462,
+    "billing": "one-time",
+    "description": "Hasta 6 widgets, filtros y exportación.",
+    "features": [
+      "UI/UX",
+      "PDF/Excel",
+      "1 revisión"
+    ],
+    "recommended": false,
+    "icon": "pie-chart",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-data-medium",
+    "name": "Datos medianos",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 231,
+    "billing": "one-time",
+    "description": "Ajuste por volumen de datos mediano.",
+    "recommended": false,
+    "icon": "hard-drive",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-data-large",
+    "name": "Datos grandes",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 693,
+    "billing": "one-time",
+    "description": "Ajuste por gran volumen de datos.",
+    "recommended": false,
+    "icon": "hard-drive",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-api",
+    "name": "Conexión API estándar",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 144,
+    "billing": "one-time",
+    "description": "Conectividad mediante API estándar.",
+    "recommended": false,
+    "icon": "plug",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-db",
+    "name": "Conexión BD directa",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 202,
+    "billing": "one-time",
+    "description": "Conexión directa a base de datos.",
+    "recommended": false,
+    "icon": "database",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-erp",
+    "name": "Conexión custom / ERP",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 462,
+    "billing": "one-time",
+    "description": "Integración personalizada o ERP.",
+    "recommended": false,
+    "icon": "link",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-dedicated",
+    "name": "Cloud dedicado",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 115,
+    "billing": "one-time",
+    "description": "Configuración dedicada; hosting $69/mes.",
+    "recommended": false,
+    "icon": "cloud",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "dash-self",
+    "name": "Servidor self-hosted",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 202,
+    "billing": "one-time",
+    "description": "Configuración en servidor propio.",
+    "recommended": false,
+    "icon": "server",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "addon-widget",
+    "name": "Widget adicional",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 46,
+    "billing": "one-time",
+    "description": "Widget adicional al alcance base.",
+    "recommended": false,
+    "icon": "plus-circle",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "addon-alerts",
+    "name": "Alertas automáticas",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 144,
+    "billing": "one-time",
+    "description": "Alertas basadas en reglas.",
+    "recommended": false,
+    "icon": "bell",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "addon-roles",
+    "name": "Multiusuario con roles",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 173,
+    "billing": "one-time",
+    "description": "Accesos y permisos por rol.",
+    "recommended": false,
+    "icon": "lock",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "addon-realtime",
+    "name": "Tiempo real",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 231,
+    "billing": "one-time",
+    "description": "Actualización de datos en tiempo real.",
+    "recommended": false,
+    "icon": "activity",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "addon-whitelabel",
+    "name": "White-label",
+    "category": "Web",
+    "subcategory": "Dashboards",
+    "price": 289,
+    "billing": "one-time",
+    "description": "Personalización completa de marca.",
+    "recommended": false,
+    "icon": "paintbrush",
+    "sourceCurrency": "MXN"
+  },
+  {
+    "id": "mxn-dev-fullstack",
+    "name": "Desarrollo Web Full Stack",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 25000,
+    "billing": "one-time",
+    "description": "Desarrollo de aplicación web completa con frontend y backend.",
+    "features": [
+      "Hasta 3 revisiones",
+      "No incluye hosting",
+      "2 semanas de entrega"
+    ],
+    "icon": "code-2",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-landing",
+    "name": "Landing Page Profesional",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 6500,
+    "billing": "one-time",
+    "description": "Página de aterrizaje optimizada para conversión.",
+    "features": [
+      "Diseño responsive",
+      "Formulario de contacto",
+      "5 días de entrega"
+    ],
+    "icon": "layout-template",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-app-mobile",
+    "name": "App Móvil iOS/Android",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 45000,
+    "billing": "one-time",
+    "description": "Aplicación móvil nativa o híbrida.",
+    "features": [
+      "Publicación en stores",
+      "Mantenimiento primer mes gratis",
+      "6 semanas de entrega"
+    ],
+    "icon": "smartphone",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-consultoria",
+    "name": "Consultoría IT",
+    "category": "Soporte",
+    "subcategory": "Consultoría",
+    "price": 2000,
+    "billing": "one-time",
+    "description": "Asesoría técnica especializada en infraestructura.",
+    "features": [
+      "Mínimo 2 horas",
+      "Reporte escrito incluido",
+      "1 hora por sesión"
+    ],
+    "icon": "message-square",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-audit-seg",
+    "name": "Auditoría de Seguridad",
+    "category": "Soporte",
+    "subcategory": "Consultoría",
+    "price": 11000,
+    "billing": "one-time",
+    "description": "Revisión completa de vulnerabilidades.",
+    "features": [
+      "Reporte ejecutivo",
+      "Plan de remediación",
+      "1 semana de entrega"
+    ],
+    "icon": "shield-check",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-branding",
+    "name": "Branding Corporativo",
+    "category": "Web",
+    "subcategory": "Diseño",
+    "price": 12500,
+    "billing": "one-time",
+    "description": "Creación de identidad visual completa.",
+    "features": [
+      "Logo, paleta y tipografía",
+      "Manual básico incluido",
+      "10 días de entrega"
+    ],
+    "icon": "palette",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-uxui",
+    "name": "Diseño UX/UI App",
+    "category": "Web",
+    "subcategory": "Diseño",
+    "price": 22000,
+    "billing": "one-time",
+    "description": "Diseño de interfaz y experiencia de usuario.",
+    "features": [
+      "Prototipo interactivo",
+      "Entrega en Figma",
+      "2 semanas de entrega"
+    ],
+    "icon": "pen-tool",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-social",
+    "name": "Redes Sociales - Gestión Mensual",
+    "category": "Media & Marketing",
+    "subcategory": "Redes Sociales",
+    "price": 5500,
+    "billing": "monthly",
+    "description": "Administración de 3 redes sociales.",
+    "features": [
+      "12 posts mensuales",
+      "Reporte mensual",
+      "Respuesta a comentarios"
+    ],
+    "icon": "share-2",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-seo",
+    "name": "SEO Técnico On-Page",
+    "category": "Media & Marketing",
+    "subcategory": "SEO",
+    "price": 6000,
+    "billing": "one-time",
+    "description": "Optimización técnica para motores de búsqueda.",
+    "features": [
+      "Análisis de keywords",
+      "10 páginas optimizadas",
+      "1 semana de entrega"
+    ],
+    "icon": "search",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-newsletter",
+    "name": "Newsletter Mensual Diseñada",
+    "category": "Media & Marketing",
+    "subcategory": "Email Marketing",
+    "price": 2500,
+    "billing": "one-time",
+    "description": "Diseño y maquetación de newsletter.",
+    "features": [
+      "Diseño responsive",
+      "2 revisiones",
+      "1 semana de entrega"
+    ],
+    "icon": "mail",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-video",
+    "name": "Video Corporativo 2min",
+    "category": "Media & Marketing",
+    "subcategory": "Video",
+    "price": 2500,
+    "billing": "one-time",
+    "description": "Video institucional con edición profesional.",
+    "features": [
+      "Locución incluida",
+      "Música de stock",
+      "2 revisiones",
+      "5 días de entrega"
+    ],
+    "icon": "video",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-grabacion-pro",
+    "name": "Grabación Profesional · Audio, Video e Iluminación",
+    "category": "Media & Marketing",
+    "subcategory": "Video",
+    "price": 4500,
+    "billing": "one-time",
+    "description": "Producción profesional con audio, video e iluminación. Entregable en alta resolución para redes sociales. La carga o publicación se cotiza por separado.",
+    "features": [
+      "Audio profesional",
+      "Video alta resolución",
+      "Iluminación incluida",
+      "Formato optimizado para redes",
+      "Publicación no incluida"
+    ],
+    "icon": "clapperboard",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-foto",
+    "name": "Fotografía de Producto",
+    "category": "Media & Marketing",
+    "subcategory": "Fotografía",
+    "price": 4000,
+    "billing": "one-time",
+    "description": "Sesión fotográfica profesional de productos.",
+    "features": [
+      "20 fotos retocadas",
+      "Estudio incluido",
+      "1 día de entrega"
+    ],
+    "icon": "camera",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-mantenimiento",
+    "name": "Mantenimiento Web Mensual",
+    "category": "Soporte",
+    "subcategory": "Mantenimiento",
+    "price": 2500,
+    "billing": "monthly",
+    "description": "Actualizaciones, backups y monitoreo mensual.",
+    "features": [
+      "Hasta 2 horas de cambios menores",
+      "Backups automáticos",
+      "Monitoreo 24/7"
+    ],
+    "icon": "wrench",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-excel",
+    "name": "Capacitación Excel Avanzado",
+    "category": "Soporte",
+    "subcategory": "Capacitación",
+    "price": 8000,
+    "billing": "one-time",
+    "description": "Curso presencial o virtual de 6 horas.",
+    "features": [
+      "Material digital incluido",
+      "Máximo 10 participantes",
+      "3 días de entrega"
+    ],
+    "icon": "graduation-cap",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-python",
+    "name": "Capacitación Python Básico",
+    "category": "Soporte",
+    "subcategory": "Capacitación",
+    "price": 12000,
+    "billing": "one-time",
+    "description": "Curso introductorio de Python para principiantes.",
+    "features": [
+      "Ejercicios prácticos",
+      "Máximo 8 participantes",
+      "5 días de entrega"
+    ],
+    "icon": "book-open",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-cloud-mig",
+    "name": "Migración a Cloud",
+    "category": "Soporte",
+    "subcategory": "Cloud",
+    "price": 20000,
+    "billing": "one-time",
+    "description": "Migración de infraestructura a AWS/Azure/GCP.",
+    "features": [
+      "Configuración básica",
+      "Documentación incluida",
+      "1 semana de entrega"
+    ],
+    "icon": "cloud-upload",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-backup",
+    "name": "Backup Automatizado Cloud",
+    "category": "Soporte",
+    "subcategory": "Cloud",
+    "price": 3000,
+    "billing": "one-time",
+    "description": "Configuración de backups automáticos en la nube.",
+    "features": [
+      "Primer mes de monitoreo",
+      "Storage no incluido",
+      "2 días de entrega"
+    ],
+    "icon": "cloud",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-analytics",
+    "name": "Análisis de Datos Básico",
+    "category": "Soporte",
+    "subcategory": "Datos",
+    "price": 7000,
+    "billing": "one-time",
+    "description": "Dashboard y análisis exploratorio de datos.",
+    "features": [
+      "Hasta 3 fuentes de datos",
+      "Power BI o Looker",
+      "3 días de entrega"
+    ],
+    "icon": "bar-chart-3",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-ml",
+    "name": "Machine Learning Básico",
+    "category": "Soporte",
+    "subcategory": "Datos",
+    "price": 35000,
+    "billing": "one-time",
+    "description": "Modelo predictivo con datos proporcionados.",
+    "features": [
+      "Documentación incluida",
+      "Deployment básico",
+      "3 semanas de entrega"
+    ],
+    "icon": "brain-circuit",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-api-int",
+    "name": "Integración API Terceros",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 12000,
+    "billing": "one-time",
+    "description": "Conexión con APIs externas (Stripe, Twilio, etc.).",
+    "features": [
+      "Manejo de errores básico",
+      "Logs configurados",
+      "1 semana de entrega"
+    ],
+    "icon": "plug",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-chatbot",
+    "name": "Chatbot WhatsApp Business",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 18000,
+    "billing": "one-time",
+    "description": "Bot automatizado para WhatsApp Business API.",
+    "features": [
+      "No incluye costos Meta/Facebook",
+      "Flujo básico",
+      "2 semanas de entrega"
+    ],
+    "icon": "message-circle",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-ecommerce",
+    "name": "E-commerce Shopify/WooCommerce",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 20000,
+    "billing": "one-time",
+    "description": "Tienda en línea funcional con pasarela de pago.",
+    "features": [
+      "Hasta 20 productos",
+      "Stripe/MercadoPago",
+      "2 semanas de entrega"
+    ],
+    "icon": "shopping-bag",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-video-short",
+    "name": "Video Corto Individual",
+    "category": "Media & Marketing",
+    "subcategory": "Video",
+    "price": 1400,
+    "billing": "one-time",
+    "description": "Video corto profesional de 30–60 segundos para redes sociales o web.",
+    "features": [
+      "Edición profesional",
+      "Música de stock",
+      "1 revisión",
+      "3 días de entrega"
+    ],
+    "icon": "video",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-pack-video",
+    "name": "Pack Video Creation · 4 videos",
+    "category": "Media & Marketing",
+    "subcategory": "Video",
+    "price": 4590,
+    "billing": "one-time",
+    "description": "Pack de 4 videos: $5,400 MXN a precio unitario, menos 15% de descuento. Total del pack: $4,590 MXN.",
+    "features": [
+      "4 videos profesionales",
+      "$1,350 MXN por video",
+      "15% OFF incluido",
+      "Locución y música incluidas",
+      "2 revisiones por video"
+    ],
+    "icon": "film",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-optimizacion",
+    "name": "Optimización de Velocidad Web",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 6000,
+    "billing": "one-time",
+    "description": "Mejora de Core Web Vitals y velocidad.",
+    "features": [
+      "Objetivo: score 90+ PageSpeed",
+      "No garantizado",
+      "3 días de entrega"
+    ],
+    "icon": "zap",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-db-design",
+    "name": "Base de Datos - Diseño",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 10000,
+    "billing": "one-time",
+    "description": "Modelado relacional y normalización.",
+    "features": [
+      "Diagrama ER",
+      "Scripts DDL",
+      "1 semana de entrega"
+    ],
+    "icon": "database",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-db-mig",
+    "name": "Base de Datos - Migración",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 15000,
+    "billing": "one-time",
+    "description": "Migración de datos entre plataformas.",
+    "features": [
+      "Validación incluida",
+      "Rollback plan",
+      "2 semanas de entrega"
+    ],
+    "icon": "database-backup",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-qa-manual",
+    "name": "Testing QA Manual",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 8000,
+    "billing": "one-time",
+    "description": "Pruebas funcionales de aplicación web/móvil.",
+    "features": [
+      "Reporte de bugs",
+      "Hasta 50 casos de prueba",
+      "1 semana de entrega"
+    ],
+    "icon": "check-circle",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-qa-auto",
+    "name": "Testing QA Automatizado",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 25000,
+    "billing": "one-time",
+    "description": "Suite de pruebas automatizadas (Selenium/Cypress).",
+    "features": [
+      "Framework base",
+      "Mantenimiento no incluido",
+      "3 semanas de entrega"
+    ],
+    "icon": "flask-conical",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-vps",
+    "name": "Servidor VPS Configuración",
+    "category": "Soporte",
+    "subcategory": "Infraestructura",
+    "price": 5000,
+    "billing": "one-time",
+    "description": "Configuración inicial de VPS (Ubuntu/CentOS).",
+    "features": [
+      "Hardening básico",
+      "Firewall y SSL",
+      "1 día de entrega"
+    ],
+    "icon": "server",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-server-local",
+    "name": "Configuración de Server Local",
+    "category": "Soporte",
+    "subcategory": "Infraestructura",
+    "price": 8900,
+    "billing": "one-time",
+    "description": "Setup completo de servidor local con servicios empresariales: impresión remota, monitoreo de sitio web, NAS (almacenamiento compartido), aplicaciones internas y utilidades críticas para el negocio.",
+    "features": [
+      "Impresión remota configurada",
+      "Monitoreo de sitio web 24/7",
+      "NAS con backups automáticos",
+      "Aplicaciones internas deployadas",
+      "2 días de entrega"
+    ],
+    "icon": "hard-drive",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  },
+  {
+    "id": "mxn-dominio",
+    "name": "Dominio + Certificado SSL",
+    "category": "Web",
+    "subcategory": "Desarrollo",
+    "price": 1500,
+    "billing": "one-time",
+    "description": "Registro de dominio .com + SSL LetsEncrypt.",
+    "features": [
+      "Renovación anual por cuenta del cliente",
+      "1 día de entrega"
+    ],
+    "icon": "globe",
+    "sourceCurrency": "MXN",
+    "chargeType": "soul23"
+  }
+]

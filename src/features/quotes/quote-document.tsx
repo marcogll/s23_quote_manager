@@ -4,7 +4,7 @@ import type { AgentProfile } from "./profile-dialog";
 import { MarkdownContent } from "./markdown-editor";
 
 type Client = { name: string; company: string; email: string; phone: string };
-type QuoteTotals = { subtotal: number; thirdPartyTotal: number; discount: number; total: number; projectTotal: number; vat: number; payableTotal: number };
+type QuoteTotals = { subtotal: number; thirdPartyTotal: number; discount: number; total: number; projectTotal: number; vat: number; roundingAdjustment: number; payableTotal: number };
 
 type QuoteDocumentProps = {
   number: string;
@@ -122,6 +122,7 @@ export const QuoteDocument = ({ number, date, agent, client, lines, totals, disc
             {totals.discount > 0 && <tr><td className="label">{discountLabel.toUpperCase()}<small>Descuento aplicado.</small></td><td className="amount">−{displayMoney(totals.discount)}</td></tr>}
             {totals.thirdPartyTotal > 0 && <tr><td className="label">PAGOS DIRECTOS A PROVEEDORES<small>Referencia informativa; no pagaderos a Soul:23.</small></td><td className="amount">{displayMoney(totals.thirdPartyTotal)}</td></tr>}
             {includeVat && <tr><td className="label">IVA 16%<small>Calculado sobre honorarios Soul:23 después de descuentos.</small></td><td className="amount">{displayMoney(totals.vat)}</td></tr>}
+            {Math.abs(totals.roundingAdjustment) > 0.001 && <tr><td className="label">AJUSTE AL PRECIO FINAL<small>Ajuste para alcanzar el total comercial definido.</small></td><td className="amount">{totals.roundingAdjustment < 0 ? "−" : "+"}{displayMoney(Math.abs(totals.roundingAdjustment))}</td></tr>}
             <tr className="total-row"><td className="label">TOTAL A PAGAR A SOUL:23<small>{currency} · {includeVat ? "IVA incluido · Requiere factura" : "Sin IVA · No requiere factura"}</small></td><td className="amount">{displayMoney(totals.payableTotal)}</td></tr>
           </tbody>
         </table>

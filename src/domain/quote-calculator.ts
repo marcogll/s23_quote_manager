@@ -2,7 +2,8 @@ import type { Service } from "./catalog";
 
 export type QuoteLine = { service: Service; quantity: number };
 
-export const unitPriceInUsd = (service: Service, usdRates: Record<string, number>) => service.sourceCurrency === "MXN" ? service.price / (usdRates.mxn || 1) : service.price;
+const isSourceMxn = (service: Service) => service.sourceCurrency === "MXN" || !service.sourceCurrency;
+export const unitPriceInUsd = (service: Service, usdRates: Record<string, number>) => isSourceMxn(service) ? service.price / (usdRates.mxn || 1) : service.price;
 
 export const lineTotalInUsd = (line: QuoteLine, usdRates: Record<string, number>) => {
   const gross = unitPriceInUsd(line.service, usdRates) * line.quantity;
@@ -19,6 +20,11 @@ export const calculateQuote = (lines: QuoteLine[], discountRate: number, referra
 
   const total = Math.max(0, subtotal - discount);
   return { subtotal, thirdPartyTotal, discount, total, projectTotal: total + thirdPartyTotal };
+};
+
+export const roundPayableTotal = (amount: number, currency: string, exchangeRate: number, step: number) => {
+  if (currency !== "MXN" || exchangeRate <= 0 || step <= 0) return amount;
+  return Math.round((amount * exchangeRate) / step) * step / exchangeRate;
 };
 
 export const money = (amount: number, currency = "USD", rate = 1) => new Intl.NumberFormat(currency === "MXN" ? "es-MX" : "en-US", {

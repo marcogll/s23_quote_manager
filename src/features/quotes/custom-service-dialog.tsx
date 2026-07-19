@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Plus, X } from "lucide-react";
 import type { Service } from "@/domain/catalog";
 import { MarkdownEditor } from "./markdown-editor";
@@ -9,12 +9,31 @@ type CustomServiceDialogProps = {
   open: boolean;
   onClose: () => void;
   onSave: (service: Service) => void;
+  editingService?: Service | null;
 };
 
 const initialForm = { name: "", description: "", price: "", chargeType: "soul23" as "soul23" | "third-party", content: "## Alcance\n\n- Entregable principal\n- Configuración y puesta en marcha\n\n## Condiciones\n\n- [ ] Accesos proporcionados por el cliente\n- [ ] Alcance aprobado" };
 
-export const CustomServiceDialog = ({ open, onClose, onSave }: CustomServiceDialogProps) => {
+const formFromService = (service: Service) => ({
+  name: service.name,
+  description: service.description === "Servicio personalizado de pago único." ? "" : service.description,
+  price: String(service.price),
+  chargeType: service.chargeType ?? "soul23",
+  content: service.content ?? "",
+});
+
+export const CustomServiceDialog = ({ open, onClose, onSave, editingService }: CustomServiceDialogProps) => {
   const [form, setForm] = useState(initialForm);
+
+  const isEditing = !!editingService;
+
+  useEffect(() => {
+    if (editingService) {
+      setForm(formFromService(editingService));
+    } else {
+      setForm(initialForm);
+    }
+  }, [editingService]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,7 +41,7 @@ export const CustomServiceDialog = ({ open, onClose, onSave }: CustomServiceDial
     if (!form.name.trim() || price <= 0) return;
 
     onSave({
-      id: `custom-${Date.now()}`,
+      id: isEditing ? editingService!.id : `custom-${Date.now()}`,
       name: form.name.trim(),
       category: "Mis servicios",
       price,
@@ -41,7 +60,7 @@ export const CustomServiceDialog = ({ open, onClose, onSave }: CustomServiceDial
     <div className="dialog-backdrop" role="presentation" onMouseDown={onClose}>
       <section className="custom-dialog" role="dialog" aria-modal="true" aria-labelledby="custom-service-title" onMouseDown={(event) => event.stopPropagation()}>
         <div className="dialog-header">
-          <div><p className="eyebrow">Catálogo reutilizable</p><h2 id="custom-service-title">Nuevo servicio único</h2></div>
+          <div><p className="eyebrow">Catálogo reutilizable</p><h2 id="custom-service-title">{isEditing ? "Editar servicio" : "Nuevo servicio único"}</h2></div>
           <button type="button" onClick={onClose} aria-label="Cerrar"><X size={20} /></button>
         </div>
         <form onSubmit={handleSubmit}>
@@ -53,7 +72,7 @@ export const CustomServiceDialog = ({ open, onClose, onSave }: CustomServiceDial
           <fieldset className="charge-type"><legend>¿Quién recibe el pago?</legend><label className={form.chargeType === "soul23" ? "active" : ""}><input type="radio" name="chargeType" checked={form.chargeType === "soul23"} onChange={() => setForm({ ...form, chargeType: "soul23" })} /><span><b>Honorarios Soul:23</b><small>Se incluye en subtotal, descuentos y total a pagar.</small></span></label><label className={form.chargeType === "third-party" ? "active" : ""}><input type="radio" name="chargeType" checked={form.chargeType === "third-party"} onChange={() => setForm({ ...form, chargeType: "third-party" })} /><span><b>Costo de tercero</b><small>El cliente paga directamente al proveedor.</small></span></label></fieldset>
           <label><span>Descripción</span><textarea rows={3} value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} placeholder="Describe brevemente el alcance" /></label>
           <div className="markdown-field"><span>Alcance en Markdown</span><MarkdownEditor value={form.content} onChange={(content) => setForm({ ...form, content })} placeholder="Pega aquí tu Markdown o escribe el alcance..." /><small>Puedes pegar un documento Markdown completo; conservará títulos, listas, checklists y tablas.</small></div>
-          <div className="dialog-actions"><button type="button" className="dialog-cancel" onClick={onClose}>Cancelar</button><button type="submit" className="dialog-save"><Plus size={17} /> Guardar servicio</button></div>
+          <div className="dialog-actions"><button type="button" className="dialog-cancel" onClick={onClose}>Cancelar</button><button type="submit" className="dialog-save"><Plus size={17} /> {isEditing ? "Guardar cambios" : "Guardar servicio"}</button></div>
         </form>
       </section>
     </div>
