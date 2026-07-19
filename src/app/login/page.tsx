@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { ArrowRight, LockKeyhole, UserRound } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -38,76 +38,86 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Iniciar Sesión
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Editor de Productos Soul:23
-          </p>
+    <main className="login-page">
+      <section className="login-shell" aria-labelledby="login-title">
+        <div className="login-brand-panel">
+          <img
+            src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg"
+            alt="Soul:23"
+          />
+          <div>
+            <p className="login-eyebrow">Marketing &amp; Systems</p>
+            <h1>Tu operación comercial, en un solo lugar.</h1>
+            <p className="login-intro">
+              Crea cotizaciones, administra clientes y mantén el seguimiento de cada oportunidad.
+            </p>
+          </div>
+          <p className="login-brand-footer">Soul:23 · Sistema de cotizaciones</p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+        <div className="login-form-panel">
+          <div className="login-heading">
+            <span className="login-mark" aria-hidden="true">S:23</span>
+            <p className="login-eyebrow">Acceso seguro</p>
+            <h2 id="login-title">Bienvenido</h2>
+            <p>Ingresa tus credenciales para continuar.</p>
+          </div>
+
+          <form className="login-form" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="login-error" role="alert">
               {error}
             </div>
           )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Usuario o correo
-              </label>
+
+          <label className="login-field" htmlFor="email">
+            <span>Usuario o correo</span>
+            <span className="login-input-wrap">
+              <UserRound size={18} aria-hidden="true" />
               <input
                 id="email"
                 name="email"
                 type="text"
                 required
                 autoCapitalize="none"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                autoComplete="username"
                 placeholder="Usuario o correo"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Contraseña
-              </label>
+            </span>
+          </label>
+
+          <label className="login-field" htmlFor="password">
+            <span>Contraseña</span>
+            <span className="login-input-wrap">
+              <LockKeyhole size={18} aria-hidden="true" />
               <input
                 id="password"
                 name="password"
                 type="password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                autoComplete="current-password"
                 placeholder="Contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-          </div>
+            </span>
+          </label>
 
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-            >
-              {loading ? "Cargando..." : "Iniciar Sesión"}
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="login-submit"
+          >
+            <span>{loading ? "Verificando…" : "Iniciar sesión"}</span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </button>
         </form>
 
-        <div className="text-center">
-          <Link
-            href="/"
-            className="text-sm text-indigo-600 hover:text-indigo-500"
-          >
-            ← Volver al inicio
-          </Link>
+          <p className="login-help">Acceso exclusivo para el equipo Soul:23.</p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
