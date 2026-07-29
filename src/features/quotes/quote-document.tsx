@@ -34,6 +34,13 @@ const DocumentLogo = () => (
   </div>
 );
 
+const DocumentHeader = () => (
+  <div className="compact-header">
+    <span className="compact-brand">Soul:23</span>
+    <span className="compact-tagline">Marketing &amp; Systems</span>
+  </div>
+);
+
 const typeClass = (line: QuoteLine) => {
   if (line.service.chargeType === "third-party") return "badge-anual";
   if (line.service.billing === "monthly") return "badge-mensual";
@@ -46,13 +53,8 @@ const typeLabel = (line: QuoteLine) =>
 export const QuoteDocument = ({ number, date, agent, client, lines, totals, discountLabel, currency, serviceOverview, notes, exchangeRate, exchangeDate, showExchangeRate, includeVat, displayMoney, displayLineTotal }: QuoteDocumentProps) => {
   const ownLines = lines.filter((line) => line.service.chargeType !== "third-party");
   const externalLines = lines.filter((line) => line.service.chargeType === "third-party");
-  const featureCount = lines.reduce((total, line) => total + (line.service.features?.length ?? 0), 0);
-  const specificationLength = lines.reduce((total, line) => total + (line.service.content?.trim().length ?? 0), 0);
-  const hasDetailPage = lines.length >= 4 || featureCount >= 12;
-  const hasSpecs = specificationLength >= 500;
-  const pageCount = 2 + Number(hasDetailPage) + Number(hasSpecs);
-  const detailPage = 3;
-  const specificationPage = hasDetailPage ? 4 : 3;
+  const linesWithDetail = lines.filter((line) => (line.service.features?.length ?? 0) > 0 || (line.service.content?.trim().length ?? 0) > 0);
+  const hasDetailPage = linesWithDetail.length > 0;
   const generated = date.toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
   const expires = new Date(date);
   expires.setDate(expires.getDate() + 15);
@@ -81,14 +83,12 @@ export const QuoteDocument = ({ number, date, agent, client, lines, totals, disc
         </div>
 
         <div className="meta-box">
-          <div className="page-label">Página 1 de {pageCount} · Plan</div>
+          <div className="page-label">Propuesta</div>
           <div className="quote-title">Propuesta de Servicios</div>
           <div>No. <span className="editable">{number}</span></div>
           <div>Generada: <b>{generated}</b></div>
           <div>Expira: <b>{expiration}</b></div>
         </div>
-
-        <div className="intro">Propuesta <b>modular</b> de servicios Soul:23. Se contrata el plan completo o únicamente los conceptos necesarios; cada alcance puede adaptarse a la operación. Las notas, condiciones y datos de pago se presentan en la página siguiente.</div>
 
         <p className="table-kicker">Servicios Soul:23 · Honorarios</p>
         <table className="plan">
@@ -127,15 +127,44 @@ export const QuoteDocument = ({ number, date, agent, client, lines, totals, disc
           </tbody>
         </table>
 
-        <div className="page-num">1</div>
+        {serviceOverview.trim() && <div className="service-overview-inline"><MarkdownContent value={serviceOverview} /></div>}
+
+        <div className="page-num">-</div>
       </article>
 
-      <article className="sheet sheet-detail payment-terms-sheet">
-        <DocumentLogo />
-        <div className="page-label">Página 2 de {pageCount} · Alcance y condiciones</div>
-        <h2>Alcance, condiciones y forma de pago</h2>
+      {hasDetailPage && <article className="sheet sheet-detail sheet-compact">
+        <DocumentHeader />
+        <div className="page-label">Desglose y alcance</div>
+        <h2>{client.company || client.name || "Cliente"} — Desglose y especificación</h2>
+        <p className="detail-subtitle">Cotización {number} · Generada: {generated} · Expira: {expiration}</p>
+        <div className="cols-2">
+          {lines.map((line, index) => {
+            const features = line.service.features ?? [];
+            const content = line.service.content?.trim() ?? "";
+            if (!features.length && !content) return null;
+            return (
+              <div className={`section ${line.service.chargeType === "third-party" ? "external-section" : ""}`} key={line.service.id}>
+                <div className="section-head">
+                  <div className="left"><div className="num">{index + 1}</div><div className="title">{line.service.name}</div><div className="type-badge badge-unico-dark">{line.service.chargeType === "third-party" ? "Pago a tercero" : typeLabel(line)}</div></div>
+                  <div className="price">{displayLineTotal(line)}</div>
+                </div>
+                <div className="section-body">
+                  {features.length > 0 && <ul>{features.map((feature) => <li key={feature}>{feature}</li>)}</ul>}
+                  {content && <MarkdownContent value={content} />}
+                  {line.service.chargeType === "third-party" && <div className="scope-note">Pago directo al proveedor.</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="page-num">-</div>
+      </article>}
+
+      <article className="sheet sheet-detail">
+        <DocumentHeader />
+        <div className="page-label">Términos y condiciones</div>
+        <h2>Condiciones y forma de pago</h2>
         <p className="detail-subtitle">Cotización {number} · {client.company || client.name || "Cliente"} · Generada: {generated} · Expira: {expiration}</p>
-        {serviceOverview.trim() && <div className="service-overview"><p className="kicker">Qué incluye el servicio</p><div className="service-overview-body"><MarkdownContent value={serviceOverview} /></div></div>}
         <div className="cta-note">
           <p className="kicker">Términos de pago</p>
           <MarkdownContent value={notes} />
@@ -161,42 +190,9 @@ export const QuoteDocument = ({ number, date, agent, client, lines, totals, disc
             {showExchangeRate && currency !== "USD" && currency !== "MXN" && <div className="exchange-section"><p className="kicker">Tipo de cambio</p><div className="exchange-value"><b>1 USD = {exchangeRate.toFixed(4)} {currency}</b><span>Actualizado {exchangeDate}</span></div></div>}
           </div>
         </div>
-        <div className="condiciones"><div className="kicker">Aceptación de condiciones</div><p>La aprobación de esta cotización confirma los entregables y condiciones descritos. Cualquier cambio posterior se cotiza por separado.</p></div>
-        <div className="page-num">2</div>
+        <div className="condiciones"><div className="kicker">Aceptación de condiciones</div><p>{serviceOverview.trim() ? `El alcance descrito en la página anterior define los entregables incluidos. ` : ""}La aprobación de esta cotización confirma las condiciones aquí descritas. Cualquier cambio posterior se cotiza por separado.</p></div>
+        <div className="page-num">-</div>
       </article>
-
-      {hasDetailPage && <article className="sheet sheet-detail">
-        <DocumentLogo />
-        <div className="page-label">Página {detailPage} de {pageCount} · Desglose detallado</div>
-        <h2>{client.company || client.name || "Cliente"} — Desglose por sección</h2>
-        <p className="detail-subtitle">Cotización {number} · Generada: {generated} · Expira: {expiration} · Cada sección puede contratarse de forma independiente.</p>
-        {lines.map((line, index) => (
-          <div className={`section ${line.service.chargeType === "third-party" ? "external-section" : ""}`} key={line.service.id}>
-            <div className="section-head">
-              <div className="left"><div className="num">{index + 1}</div><div className="title">{line.service.name}</div><div className="type-badge badge-unico-dark">{line.service.chargeType === "third-party" ? "Pago a tercero" : typeLabel(line)}</div></div>
-              <div className="price">{displayLineTotal(line)}</div>
-            </div>
-            <div className="section-body">
-              {line.service.features?.length ? <ul>{line.service.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : <p>{line.service.description}</p>}
-              {line.service.volumeDiscount && <div className="scope-note">Tarifa: $950 MXN por hora · 15% de descuento automático desde 4 horas.</div>}
-              {line.service.chargeType === "third-party" && <div className="scope-note">Referencia informativa. El cliente realiza el pago directamente al proveedor.</div>}
-              <div className="checkbox-row">☑ Incluido en esta propuesta · Cantidad: {line.quantity}</div>
-            </div>
-          </div>
-        ))}
-        <div className="condiciones"><div className="kicker">Condiciones</div><p>Vigencia de 15 días naturales. Los alcances pueden ajustarse antes de la aceptación final.</p></div>
-        <div className="page-num">{detailPage}</div>
-      </article>}
-
-      {hasSpecs && <article className="sheet sheet-detail sheet-spec">
-        <DocumentLogo />
-        <div className="page-label">Página {specificationPage} de {pageCount} · Especificación del proyecto</div>
-        <h2>Alcance y entregables</h2>
-        <p className="detail-subtitle">Cotización {number} · Especificación derivada del contenido Markdown aprobado.</p>
-        {lines.filter((line) => line.service.content).map((line, index) => <div className="section spec-section" key={line.service.id}><div className="section-head"><div className="left"><div className="num">{index + 1}</div><div className="title">{line.service.name}</div></div><div className="price">{displayLineTotal(line)}</div></div><div className="section-body"><MarkdownContent value={line.service.content ?? ""} /></div></div>)}
-        <div className="condiciones"><div className="kicker">Aceptación del alcance</div><p>La aprobación de esta cotización confirma los entregables descritos. Cualquier cambio posterior se cotiza por separado.</p></div>
-        <div className="page-num">{specificationPage}</div>
-      </article>}
     </section>
   );
 };

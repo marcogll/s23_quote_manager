@@ -835,7 +835,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 }
 
 @media print {
-  @page { size: letter portrait; margin: 1.2cm 1.5cm; }
+  @page { size: 8.5in 14in portrait; margin: 1.2cm 1.5cm; }
   html, body { width: auto; height: auto; background: white; zoom: 1 !important; }
   body, body * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .workspace > :not(.print-quote) { display: none !important; }
@@ -946,12 +946,20 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
   /* The PDF uses the original machotes/*.html structure verbatim. */
   .machote-document { font-family: "Helvetica Neue", Arial, sans-serif; color: #1a1a1a; zoom: 1 !important; }
-  .machote-document .sheet { position: relative; width: 100%; min-height: calc(11in - 2.4cm); padding: 0; background: #fff; page-break-after: always; break-after: page; }
-  .machote-document .sheet:last-child { page-break-after: auto; break-after: auto; }
+  .machote-document .sheet { position: relative; width: 100%; padding: 0; background: #fff; page-break-after: auto; break-after: auto; }
+  .machote-document .sheet + .sheet { margin-top: 16px; padding-top: 12px; page-break-before: always; break-before: page; }
   .machote-document .logo-wrap { margin-bottom: 20px; }
   .machote-document .logo-wrap img { display: block; width: auto; height: 36px; }
   .machote-document .logo-wrap .tagline { margin-top: 4px; color: #8a8a8a; font-size: 8.5px; letter-spacing: 2.5px; text-transform: uppercase; }
-  .machote-document .parties { display: flex; justify-content: space-between; gap: 30px; margin-bottom: 18px; }
+  .machote-document .compact-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #e5e5e5; }
+  .machote-document .compact-brand { color: #000; font-size: 11px; font-weight: 800; letter-spacing: .5px; }
+  .machote-document .compact-tagline { color: #8a8a8a; font-size: 7.5px; letter-spacing: 2px; text-transform: uppercase; }
+  .machote-document .intro-overview { margin: 8px 0 0; opacity: .8; font-size: 10.5px; line-height: 1.4; }
+  .machote-document .service-overview-inline { margin-top: 14px; padding: 10px 12px; border: 1px solid #e5e5e5; border-radius: 4px; color: #333; background: #fafafa; font-size: 9.5px; line-height: 1.45; break-inside: avoid; }
+  .machote-document .service-overview-inline .markdown-content { min-height: 0; padding: 0; color: #333; font-size: 9.5px; line-height: 1.45; }
+  .machote-document .service-overview-inline .markdown-content p { margin: 2px 0; }
+  .machote-document .parties { display: flex; justify-content: space-between; gap: 30px; margin-bottom: 18px; break-inside: avoid; }
+  .machote-document table.plan { break-inside: avoid; }
   .machote-document .party { flex: 1; }
   .machote-document .party h4 { margin: 0 0 6px; color: #8a8a8a; font-size: 9.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
   .machote-document .party p { margin: 0 0 2px; font-size: 11.5px; line-height: 1.4; }
@@ -960,11 +968,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .machote-document .party .company-line { margin-top: 4px; }
   .machote-document .contact-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 11.5px; }
   .machote-document .contact-row .icon { display: inline-flex; width: 14px; height: 14px; align-items: center; justify-content: center; }
-  .machote-document .meta-box { margin-bottom: 4px; color: #555; font-size: 11.5px; text-align: right; }
+  .machote-document .meta-box { margin-bottom: 4px; color: #555; font-size: 11.5px; text-align: right; break-inside: avoid; }
   .machote-document .meta-box .quote-title { margin-bottom: 2px; color: #000; font-size: 19px; font-weight: 800; letter-spacing: .5px; }
   .machote-document .meta-box > div { margin-top: 1px; }
   .machote-document .page-label { margin-bottom: 4px; color: #aaa; font-size: 8.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
-  .machote-document .intro { margin: 12px 0 18px; padding: 12px 18px; border-radius: 5px; color: #fff; background: #000; font-size: 11.5px; line-height: 1.5; }
+  .machote-document .intro { margin: 12px 0 18px; padding: 12px 18px; border-radius: 5px; color: #fff; background: #000; font-size: 11.5px; line-height: 1.5; break-inside: avoid; }
   .machote-document .table-kicker { margin: 0 0 4px; color: #8a8a8a; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
   .machote-document .table-kicker.external-kicker { margin-top: 16px; }
   .print-quote.machote-document table.plan { width: 100%; margin-top: 2px; border-collapse: collapse; font-size: 11.5px; }
@@ -979,7 +987,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .machote-document .badge-unico { color: #333; background: #eee; }
   .machote-document .badge-anual { color: #fff; background: #2b6cb0; }
   .machote-document .badge-mensual { color: #fff; background: #b7791f; }
-  .print-quote.machote-document table.totals-mini { width: 100%; margin-top: 16px; border-collapse: collapse; font-size: 11.5px; }
+  .print-quote.machote-document table.totals-mini { width: 100%; margin-top: 16px; border-collapse: collapse; font-size: 11.5px; break-inside: avoid; }
   .machote-document table.totals-mini td { padding: 8px 12px; border-bottom: 1px solid #e8e8e8; font-size: 11.5px; }
   .machote-document table.totals-mini td.label { width: auto; color: #555; }
   .machote-document table.totals-mini td.label small { display: block; margin-top: 1px; color: #999; font-size: 10px; font-weight: 400; }
@@ -1034,6 +1042,21 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .machote-document .condiciones .kicker { margin-bottom: 2px; color: #8a8a8a; font-size: 7px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
   .machote-document .condiciones p { margin: 1px 0; }
   .machote-document .sheet-spec .section-body .markdown-content { min-height: 0; padding: 0; color: #333; font-size: 8.5px; line-height: 1.3; }
+  .machote-document .sheet-compact .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .machote-document .sheet-compact .cols-2 > .section { margin-bottom: 0; break-inside: avoid; }
+  .machote-document .sheet-compact .section-head { padding: 5px 10px; }
+  .machote-document .sheet-compact .section-head .num { width: 16px; height: 16px; font-size: 9px; }
+  .machote-document .sheet-compact .section-head .title { font-size: 11px; }
+  .machote-document .sheet-compact .section-head .price { font-size: 12px; }
+  .machote-document .sheet-compact .section-head .type-badge { font-size: 8px; padding: 1px 6px; }
+  .machote-document .sheet-compact .section-body { padding: 5px 10px 6px; }
+  .machote-document .sheet-compact .section-body ul { margin: 0; padding-left: 13px; }
+  .machote-document .sheet-compact .section-body li { font-size: 9.5px; line-height: 1.35; }
+  .machote-document .sheet-compact .section-body .scope-note { font-size: 8px; margin-top: 2px; }
+  .machote-document .sheet-compact .detail-subtitle { margin-bottom: 10px; font-size: 10px; }
+  .machote-document .sheet-compact > h2 { font-size: 16px; }
+  .machote-document .sheet-compact .section-body .markdown-content { font-size: 9.5px; line-height: 1.35; }
+  .machote-document .sheet-compact .section-body .markdown-content h2 { font-size: 10px; }
 }
 
 .dark {

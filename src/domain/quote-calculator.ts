@@ -30,7 +30,8 @@ export const roundPayableTotal = (amount: number, currency: string, exchangeRate
 export const money = (amount: number, currency = "USD", rate = 1) => new Intl.NumberFormat(currency === "MXN" ? "es-MX" : "en-US", {
   style: "currency",
   currency,
-  minimumFractionDigits: 2,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
 }).format(amount * rate);
 
 export const billingLabel = { "one-time": "Único", monthly: "Mensual", annual: "Anual" } as const;
