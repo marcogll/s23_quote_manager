@@ -1,28 +1,43 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg">
-    <img src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo.svg" width="110" alt="Soul:23 Product Editor">
-  </picture>
+  <a href="https://soul23.mx">
+    <picture>
+      <source
+        media="(prefers-color-scheme: dark)"
+        srcset="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo_wh.png">
+      <source
+        media="(prefers-color-scheme: light)"
+        srcset="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo_blk.png">
+      <img
+        src="https://raw.githubusercontent.com/marcogll/mg_data_storage/refs/heads/main/soul23/logo/soul23_logo_blk.png"
+        width="110"
+        alt="Soul:23">
+    </picture>
+  </a>
 </p>
 
 <h1 align="center">Soul:23 Product Editor</h1>
 
 <p align="center">
-  Gestor de cotizaciones con autenticacion, PostgreSQL y despliegue containerizado para Coolify.
+  Gestor de cotizaciones con autenticación, PostgreSQL y despliegue containerizado para Coolify.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-3a3a3a?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js">
-  <img src="https://img.shields.io/badge/TypeScript-3a3a3a?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3a3a3a?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/PostgreSQL-3a3a3a?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Prisma-3a3a3a?style=flat-square&logo=prisma&logoColor=white" alt="Prisma">
-  <img src="https://img.shields.io/badge/Docker-3a3a3a?style=flat-square&logo=docker&logoColor=white" alt="Docker">
-  <img src="https://img.shields.io/badge/NextAuth-3a3a3a?style=flat-square&logo=nextauth&logoColor=white" alt="NextAuth.js">
+  <img src="https://img.shields.io/badge/Next.js-3a3a3a?style=flat-square&logo=nextdotjs&logoColor=white">
+  <img src="https://img.shields.io/badge/TypeScript-3a3a3a?style=flat-square&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3a3a3a?style=flat-square&logo=tailwindcss&logoColor=white">
+  <img src="https://img.shields.io/badge/PostgreSQL-3a3a3a?style=flat-square&logo=postgresql&logoColor=white">
+  <img src="https://img.shields.io/badge/Prisma-3a3a3a?style=flat-square&logo=prisma&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-3a3a3a?style=flat-square&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/NextAuth-3a3a3a?style=flat-square&logo=nextauth&logoColor=white">
 </p>
 
 ---
+
+## Description
+
+Gestor de cotizaciones con CRUD de productos, autenticación con credenciales vía NextAuth.js y middleware de protección de rutas. Las cotizaciones se guardan por usuario en PostgreSQL con Prisma ORM y pueden importarse/exportarse en JSON; las guardadas en localStorage se migran a la base al iniciar sesión.
+
+Construido con Next.js 15 (App Router) y Tailwind CSS, se despliega en Docker Compose listo para Coolify en VPS, con PWA instalable y healthcheck en `/api/health`.
 
 ## Caracteristicas
 
